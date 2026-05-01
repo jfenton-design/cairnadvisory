@@ -154,6 +154,7 @@
 
     .hero-content {
       position: relative;
+      z-index: 2;
       max-width: 720px;
       width: 100%;
       display: flex;
@@ -1079,7 +1080,7 @@
       /* Hero — wrap headline, hide decorations */
       .hero { min-height: auto; padding-top: 96px; padding-bottom: 80px; }
       .hero-content { padding: 0 24px 0; max-width: 100%; }
-      .hero-cairn { display: block; width: 130px; left: auto; right: -18px; bottom: 60px; opacity: 0.5; }
+      .hero-cairn { display: block; width: 130px; left: auto; right: -18px; bottom: 60px; opacity: 0.5; filter: none; z-index: 0; }
       .hero-stamp { display: none; }
       .hero {
         background-image:
