@@ -52,8 +52,20 @@ body.cairn { background: var(--cairn-linen); }
 .article {
   max-width: 760px;
   margin: 0 auto;
-  padding: 96px 32px 160px;
+  padding: 64px 32px 160px;
 }
+
+/* ── Back link ─────────────────────────────────────────────── */
+.back-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cairn-umber); text-decoration: none;
+  margin-bottom: 40px;
+  transition: color var(--dur-fast) var(--ease);
+}
+.back-link:hover { color: var(--cairn-ironwood); }
+.back-link::before { content: "←"; margin-right: 2px; letter-spacing: 0; }
 
 /* ── Eyebrow / metadata strip above the head ───────────────── */
 .meta-strip {
@@ -68,7 +80,7 @@ body.cairn { background: var(--cairn-linen); }
 /* ── Editorial header with integrated drop-numeral ─────────── */
 .article-header {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 1fr;
   gap: 36px;
   align-items: start;
   margin-bottom: 56px;
@@ -76,7 +88,7 @@ body.cairn { background: var(--cairn-linen); }
   border-bottom: var(--border-hair);
   position: relative;
 }
-.article-header.no-numeral { grid-template-columns: 1fr; }
+.article-header.with-numeral { grid-template-columns: 200px 1fr; }
 
 .head-numeral {
   font-family: var(--font-display); font-weight: 300;
@@ -133,27 +145,38 @@ body.cairn { background: var(--cairn-linen); }
 }
 .byline .name { color: var(--cairn-ironwood); font-weight: 500; }
 
-/* ── Hero vista (watercolor scene) ─────────────────────────── */
-.hero-figure {
-  margin: 0 0 72px;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-  height: 420px;
+/* ── Hero banner (watercolor scene — full-width, fades into page) ─ */
+.article-banner {
+  width: 100%;
+  height: 460px;
   background-size: cover;
   background-position: center;
+  background-color: var(--cairn-linen);
   position: relative;
 }
-/* Watercolor vistas use the linen as background — no dark overlay */
-.hero-figure.vista {
-  background-color: var(--cairn-linen);
-  border: var(--border-hair);
+.article-banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 52%;
+  background: linear-gradient(to bottom, rgba(248,245,240,0) 0%, rgba(248,245,240,1) 100%);
+  pointer-events: none;
 }
-.hero-figure .caption {
-  position: absolute; bottom: 18px; left: 22px;
-  font-family: var(--font-display); font-size: 11px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--cairn-umber);
-  opacity: 0.7;
+.article-breadcrumb {
+  position: absolute;
+  top: 26px; left: 56px;
+  z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cairn-ironwood);
 }
+.article-breadcrumb a {
+  color: inherit; text-decoration: none; opacity: 0.65;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+.article-breadcrumb a:hover { opacity: 1; }
+.article-breadcrumb .bc-sep { opacity: 0.35; letter-spacing: 0; font-size: 13px; }
 
 /* ── Body prose ─────────────────────────────────────────────── */
 .prose {
@@ -369,10 +392,16 @@ body.cairn { background: var(--cairn-linen); }
   .article-title { font-size: clamp(30px, 8vw, 40px); line-height: 1.06; }
   .article-deck { font-size: 17px; line-height: 1.6; }
   .byline { margin-top: 24px; gap: 10px; flex-wrap: wrap; font-size: 11px; }
-  .hero-figure { height: 240px; margin-bottom: 48px; }
+  .article-banner { height: 280px; }
+  .article-breadcrumb { top: 16px; left: 24px; font-size: 10px; gap: 8px; }
 
   .prose { font-size: 17px; line-height: 1.72; }
-  .prose h2 { font-size: clamp(22px, 6vw, 28px); margin-top: 48px; }
+  .prose h2 {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: var(--border-hair);
+  }
   .prose h2 .h2-num { font-size: 11px; }
   .prose .lede-p { font-size: 19px; line-height: 1.6; }
   .prose .lede-p::first-letter { font-size: 60px; padding: 6px 10px 0 0; }
