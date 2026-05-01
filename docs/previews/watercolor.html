@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cairn — Watercolor System</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 64px 72px; min-height: 100vh; background: var(--cairn-linen); }
+  @media (max-width: 720px) {
+    body { padding: 40px 20px; }
+    .principles { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pcell { padding: 22px 20px; }
+    .anchors, .mark-rule, .washes, .vista-grid, .dropcap-stage, .donts { grid-template-columns: 1fr; gap: 12px; }
+    .donts { display: block; }
+    .dont-cell:nth-child(odd) { border-right: none; }
+    .anchor-card { padding: 36px 28px 32px; }
+    .anchor-title { font-size: 24px; }
+    .recipe { padding: 28px 22px; }
+    .recipe-checklist { grid-template-columns: 1fr; gap: 20px; }
+    .vista-hero { height: 220px; }
+    h1 { font-size: 38px !important; }
+  }
+  @media (max-width: 480px) {
+    body { padding: 32px 16px; }
+    .principles { grid-template-columns: 1fr; }
+    .head { margin-bottom: 32px; }
+  }
+  .head { margin-bottom: 56px; max-width: 760px; }
+  .eyebrow { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber); margin-bottom: 18px; display: block; }
+  h1 { font-family: var(--font-display); font-weight: var(--fw-light); font-size: 56px; line-height: 1.05; letter-spacing: var(--ls-h); color: var(--color-text); margin: 0 0 20px; }
+  .lede { font-size: 17px; line-height: var(--lh-loose); color: var(--cairn-umber); max-width: 580px; margin: 0; }
+  .lede em { font-style: italic; color: var(--cairn-ironwood); }
+  .group-label { font-family: var(--font-display); font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cairn-ironwood); margin: 56px 0 24px; padding-top: 24px; border-top: var(--border-hair); }
+
+  /* ─── Principles strip ─── */
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .pcell { padding: 28px 28px; background: var(--cairn-white); border: var(--border-hair); border-radius: var(--r-xl); position: relative; overflow: hidden; }
+  .pcell::after { content: ""; position: absolute; inset: 0; background: var(--wc-wash-amber); opacity: 0.45; pointer-events: none; }
+  .pnum { position: relative; font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--cairn-amber); letter-spacing: 0.22em; margin-bottom: 14px; }
+  .pname { position: relative; font-family: var(--font-display); font-size: 17px; font-weight: 400; color: var(--color-text); margin-bottom: 10px; }
+  .pdesc { position: relative; font-size: 13px; color: var(--cairn-umber); line-height: 1.7; }
+
+  /* ─── Decorative wash fragments ─── */
+  .anchors { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .anchor-card { background: var(--cairn-white); border: var(--border-hair); border-radius: var(--r-xl); padding: 56px 56px 48px; position: relative; overflow: hidden; }
+  .anchor-card.dark { background: var(--cairn-dark-bg); border-color: var(--cairn-ironwood); }
+  /* a soft painted blob — abstract pigment, not the mark */
+  .anchor-blob { position: absolute; top: -40px; right: -40px; width: 220px; height: 220px; border-radius: 50%; pointer-events: none;
+    background:
+      radial-gradient(circle at 32% 30%, rgba(var(--wc-amber-rgb), 0.42), transparent 55%),
+      radial-gradient(circle at 68% 70%, rgba(var(--wc-sienna-rgb), 0.32), transparent 55%),
+      radial-gradient(circle at 50% 50%, rgba(var(--wc-amber-rgb), 0.18), transparent 70%);
+    filter: blur(0.5px);
+  }
+  .anchor-card.dark .anchor-blob {
+    background:
+      radial-gradient(circle at 32% 30%, rgba(var(--wc-slate-rgb), 0.55), transparent 55%),
+      radial-gradient(circle at 68% 70%, rgba(var(--wc-amber-rgb), 0.32), transparent 55%),
+      radial-gradient(circle at 50% 50%, rgba(var(--wc-slate-rgb), 0.22), transparent 70%);
+  }
+  .anchor-eyebrow { position: relative; font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber); margin-bottom: 14px; display: block; }
+  .anchor-title { position: relative; font-family: var(--font-display); font-weight: 300; font-size: 28px; line-height: 1.2; letter-spacing: -0.01em; color: var(--color-text); margin: 0 0 16px; max-width: 380px; }
+  .anchor-card.dark .anchor-title { color: var(--cairn-parchment); }
+  .anchor-meta { position: relative; font-size: 13px; color: var(--cairn-umber); }
+  .anchor-card.dark .anchor-meta { color: var(--cairn-slate-lt); }
+  .anchor-tag { position: relative; font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cairn-slate); margin-top: 28px; padding-top: 18px; border-top: var(--border-hair); display: block; }
+  .anchor-card.dark .anchor-tag { border-color: var(--cairn-ironwood); color: var(--cairn-amber); }
+
+  /* Mark-on-tile callout — reinforces the rule */
+  .mark-rule { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  .mark-rule-card { padding: 36px 40px; border-radius: var(--r-xl); display: flex; align-items: center; gap: 24px; }
+  .mark-rule-card.linen { background: var(--cairn-linen); border: var(--border-hair); }
+  .mark-rule-card.dark  { background: var(--cairn-dark-bg);  border: var(--border-hair-dark); }
+  .mark-tile { width: 96px; height: 96px; border-radius: 50%; background: var(--cairn-linen); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(14,11,7,0.22); flex-shrink: 0; }
+  .mark-tile img { width: 70%; height: auto; display: block; }
+  .mark-rule-card.linen .mark-tile { background: var(--cairn-linen); box-shadow: none; }
+  .mark-rule-text .mr-label { font-family: var(--font-display); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .mark-rule-card.linen .mr-label { color: var(--cairn-amber); }
+  .mark-rule-card.dark  .mr-label { color: var(--cairn-amber); }
+  .mark-rule-text .mr-body { font-size: 13px; line-height: 1.65; }
+  .mark-rule-card.linen .mr-body { color: var(--cairn-umber); }
+  .mark-rule-card.dark  .mr-body { color: var(--cairn-slate-lt); }
+
+  /* ─── Wash backgrounds ─── */
+  .washes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .wash { height: 220px; border-radius: var(--r-xl); border: var(--border-hair); padding: 28px 32px; display: flex; flex-direction: column; justify-content: flex-end; background-color: var(--cairn-white); position: relative; overflow: hidden; }
+  .wash-amber  { background-image: var(--wc-wash-amber); }
+  .wash-slate  { background-image: var(--wc-wash-slate); }
+  .wash-mixed  { background-image: var(--wc-wash-mixed); }
+  .wash-name { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--color-text); margin-bottom: 4px; }
+  .wash-spec { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--cairn-umber); }
+
+  /* ─── Vista hero (the headline component) ─── */
+  .vista-hero { margin: 0; border-radius: var(--r-xl); overflow: hidden; height: 380px; background-size: cover; background-position: center; border: var(--border-hair); position: relative; background-color: var(--cairn-linen); }
+  .vista-hero .vh-cap { position: absolute; bottom: 18px; left: 22px; font-family: var(--font-display); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-umber); opacity: 0.75; }
+  .vista-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .vista-card { border-radius: var(--r-xl); overflow: hidden; border: var(--border-hair); background-color: var(--cairn-linen); aspect-ratio: 12/5; background-size: cover; background-position: center; position: relative; }
+  .vista-card .vc-tag { position: absolute; bottom: 14px; left: 18px; font-family: var(--font-display); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-umber); opacity: 0.85; background: rgba(248,242,226,0.78); padding: 5px 10px; border-radius: 4px; }
+  .vista-card .vc-state { position: absolute; top: 14px; right: 14px; font-family: var(--font-display); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber); background: rgba(248,242,226,0.78); padding: 4px 8px; border-radius: 4px; font-weight: 500; }
+  .vista-card.painted .vc-state { color: #4A6A50; }
+
+  /* ─── Drop cap ─── */
+  .dropcap-stage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .dropcap-card { background: var(--cairn-white); border: var(--border-hair); border-radius: var(--r-xl); padding: 48px 56px; position: relative; }
+  .dropcap-card .dc-eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber); margin-bottom: 24px; display: block; }
+  .dc-row { display: grid; grid-template-columns: 110px 1fr; gap: 22px; align-items: start; }
+  .dc-letter {
+    font-family: 'Figtree', sans-serif; font-weight: 300; font-size: 124px; line-height: 0.9; color: var(--cairn-amber);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(var(--wc-amber-rgb), 0.28), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(var(--wc-sienna-rgb), 0.22), transparent 55%);
+    background-clip: text; -webkit-background-clip: text;
+    position: relative;
+    text-shadow: 0 0 18px rgba(var(--wc-amber-rgb), 0.2);
+  }
+  .dc-num {
+    font-family: 'Figtree', sans-serif; font-weight: 300; font-size: 96px; line-height: 0.9;
+    color: var(--cairn-slate);
+    text-shadow: 0 0 14px rgba(var(--wc-slate-rgb), 0.25);
+  }
+  .dc-text { font-family: 'DM Sans'; font-size: 15px; line-height: 1.85; color: var(--cairn-umber); padding-top: 8px; }
+  .dc-text strong { color: var(--color-text); font-weight: 500; }
+
+  /* ─── AI prompt recipe ─── */
+  .recipe { background: var(--cairn-dark-bg); border: var(--border-hair-dark); border-radius: var(--r-xl); padding: 44px 48px; color: var(--cairn-parchment); }
+  .recipe h3 { font-family: var(--font-display); font-weight: 300; font-size: 22px; color: var(--cairn-parchment); margin: 0 0 16px; }
+  .recipe-eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber); margin-bottom: 14px; display: block; }
+  .recipe-prompt { background: rgba(255,255,255,0.04); border-left: 2px solid var(--cairn-amber); padding: 22px 26px; font-family: 'DM Sans'; font-size: 14px; line-height: 1.85; color: var(--cairn-parchment); margin: 18px 0; }
+  .recipe-checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px; margin-top: 20px; }
+  .recipe-checklist h4 { font-family: var(--font-display); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cairn-amber); margin: 0 0 10px; }
+  .recipe-checklist ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.85; color: var(--cairn-slate-lt); }
+  .recipe-checklist li { margin-bottom: 4px; }
+
+  /* ─── Don't list ─── */
+  .donts { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: var(--border-hair); border-radius: var(--r-xl); overflow: hidden; }
+  .dont-cell { padding: 26px 32px; font-size: 14px; color: var(--color-text); border-bottom: 0.5px solid #EEE0CC; }
+  .dont-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .dont-cell:nth-child(odd) { border-right: var(--border-hair); }
+  .dont-hdr { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 16px 32px; }
+  .dont-yes { background: #F0F5F0; color: #4A6A50; }
+  .dont-no  { background: #F5F0F0; color: #8A4A4A; border-right: var(--border-hair); }
+</style>
+</head>
+<body class="cairn">
+  <div class="head">
+    <span class="eyebrow">08 · Watercolor system</span>
+    <h1>The pigment, atomized.</h1>
+    <p class="lede">The watercolor technique in our mark isn't just for the mark — it's a fingerprint we let surface as <strong>vista paintings</strong> at the head of long-form pieces, soft washes on hero surfaces, drop caps for editorial openers, and decorative pigment blobs. <em>Companion, never headline.</em> The mark itself is never atomized, faded, or blended — it always sits on linen at full fidelity.</p>
+  </div>
+
+  <div class="group-label">Principles</div>
+  <div class="principles">
+    <div class="pcell"><div class="pnum">01</div><div class="pname">Companion, never headline</div><div class="pdesc">Watercolor supports content. If you notice it before the headline, it's too loud.</div></div>
+    <div class="pcell"><div class="pnum">02</div><div class="pname">Mark's palette only</div><div class="pdesc">Slate gray, warm amber, deep sienna. Never blue, green, pink, or saturated red.</div></div>
+    <div class="pcell"><div class="pnum">03</div><div class="pname">Low opacity, by default</div><div class="pdesc">6–12% for washes and overlays. Never above 20% in body content.</div></div>
+    <div class="pcell"><div class="pnum">04</div><div class="pname">Print &amp; screen</div><div class="pdesc">Specs are CMYK-safe at the published opacity. Test on uncoated paper before shipping.</div></div>
+  </div>
+
+  <div class="group-label">A standing rule · the mark is never atomized</div>
+  <div class="mark-rule">
+    <div class="mark-rule-card linen">
+      <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" style="width:96px;height:auto;flex-shrink:0;">
+      <div class="mark-rule-text">
+        <div class="mr-label">Always full fidelity</div>
+        <div class="mr-body">The mark renders at 100% opacity, transparent background, every surface — hero corner, footer, favicon, signature. Same brightness, same contrast, every time.</div>
+      </div>
+    </div>
+    <div class="mark-rule-card linen">
+      <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" style="width:96px;height:auto;flex-shrink:0;">
+      <div class="mark-rule-text">
+        <div class="mr-label">Never atomized into fragments</div>
+        <div class="mr-body">The watercolor system below uses abstract pigment blobs and washes. The mark itself is never reduced in opacity, masked, cropped, or extracted into a stone fragment.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-label">Decorative wash blobs · abstract pigment, not the mark</div>
+  <div class="anchors">
+    <div class="anchor-card">
+      <div class="anchor-blob"></div>
+      <span class="anchor-eyebrow">Field notes · 03</span>
+      <h2 class="anchor-title">What &lsquo;AI readiness&rsquo; really means for a 200-person team.</h2>
+      <p class="anchor-meta">Jacob Fenton · 6 min read · April 2026</p>
+      <span class="anchor-tag">Blog post header · amber-sienna blob</span>
+    </div>
+    <div class="anchor-card dark">
+      <div class="anchor-blob"></div>
+      <span class="anchor-eyebrow">Quarterly note</span>
+      <h2 class="anchor-title">Three patterns I&rsquo;m watching this quarter.</h2>
+      <p class="anchor-meta">A short letter from Cairn Advisory · April 2026</p>
+      <span class="anchor-tag">Newsletter signoff · slate-amber blob</span>
+    </div>
+  </div>
+
+  <div class="group-label">Wash backgrounds · for hero &amp; feature surfaces</div>
+  <div class="washes">
+    <div class="wash wash-amber"><div class="wash-name">Amber wash</div><div class="wash-spec">--wc-wash-amber</div></div>
+    <div class="wash wash-slate"><div class="wash-name">Slate wash</div><div class="wash-spec">--wc-wash-slate</div></div>
+    <div class="wash wash-mixed"><div class="wash-name">Mixed wash</div><div class="wash-spec">--wc-wash-mixed</div></div>
+  </div>
+
+  <div class="group-label">Vistas · the headline component for article heroes</div>
+  <div class="vista-hero" style="background-image:url('../assets/vistas/shoreline.png');">
+    <span class="vh-cap">Shoreline · the canonical example · hand-painted</span>
+  </div>
+  <p style="font-size: 14px; line-height: 1.7; color: var(--cairn-umber); max-width: 640px; margin: 18px 0 28px;">A watercolor vista is the visual headline of a long-form note. It sits between the title block and the body, in the same palette as the mark, painting a scene that resonates with the piece — a shoreline for orientation, a mountain for the long view, a working block for operations. <em>One vista per piece. Quiet. Atmospheric. Never decorative.</em></p>
+
+  <div class="group-label">Library · current state</div>
+  <div class="vista-grid">
+    <div class="vista-card painted" style="background-image:url('../assets/vistas/shoreline.png');">
+      <span class="vc-state">Painted</span>
+      <span class="vc-tag">Shoreline</span>
+    </div>
+    <div class="vista-card" style="background-image:url('../assets/vistas/mountain.svg');">
+      <span class="vc-state">Placeholder</span>
+      <span class="vc-tag">Mountain</span>
+    </div>
+    <div class="vista-card" style="background-image:url('../assets/vistas/river.svg');">
+      <span class="vc-state">Placeholder</span>
+      <span class="vc-tag">River</span>
+    </div>
+    <div class="vista-card" style="background-image:url('../assets/vistas/row-houses.svg');">
+      <span class="vc-state">Placeholder</span>
+      <span class="vc-tag">Row houses</span>
+    </div>
+    <div class="vista-card" style="background-image:url('../assets/vistas/city.svg');">
+      <span class="vc-state">Placeholder</span>
+      <span class="vc-tag">City skyline</span>
+    </div>
+    <div class="vista-card" style="background-image:url('../assets/vistas/restaurant.svg');">
+      <span class="vc-state">Placeholder</span>
+      <span class="vc-tag">Restaurant interior</span>
+    </div>
+  </div>
+  <p style="font-size: 13px; line-height: 1.7; color: var(--cairn-umber); max-width: 640px; margin: 18px 0 0;"><strong>Shoreline</strong> is the only painting we have. The five placeholders are flat washes — they reserve the slot and signal palette intent, but they are <em>not</em> shipping art. Commission a hand-painted scan in the same technique before publishing pieces that use them.</p>
+
+  <div class="group-label">Drop cap &amp; numerals · for editorial openers</div>
+  <div class="dropcap-stage">
+    <div class="dropcap-card">
+      <span class="dc-eyebrow">Editorial opener · letterform</span>
+      <div class="dc-row">
+        <div class="dc-letter">A</div>
+        <div class="dc-text"><strong>cairn is a simple thing</strong> — stones stacked by someone who walked the path before you, left there so you don't lose your way. That's what we do at Cairn Advisory: we leave clear markers for operators navigating AI for the first time.</div>
+      </div>
+    </div>
+    <div class="dropcap-card">
+      <span class="dc-eyebrow">Editorial opener · numeral</span>
+      <div class="dc-row">
+        <div class="dc-num">03</div>
+        <div class="dc-text"><strong>Most AI tools your team uses</strong> can already do what they think they need a custom build for. The first move is rarely &lsquo;buy something new&rsquo; — it's &lsquo;use what's already in front of you, properly.&rsquo;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-label">Authoring new vistas · commission recipe</div>
+  <div class="recipe">
+    <span class="recipe-eyebrow">Generation prompt</span>
+    <h3>For new watercolor vistas — atmospheric scenes that head long-form pieces.</h3>
+    <div class="recipe-prompt">
+      &ldquo;A loose watercolor landscape vista on warm linen paper, hand-painted technique, wet-on-wet pigment bleed, soft graded washes. Palette restricted to: warm amber-sienna (#C4A87A, #8C5838), cool slate (#6B8A9A), deep umber (#52443A). Atmospheric perspective — distant elements very pale, foreground slightly more saturated. Subject: <strong>[shoreline / mountain ridges / river bend / row of brownstones / distant city skyline / warm restaurant interior]</strong>. Painterly edges, visible paper grain, no hard outlines. Generous negative space (top half largely empty paper). Editorial, restrained, contemplative — <em>not</em> picturesque or romantic. 1200×500 aspect.&rdquo;
+    </div>
+    <div class="recipe-checklist">
+      <div>
+        <h4>Always</h4>
+        <ul>
+          <li>Slate + amber + sienna palette only</li>
+          <li>Loose wet-brush edges, visible pigment pooling</li>
+          <li>Top ⅓ of frame mostly empty paper / sky</li>
+          <li>One subject, atmospheric perspective</li>
+          <li>1200×500 (12:5), linen background visible</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Never</h4>
+        <ul>
+          <li>Bright, saturated, or pastel color</li>
+          <li>Hard outlines, vector look, or digital cleanness</li>
+          <li>People, vehicles, signage, or text in the scene</li>
+          <li>Romantic or picturesque (sunsets, golden hour)</li>
+          <li>Dense, busy, or detailed compositions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-label">Yes / no</div>
+  <div class="donts">
+    <div class="dont-hdr dont-yes">Use watercolor for…</div>
+    <div class="dont-hdr dont-no">Avoid using watercolor for…</div>
+    <div class="dont-cell">Article hero vistas in the Cairn palette</div>
+    <div class="dont-cell">UI controls, buttons, or interactive elements</div>
+    <div class="dont-cell">Newsletter and email signoffs</div>
+    <div class="dont-cell">Data, charts, or quantitative content</div>
+    <div class="dont-cell">Subtle wash backgrounds on hero surfaces</div>
+    <div class="dont-cell">Logos, wordmarks, or anywhere the mark itself appears</div>
+    <div class="dont-cell">Drop-cap and numeral openers in editorial</div>
+    <div class="dont-cell">Anywhere it competes with a photograph or replaces the mark</div>
+  </div>
+</body>
+</html>

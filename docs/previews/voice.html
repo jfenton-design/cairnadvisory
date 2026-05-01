@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cairn — Voice &amp; Tone</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 64px 72px; min-height: 100vh; }
+  .head { margin-bottom: 56px; max-width: 760px; }
+  .eyebrow { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: var(--fw-medium); letter-spacing: var(--ls-tag); text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 12px; display: block; }
+  h1 { font-family: var(--font-display); font-weight: var(--fw-light); font-size: 56px; line-height: 1.05; letter-spacing: var(--ls-h); color: var(--color-text); margin: 0 0 20px; }
+  .lede { font-size: 17px; line-height: var(--lh-loose); color: var(--cairn-umber); max-width: 580px; margin: 0; }
+
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 56px 0 36px; }
+  .vcard { background: var(--cairn-white); border: var(--border-hair); border-radius: var(--r-xl); padding: 36px 32px; }
+  .vnum { font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--cairn-amber); letter-spacing: 0.22em; margin-bottom: 14px; }
+  .vtitle { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--color-text); margin-bottom: 12px; line-height: 1.3; letter-spacing: -0.01em; }
+  .vdesc { font-size: 14px; color: var(--cairn-umber); line-height: 1.85; }
+
+  .group-label { font-family: var(--font-display); font-size: 13px; font-weight: var(--fw-medium); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cairn-ironwood); margin: 56px 0 20px; padding-top: 24px; border-top: var(--border-hair); }
+
+  .say-grid { display: grid; grid-template-columns: 1fr 1fr; border: var(--border-hair); border-radius: var(--r-xl); overflow: hidden; }
+  .say-hdr { padding: 16px 28px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; border-bottom: var(--border-hair); }
+  .say-yes { background: #F0F5F0; color: #4A6A50; }
+  .say-no  { background: #F5F0F0; color: #8A4A4A; border-left: var(--border-hair); }
+  .say-item { padding: 22px 28px; font-size: 14px; color: var(--color-text); line-height: 1.6; border-bottom: 0.5px solid #EEE0CC; font-weight: 300; font-family: var(--font-display); }
+  .say-item:last-child { border-bottom: none; }
+  .say-item-r { border-left: var(--border-hair); }
+</style>
+</head>
+<body class="cairn">
+  <div class="head">
+    <span class="eyebrow">05 — Voice &amp; tone</span>
+    <h1>How we speak.</h1>
+    <p class="lede">Cairn Advisory sounds like a senior operator who happens to know AI deeply. Direct, warm, and never academic.</p>
+  </div>
+
+  <div class="voice-grid">
+    <div class="vcard"><div class="vnum">01</div><div class="vtitle">Operators first, technology second</div><div class="vdesc">We lead with business outcomes. AI is a tool, not the point. Every sentence should answer: what does this mean for the business?</div></div>
+    <div class="vcard"><div class="vnum">02</div><div class="vtitle">Confident without being loud</div><div class="vdesc">No exclamation marks. No hype. We state clearly what we do and trust the work to speak. Restraint is a form of confidence.</div></div>
+    <div class="vcard"><div class="vnum">03</div><div class="vtitle">Specific over general</div><div class="vdesc">We name things. "Reduce churn by 20%" not "drive efficiency." Vague language is what consultants use when they don't know.</div></div>
+    <div class="vcard"><div class="vnum">04</div><div class="vtitle">Warm, not casual</div><div class="vdesc">A partner, not a vendor. We speak like a trusted colleague — direct, honest, human — but never sloppy or overfamiliar.</div></div>
+  </div>
+
+  <div class="group-label">In practice</div>
+  <div class="say-grid">
+    <div>
+      <div class="say-hdr say-yes">Say this</div>
+      <div class="say-item">"We'll build the system alongside you."</div>
+      <div class="say-item">"Here's what's actually slowing you down."</div>
+      <div class="say-item">"Most AI tools your team uses can already do this."</div>
+    </div>
+    <div>
+      <div class="say-hdr say-no">Not this</div>
+      <div class="say-item say-item-r">"We leverage cutting-edge AI solutions."</div>
+      <div class="say-item say-item-r">"Let's ideate on your digital transformation."</div>
+      <div class="say-item say-item-r">"The AI ecosystem is rapidly evolving."</div>
+    </div>
+  </div>
+</body>
+</html>

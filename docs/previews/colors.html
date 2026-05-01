@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cairn — Color Palette</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 64px 72px; min-height: 100vh; }
+  .head { margin-bottom: 56px; max-width: 760px; }
+  .eyebrow { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: var(--fw-medium); letter-spacing: var(--ls-tag); text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 12px; display: block; }
+  h1 { font-family: var(--font-display); font-weight: var(--fw-light); font-size: 56px; line-height: 1.05; letter-spacing: var(--ls-h); color: var(--color-text); margin: 0 0 20px; }
+  .lede { font-size: 17px; line-height: var(--lh-loose); color: var(--cairn-umber); max-width: 580px; margin: 0; }
+  .group-label { font-family: var(--font-display); font-size: 13px; font-weight: var(--fw-medium); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cairn-ironwood); margin: 56px 0 20px; padding-top: 24px; border-top: var(--border-hair); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .swatch { border-radius: var(--r-xl); overflow: hidden; border: var(--border-hair); background: var(--color-bg-card); }
+  .bar { height: 130px; }
+  .meta { padding: 18px 20px 22px; }
+  .name { font-family: var(--font-display); font-size: 14px; font-weight: var(--fw-medium); color: var(--color-text); margin-bottom: 4px; }
+  .hex { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--cairn-umber); margin-bottom: 8px; letter-spacing: 0.04em; }
+  .use { font-size: 12px; color: var(--color-text-subtle); line-height: 1.55; }
+  .ring-light { border: 0.5px solid #E0D0B8; }
+</style>
+</head>
+<body class="cairn">
+  <div class="head">
+    <span class="eyebrow">03 — Color</span>
+    <h1>Earth, stone, and weathered light.</h1>
+    <p class="lede">Colors are pulled directly from the mark — cool slate of river stones, warm amber of sandstone, deep ironwood of shadow. Earthy without being rustic. Modern without being cold.</p>
+  </div>
+
+  <div class="group-label">Darks · structural anchor</div>
+  <div class="grid">
+    <div class="swatch"><div class="bar" style="background:#0E0B07;"></div><div class="meta"><div class="name">Obsidian</div><div class="hex">#0E0B07</div><div class="use">Deepest shadow. Reserved.</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#2C1E10;"></div><div class="meta"><div class="name">Ironwood</div><div class="hex">#2C1E10</div><div class="use">Primary text · headings</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#1E1C17;"></div><div class="meta"><div class="name">Dark umber</div><div class="hex">#1E1C17</div><div class="use">Dark backgrounds · cover</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#8B6A48;"></div><div class="meta"><div class="name">Umber</div><div class="hex">#8B6A48</div><div class="use">Body text · captions</div></div></div>
+  </div>
+
+  <div class="group-label">Slates · cool accent</div>
+  <div class="grid">
+    <div class="swatch"><div class="bar" style="background:#6B8A9A;"></div><div class="meta"><div class="name">Slate</div><div class="hex">#6B8A9A</div><div class="use">Accent · ADVISORY label</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#8B9EA8;"></div><div class="meta"><div class="name">River slate</div><div class="hex">#8B9EA8</div><div class="use">Secondary text · subtext</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#C4A87A;"></div><div class="meta"><div class="name">Sandstone</div><div class="hex">#C4A87A</div><div class="use">Rules · warm accents</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#E8D8B8;"></div><div class="meta"><div class="name">Parchment</div><div class="hex">#E8D8B8</div><div class="use">Reversed type on dark</div></div></div>
+  </div>
+
+  <div class="group-label">Surfaces</div>
+  <div class="grid">
+    <div class="swatch"><div class="bar ring-light" style="background:#F8F5F0;"></div><div class="meta"><div class="name">Linen</div><div class="hex">#F8F5F0</div><div class="use">Primary background</div></div></div>
+    <div class="swatch"><div class="bar ring-light" style="background:#FDFAF6;"></div><div class="meta"><div class="name">White (warm)</div><div class="hex">#FDFAF6</div><div class="use">Card surface</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#D8C8A8;"></div><div class="meta"><div class="name">Hairline</div><div class="hex">#D8C8A8</div><div class="use">Canonical rule color</div></div></div>
+    <div class="swatch"><div class="bar" style="background:#2A2018;"></div><div class="meta"><div class="name">Dark hairline</div><div class="hex">#2A2018</div><div class="use">Rules on dark surfaces</div></div></div>
+  </div>
+</body>
+</html>

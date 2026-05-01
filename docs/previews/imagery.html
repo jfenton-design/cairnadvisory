@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cairn — Imagery</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 64px 72px; min-height: 100vh; }
+  .head { margin-bottom: 56px; max-width: 760px; }
+  .eyebrow { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: var(--fw-medium); letter-spacing: var(--ls-tag); text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 12px; display: block; }
+  h1 { font-family: var(--font-display); font-weight: var(--fw-light); font-size: 56px; line-height: 1.05; letter-spacing: var(--ls-h); color: var(--color-text); margin: 0 0 20px; }
+  .lede { font-size: 17px; line-height: var(--lh-loose); color: var(--cairn-umber); max-width: 580px; margin: 0; }
+
+  .hero-sample { margin: 56px 0; height: 480px; border-radius: var(--r-xl); overflow: hidden; background: url('../assets/imagery/hero-cairn-coastal.jpg') center 40% / cover; position: relative; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(14,11,7,0) 0%, rgba(14,11,7,0.05) 45%, rgba(14,11,7,0.55) 70%, rgba(14,11,7,0.82) 100%); }
+  .hero-cap { position: absolute; bottom: 36px; left: 44px; right: 44px; }
+  .hero-cap .eb-line { width: 32px; height: 0.5px; background: var(--cairn-amber); display: inline-block; vertical-align: middle; margin-right: 12px; }
+  .hero-cap .eb { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber); display: inline-block; }
+  .hero-cap h2 { font-family: var(--font-display); font-weight: 300; font-size: 48px; line-height: 1.04; letter-spacing: -0.02em; color: var(--cairn-white); margin: 14px 0 0; }
+  .hero-cap em { font-style: italic; color: var(--cairn-parchment); }
+
+  .group-label { font-family: var(--font-display); font-size: 13px; font-weight: var(--fw-medium); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cairn-ironwood); margin: 56px 0 20px; padding-top: 24px; border-top: var(--border-hair); }
+
+  .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .img-card { border-radius: var(--r-xl); overflow: hidden; border: var(--border-hair); background: var(--cairn-white); }
+  .img-swatch { height: 140px; }
+  .img-info { padding: 18px 22px 22px; }
+  .img-rule { font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--color-text); margin-bottom: 5px; }
+  .img-desc { font-size: 12px; color: var(--cairn-umber); line-height: 1.6; }
+
+  .overlay-rule { background: var(--cairn-white); border: var(--border-hair); border-radius: var(--r-xl); padding: 32px 36px; margin-top: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: center; }
+  .overlay-spec { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--cairn-umber); line-height: 1.8; }
+  .overlay-name { font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--color-text); margin-bottom: 6px; }
+</style>
+</head>
+<body class="cairn">
+  <div class="head">
+    <span class="eyebrow">06 — Imagery</span>
+    <h1>Natural, specific, quietly beautiful.</h1>
+    <p class="lede">Imagery should feel like the mark — never stock-photo generic. Cool overcast light, weathered materials, considered spaces. The metaphor of the cairn made literal, sparingly.</p>
+  </div>
+
+  <div class="hero-sample">
+    <div class="hero-overlay"></div>
+    <div class="hero-cap">
+      <span class="eb"><span class="eb-line"></span>Sample · hero treatment</span>
+      <h2>I've been<br><em>in the room.</em></h2>
+    </div>
+  </div>
+
+  <div class="group-label">Direction · do</div>
+  <div class="img-grid">
+    <div class="img-card"><div class="img-swatch" style="background:linear-gradient(135deg,#4A5A60,#8B9EA8,#C8D8DF);"></div><div class="img-info"><div class="img-rule">Natural light, cool tones</div><div class="img-desc">Overcast daylight. Stone, water, worn surfaces.</div></div></div>
+    <div class="img-card"><div class="img-swatch" style="background:linear-gradient(135deg,#3A2A18,#7A6048,#C4A87A);"></div><div class="img-info"><div class="img-rule">Warm, textured materials</div><div class="img-desc">Wood, leather, paper. Never plastic or chrome.</div></div></div>
+    <div class="img-card"><div class="img-swatch" style="background:linear-gradient(135deg,#1A1410,#2C2018,#4A3A28);"></div><div class="img-info"><div class="img-rule">Dark, considered spaces</div><div class="img-desc">A study. A workshop. Serious work happens here.</div></div></div>
+    <div class="img-card"><div class="img-swatch" style="background:linear-gradient(135deg,#D8E0D8,#A8B8A8,#688068);"></div><div class="img-info"><div class="img-rule">Landscape · path · trail</div><div class="img-desc">Cairns in frame. The metaphor made literal, sparingly.</div></div></div>
+    <div class="img-card"><div class="img-swatch" style="background:linear-gradient(135deg,#F0EBE0,#D8C8A8,#B0A080);"></div><div class="img-info"><div class="img-rule">Clean linen surfaces</div><div class="img-desc">Flat lays of documents, notebooks, hands at work.</div></div></div>
+    <div class="img-card"><div class="img-swatch" style="background:linear-gradient(135deg,#C47A5A,#8B5A38,#5C3820);position:relative;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#F5E0D0;font-family:var(--font-display);font-weight:500;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">Avoid</div></div><div class="img-info"><div class="img-rule">Avoid: warm saturated stock</div><div class="img-desc">No heroic handshakes. No smiling at laptops.</div></div></div>
+  </div>
+
+  <div class="group-label">Hero overlay · canonical recipe</div>
+  <div class="overlay-rule">
+    <div>
+      <div class="overlay-name">Bottom-anchored gradient</div>
+      <div style="font-size:12px;color:var(--cairn-umber);line-height:1.6;">Sky stays clear at the top. Bottom third reads as a paragraph against ironwood.</div>
+    </div>
+    <div class="overlay-spec">linear-gradient(<br>&nbsp;&nbsp;to bottom,<br>&nbsp;&nbsp;rgba(14,11,7, 0.00) 0%,<br>&nbsp;&nbsp;rgba(14,11,7, 0.05) 45%,<br>&nbsp;&nbsp;rgba(14,11,7, 0.55) 70%,<br>&nbsp;&nbsp;rgba(14,11,7, 0.82) 100%<br>)</div>
+  </div>
+</body>
+</html>

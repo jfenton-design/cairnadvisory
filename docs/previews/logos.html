@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cairn — Logo System</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 64px 72px; min-height: 100vh; }
+  .head { margin-bottom: 56px; max-width: 760px; }
+  .eyebrow { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: var(--fw-medium); letter-spacing: var(--ls-tag); text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 12px; display: block; }
+  h1 { font-family: var(--font-display); font-weight: var(--fw-light); font-size: 56px; line-height: 1.05; letter-spacing: var(--ls-h); color: var(--color-text); margin: 0 0 20px; }
+  .lede { font-size: 17px; line-height: var(--lh-loose); color: var(--cairn-umber); max-width: 580px; margin: 0; }
+  .lede strong { font-weight: 500; color: var(--color-text); }
+  .group-label { font-family: var(--font-display); font-size: 13px; font-weight: var(--fw-medium); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cairn-ironwood); margin: 56px 0 20px; padding-top: 24px; border-top: var(--border-hair); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { border-radius: var(--r-xl); padding: 60px 40px 36px; display: flex; flex-direction: column; align-items: center; }
+  .card.light { background: var(--cairn-linen); border: var(--border-hair); }
+  .card.dark  { background: var(--cairn-dark-bg); border: var(--border-hair-dark); }
+  .card.slate { background: var(--cairn-slate); border: 0.5px solid #5A7888; }
+  .card.amber { background: var(--cairn-amber); border: 0.5px solid #B09060; }
+  .card img { width: 130px; height: auto; }
+  .lockup { display: flex; flex-direction: column; align-items: center; margin-top: 22px; }
+  .cairn-w { font-family: 'Figtree',sans-serif; font-weight: 300; font-size: 26px; letter-spacing: 11px; text-transform: uppercase; line-height: 1; }
+  .adv-w   { font-family: 'Figtree',sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 9.74px; text-transform: uppercase; margin-top: 11px; line-height: 1; }
+  .light .cairn-w { color: var(--color-text); }
+  .light .adv-w   { color: var(--cairn-slate-lt); }
+  .dark .cairn-w  { color: var(--cairn-parchment); }
+  .dark .adv-w    { color: var(--cairn-slate-lt); }
+  .slate .cairn-w { color: var(--cairn-white); }
+  .slate .adv-w   { color: rgba(255,255,255,0.7); }
+  .amber .cairn-w { color: var(--cairn-dark-bg); }
+  .amber .adv-w   { color: rgba(28,22,12,0.65); }
+  .tag { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 22px; }
+  .light .tag { color: #B0A080; }
+  .dark .tag  { color: #5A4A2C; }
+  .slate .tag { color: rgba(255,255,255,0.55); }
+  .amber .tag { color: rgba(28,22,12,0.5); }
+
+  .wide { padding: 48px 56px; display: flex; align-items: center; gap: 26px; border-radius: var(--r-xl); margin-top: 16px; }
+  .wide.light { background: var(--cairn-linen); border: var(--border-hair); }
+  .wide.dark  { background: var(--cairn-dark-bg); border: var(--border-hair-dark); }
+  .wide img { width: 96px; height: auto; }
+  .wide .lockup-h { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .wide .cairn-w { font-size: 42px; letter-spacing: 13px; }
+  .wide .adv-w { font-size: 13px; letter-spacing: 16.49px; margin-top: 0; }
+  .wide-tag { margin-left: auto; font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; align-self: flex-end; }
+  .wide.light .wide-tag { color: #B0A080; }
+  .wide.dark  .wide-tag { color: #3A2C18; }
+
+  .fav-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .fav { border-radius: var(--r-xl); padding: 40px 16px 24px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .fav img { width: 72px; height: auto; }
+  .fav-tag { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+</style>
+</head>
+<body class="cairn">
+  <div class="head">
+    <span class="eyebrow">02 — Logo system</span>
+    <h1>The mark.</h1>
+    <p class="lede">A watercolor and ink illustration of a stone stack. The mark is the canonical floating asset — transparent background, full pigment, no tile, no border, no blend mode. It floats on linen, dark umber, slate, and amber alike at the same fidelity. <strong>Standing rule: ADVISORY is letter-spaced to match the exact visual width of CAIRN — in every lockup, application, and at every size.</strong></p>
+  </div>
+
+  <div class="group-label">Primary lockups · stacked · four surfaces</div>
+  <div class="grid-2" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="card light">
+      <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" loading="eager">
+      <div class="lockup">
+        <span class="cairn-w">CAIRN</span>
+        <span class="adv-w">ADVISORY</span>
+      </div>
+      <span class="tag">Linen</span>
+    </div>
+    <div class="card dark">
+      <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" loading="eager">
+      <div class="lockup">
+        <span class="cairn-w">CAIRN</span>
+        <span class="adv-w">ADVISORY</span>
+      </div>
+      <span class="tag">Obsidian</span>
+    </div>
+    <div class="card slate">
+      <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" loading="eager">
+      <div class="lockup">
+        <span class="cairn-w">CAIRN</span>
+        <span class="adv-w">ADVISORY</span>
+      </div>
+      <span class="tag">Slate</span>
+    </div>
+    <div class="card amber">
+      <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" loading="eager">
+      <div class="lockup">
+        <span class="cairn-w">CAIRN</span>
+        <span class="adv-w">ADVISORY</span>
+      </div>
+      <span class="tag">Amber</span>
+    </div>
+  </div>
+
+  <div class="group-label">Horizontal lockups</div>
+  <div class="wide light">
+    <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" loading="eager">
+    <div class="lockup-h">
+      <span class="cairn-w">CAIRN</span>
+      <span class="adv-w">ADVISORY</span>
+    </div>
+    <span class="wide-tag">Horizontal · light</span>
+  </div>
+  <div class="wide dark">
+    <img src="../assets/logos/cairn-mark-float.png" alt="Cairn mark" loading="eager">
+    <div class="lockup-h">
+      <span class="cairn-w">CAIRN</span>
+      <span class="adv-w">ADVISORY</span>
+    </div>
+    <span class="wide-tag">Horizontal · dark</span>
+  </div>
+
+  <div class="group-label">App icon · favicon · the mark floats on every surface</div>
+  <div class="fav-grid">
+    <div class="fav" style="background:var(--cairn-linen);"><img src="../assets/logos/cairn-mark-float.png" alt=""><span class="fav-tag" style="color:#B0A080;">On linen</span></div>
+    <div class="fav" style="background:var(--cairn-dark-bg);"><img src="../assets/logos/cairn-mark-float.png" alt=""><span class="fav-tag" style="color:#5A4A2C;">On obsidian</span></div>
+    <div class="fav" style="background:var(--cairn-slate);"><img src="../assets/logos/cairn-mark-float.png" alt=""><span class="fav-tag" style="color:rgba(255,255,255,0.55);">On slate</span></div>
+    <div class="fav" style="background:var(--cairn-amber);"><img src="../assets/logos/cairn-mark-float.png" alt=""><span class="fav-tag" style="color:rgba(28,22,12,0.5);">On amber</span></div>
+  </div>
+</body>
+</html>

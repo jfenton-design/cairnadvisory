@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cairn Advisory — AI advisory for established operators</title>
+  <link rel="stylesheet" href="homepage-assets/tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: var(--fw-light);
+      color: var(--cairn-ironwood);
+      background: var(--cairn-linen);
+      -webkit-font-smoothing: antialiased;
+      font-size: var(--fs-body);
+      line-height: var(--lh-loose);
+    }
+
+    a { color: inherit; }
+
+    /* ══════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 60px;
+      background: var(--cairn-linen);
+      border-bottom: 0.5px solid rgba(196, 168, 122, 0.3);
+      transition: box-shadow var(--dur-base) var(--ease);
+    }
+    nav.scrolled { box-shadow: 0 1px 0 rgba(196, 168, 122, 0.2); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      text-decoration: none;
+    }
+    .nav-mark { width: 64px; height: auto; display: block; }
+    .nav-wordmark { display: inline-flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+    .nav-wordmark .w-cairn {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: 26px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--cairn-obsidian);
+      display: inline-block;
+      white-space: nowrap;
+      line-height: 1;
+      margin-left: -1px;
+    }
+    .nav-wordmark .w-advisory {
+      font-family: var(--font-display);
+      font-weight: var(--fw-medium);
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--cairn-slate-lt);
+      display: inline-block;
+      white-space: nowrap;
+      line-height: 1;
+      letter-spacing: 7.6px;
+      margin-right: -7.6px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .nav-links a:hover { color: var(--cairn-obsidian); }
+
+    .nav-cta {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-parchment);
+      background: var(--cairn-ironwood);
+      padding: 11px 22px;
+      text-decoration: none;
+      border-radius: var(--r-sm);
+      transition: background var(--dur-fast) var(--ease);
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--cairn-obsidian); }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+      background-color: var(--cairn-linen);
+      background-image: url('homepage-assets/shoreline-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 140px 96px 120px;
+      text-align: left;
+    }
+    /* Watercolor shoreline backdrop — painted on .hero directly */
+    .hero::before {
+      content: none;
+    }
+    /* Cream veil so the left-side copy stays legible over the painting */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(244, 237, 224, 0.72) 0%,
+        rgba(244, 237, 224, 0.45) 28%,
+        rgba(244, 237, 224, 0.10) 50%,
+        rgba(244, 237, 224, 0) 65%
+      );
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Floating cairn planted on the shoreline path */
+    .hero-cairn {
+      position: absolute;
+      width: 280px;
+      left: 60%;
+      bottom: 18%;
+      z-index: 1;
+      filter: drop-shadow(0 4px 12px rgba(80, 64, 40, 0.12));
+      pointer-events: none;
+    }
+    .hero-cairn img { width: 100%; height: auto; display: block; }
+
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      justify-content: flex-start;
+    }
+    .hero-eyebrow-line {
+      width: 36px;
+      height: 0.5px;
+      background: var(--cairn-umber);
+    }
+    .hero-eyebrow-text {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: clamp(48px, 6.4vw, 88px);
+      line-height: var(--lh-tight);
+      color: var(--cairn-obsidian);
+      letter-spacing: var(--ls-display);
+      margin-bottom: 32px;
+      white-space: nowrap;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--cairn-umber);
+      white-space: nowrap;
+    }
+
+    .hero-sub {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-relaxed);
+      color: #5C4A30;
+      font-weight: var(--fw-light);
+      max-width: 580px;
+      margin: 0 0 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-hero-primary {
+      display: inline-block;
+      padding: 16px 36px;
+      background: var(--cairn-ironwood);
+      color: var(--cairn-linen);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--r-sm);
+      transition: background var(--dur-fast) var(--ease);
+    }
+    .btn-hero-primary:hover { background: var(--cairn-obsidian); }
+
+    .btn-hero-ghost {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+      text-decoration: none;
+      border-bottom: 0.5px solid rgba(108, 89, 56, 0.4);
+      padding-bottom: 3px;
+      transition: border-color var(--dur-fast) var(--ease);
+    }
+    .btn-hero-ghost:hover { border-color: var(--cairn-ironwood); }
+
+    /* Place / location stamp on hero */
+    .hero-stamp {
+      position: absolute;
+      top: 50%;
+      right: 60px;
+      transform: translateY(-50%) rotate(180deg);
+      writing-mode: vertical-rl;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-stamp-text {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(232, 216, 184, 0.8);
+    }
+    .hero-stamp-rule {
+      width: 0.5px;
+      height: 56px;
+      background: rgba(232, 216, 184, 0.4);
+    }
+
+    /* ══════════════════════════════════════════
+       SHARED SECTION
+    ══════════════════════════════════════════ */
+    section {
+      padding: 120px 96px;
+      border-top: 0.5px solid var(--color-rule);
+    }
+
+    .sec-tag {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: var(--fw-medium);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .sec-tag .sec-tag-num {
+      color: var(--cairn-amber);
+      font-weight: var(--fw-semibold);
+    }
+
+    h2.sec-title {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 5vw, 64px);
+      font-weight: var(--fw-light);
+      color: var(--cairn-obsidian);
+      line-height: 1.08;
+      letter-spacing: var(--ls-display);
+      margin-bottom: 48px;
+    }
+    h2.sec-title em {
+      font-style: italic;
+      color: var(--cairn-umber);
+    }
+
+    /* ══════════════════════════════════════════
+       INTRO STATEMENT (the room)
+    ══════════════════════════════════════════ */
+    .statement {
+      background: var(--cairn-linen);
+      padding: 70px 96px;
+      border-top: none;
+    }
+    .statement-inner {
+      max-width: 1100px;
+    }
+    .statement-text {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: clamp(28px, 3vw, 38px);
+      line-height: 1.4;
+      color: var(--cairn-ironwood);
+      letter-spacing: -0.01em;
+      max-width: 1000px;
+    }
+    .statement-text em {
+      font-style: italic;
+      color: var(--cairn-umber);
+    }
+    .statement-text .grey {
+      color: #B0A088;
+    }
+    .statement-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 56px;
+    }
+    .statement-meta-rule {
+      width: 36px;
+      height: 0.5px;
+      background: var(--cairn-amber);
+    }
+    .statement-meta-text {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+
+    /* ══════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════ */
+    .about { background: var(--cairn-white); padding-top: 100px; }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .about-portrait {
+      width: 280px;
+      flex: 0 0 280px;
+      margin-bottom: 0;
+    }
+    .about-portrait-frame {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background: var(--cairn-linen);
+      border: 0.5px solid var(--color-rule);
+      overflow: hidden;
+      position: relative;
+      display: block;
+    }
+    .about-portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%) contrast(1.02);
+    }
+    .about-portrait-cap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 18px;
+      font-family: var(--font-mono, var(--font-body));
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+    .about-portrait-cap-rule {
+      flex: 0 0 28px;
+      height: 0.5px;
+      background: var(--cairn-umber);
+      opacity: 0.5;
+    }
+
+    .about-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 56px;
+      margin-bottom: 56px;
+    }
+    .about-intro .about-pull-quote {
+      margin-bottom: 0;
+      font-size: clamp(24px, 2.6vw, 34px);
+      max-width: none;
+    }
+
+    .about-pull-quote {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height: 1.3;
+      color: var(--cairn-obsidian);
+      letter-spacing: var(--ls-h);
+      margin-bottom: 44px;
+      max-width: 680px;
+    }
+    .about-pull-quote em {
+      font-style: italic;
+      color: var(--cairn-umber);
+    }
+
+    .about-bio p {
+      font-size: var(--fs-body);
+      line-height: 1.85;
+      color: #5C4A30;
+      margin-bottom: 22px;
+      max-width: 640px;
+    }
+    .about-bio p:last-child { margin-bottom: 0; }
+
+    .stat-card {
+      padding: 36px 32px;
+      background: var(--cairn-linen);
+      border: 0.5px solid var(--color-rule);
+      border-radius: var(--r-lg);
+      margin-bottom: 14px;
+    }
+    .stat-card:last-child { margin-bottom: 0; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: 56px;
+      color: var(--cairn-obsidian);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .stat-number sup {
+      font-size: 28px;
+      vertical-align: super;
+      color: var(--cairn-amber);
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--cairn-umber);
+      line-height: 1.5;
+      max-width: 340px;
+    }
+
+    .credentials {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 0.5px solid var(--color-rule);
+      flex-wrap: wrap;
+    }
+    .credential-item {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-credential);
+      text-transform: uppercase;
+      color: var(--cairn-slate-lt);
+    }
+    .credential-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--color-rule);
+    }
+
+    /* ══════════════════════════════════════════
+       EXPERIENCE
+    ══════════════════════════════════════════ */
+    .experience {
+      background: var(--cairn-linen);
+      padding: 100px 96px 120px;
+    }
+    .experience-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .experience-head .sec-tag { margin-bottom: 0; }
+    .experience-note {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+    .experience-note em { font-style: italic; text-transform: none; letter-spacing: 0; color: var(--cairn-umber); }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 0.5px solid var(--color-rule);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: var(--cairn-white);
+    }
+    .exp-card {
+      padding: 44px 36px;
+      border-right: 0.5px solid var(--color-rule);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .exp-card:last-child { border-right: none; }
+
+    .exp-name {
+      font-family: var(--font-display);
+      font-weight: var(--fw-regular);
+      font-size: 24px;
+      color: var(--cairn-obsidian);
+      letter-spacing: -0.01em;
+    }
+    .exp-role {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-amber);
+    }
+    .exp-desc {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #7A6A50;
+      margin-top: 4px;
+    }
+    .exp-meta {
+      display: flex;
+      gap: 14px;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 0.5px solid var(--color-rule);
+    }
+    .exp-meta-item {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: var(--fw-medium);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cairn-slate-lt);
+    }
+
+    /* ══════════════════════════════════════════
+       INDUSTRIES — DARK
+    ══════════════════════════════════════════ */
+    .industries {
+      background: var(--cairn-dark-bg);
+      border-top: 0.5px solid var(--color-rule-dark);
+    }
+    .industries .sec-tag { color: var(--cairn-parchment); }
+    .industries .sec-tag .sec-tag-num { color: var(--cairn-amber); }
+    .industries h2.sec-title { color: var(--cairn-parchment); }
+    .industries h2.sec-title em { color: var(--cairn-amber); }
+
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .industry-card {
+      background: rgba(255,255,255,0.03);
+      border: 0.5px solid #3A3020;
+      border-radius: var(--r-xl);
+      padding: 36px 28px 32px;
+      position: relative;
+      transition: border-color var(--dur-base) var(--ease), background var(--dur-base) var(--ease);
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+    }
+    .industry-card:hover {
+      border-color: var(--cairn-amber);
+      background: rgba(196, 168, 122, 0.05);
+    }
+
+    /* Industry icon — minimal line-art SVG, amber stroke */
+    .industry-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 28px;
+      color: var(--cairn-amber);
+      display: block;
+    }
+    .industry-icon svg { width: 100%; height: 100%; display: block; }
+
+    .industry-num {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: var(--fw-light);
+      letter-spacing: 0;
+      color: var(--cairn-umber);
+      line-height: 1;
+    }
+
+    .industry-name {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: 18px;
+      color: var(--cairn-parchment);
+      margin-bottom: 12px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .industry-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--cairn-umber);
+    }
+
+    /* ══════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════ */
+    .services { background: var(--cairn-white); }
+
+    .services-head {
+      display: grid;
+      grid-template-columns: auto 380px;
+      gap: 56px;
+      margin-bottom: 64px;
+      align-items: end;
+      justify-content: start;
+    }
+    .services-head h2.sec-title { margin-bottom: 0; }
+    .services-head-aside {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #5C4A30;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--cairn-linen);
+      border: 0.5px solid var(--color-rule);
+      border-radius: var(--r-xl);
+      padding: 52px 44px;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: var(--fw-light);
+      color: var(--cairn-amber);
+      letter-spacing: 0;
+      margin-bottom: 28px;
+      line-height: 1;
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: var(--fw-light);
+      color: var(--cairn-obsidian);
+      margin-bottom: 20px;
+      line-height: 1.25;
+      letter-spacing: var(--ls-h);
+    }
+    .service-text {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #7A6A50;
+      flex: 1;
+    }
+    .service-rule {
+      width: 28px;
+      height: 0.5px;
+      background: var(--cairn-amber);
+      margin-top: 40px;
+    }
+
+    /* ══════════════════════════════════════════
+       APPROACH
+    ══════════════════════════════════════════ */
+    .approach { background: var(--cairn-linen); }
+
+    .approach-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .approach-left h2.sec-title { margin-bottom: 24px; }
+    .approach-intro {
+      font-size: var(--fs-body);
+      line-height: 1.85;
+      color: #5C4A30;
+    }
+
+    .approach-right {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid var(--color-rule);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+
+    .approach-item {
+      padding: 40px 44px;
+      border-bottom: 0.5px solid var(--color-rule);
+      background: var(--cairn-white);
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .approach-item:last-child { border-bottom: none; }
+
+    .approach-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: var(--fw-light);
+      letter-spacing: 0;
+      color: var(--cairn-amber);
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .approach-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: var(--fw-regular);
+      color: var(--cairn-obsidian);
+      margin-bottom: 12px;
+      letter-spacing: var(--ls-h);
+    }
+    .approach-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #5C4A30;
+    }
+
+    /* ══════════════════════════════════════════
+       FIELD NOTES
+    ══════════════════════════════════════════ */
+    .notes { background: var(--cairn-white); }
+
+    .notes-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 56px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .notes-head h2.sec-title { margin-bottom: 0; max-width: 720px; }
+    .notes-link {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--cairn-amber);
+      padding-bottom: 4px;
+      white-space: nowrap;
+    }
+    .notes-link:hover { color: var(--cairn-obsidian); }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .note-card {
+      background: var(--cairn-linen);
+      border: 0.5px solid var(--color-rule);
+      border-radius: var(--r-xl);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color var(--dur-base) var(--ease);
+    }
+    .note-card:hover { border-color: var(--cairn-amber); }
+
+    .note-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+    }
+    .note-kind { color: var(--cairn-amber); }
+    .note-date { color: var(--cairn-slate-lt); }
+    .note-meta-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--color-rule);
+    }
+    .note-title {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: 22px;
+      color: var(--cairn-obsidian);
+      line-height: 1.3;
+      letter-spacing: var(--ls-h);
+    }
+    .note-excerpt {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #7A6A50;
+      flex: 1;
+    }
+    .note-read {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+      margin-top: 8px;
+    }
+
+    /* ══════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════ */
+    .contact {
+      background: var(--cairn-dark-bg);
+      border-top: 0.5px solid var(--color-rule-dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 120px 96px;
+    }
+    .contact .sec-tag { color: var(--cairn-parchment); }
+    .contact .sec-tag .sec-tag-num { color: var(--cairn-amber); }
+    .contact h2.sec-title {
+      color: var(--cairn-parchment);
+      margin-bottom: 24px;
+    }
+    .contact h2.sec-title em { color: var(--cairn-amber); }
+    .contact-text {
+      font-size: var(--fs-body);
+      line-height: 1.85;
+      color: var(--cairn-parchment);
+      max-width: 480px;
+    }
+    .contact-text em {
+      font-style: italic;
+      color: #C8B890;
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 32px;
+      border: 0.5px solid var(--color-rule-dark);
+      border-radius: var(--r-lg);
+      text-decoration: none;
+      transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+    }
+    .contact-link:hover {
+      border-color: var(--cairn-amber);
+      background: rgba(196,168,122,0.05);
+    }
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: var(--fw-medium);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--cairn-amber);
+      border: 0.5px solid var(--color-rule-dark);
+      border-radius: var(--r-sm);
+    }
+    .contact-link-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .contact-link-value {
+      font-size: 16px;
+      color: var(--cairn-parchment);
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--cairn-dark-bg);
+      padding: 56px 96px 44px;
+      border-top: 0.5px solid var(--color-rule-dark);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: end;
+      padding-bottom: 36px;
+      border-bottom: 0.5px solid var(--color-rule-dark);
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-mark {
+      height: 48px;
+      width: auto;
+      display: block;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+    .footer-wordmark { display: inline-flex; flex-direction: column; align-items: flex-start; }
+    .footer-wordmark .w-cairn {
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: 17px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--cairn-parchment);
+      display: inline-block;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .footer-wordmark .w-advisory {
+      font-family: var(--font-display);
+      font-weight: var(--fw-medium);
+      font-size: 7px;
+      text-transform: uppercase;
+      color: var(--cairn-slate-lt);
+      display: inline-block;
+      white-space: nowrap;
+      line-height: 1;
+      margin-top: 4px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-parchment);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .footer-links a:hover { color: var(--cairn-amber); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+    .footer-tag {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+    .footer-tag em {
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--cairn-parchment);
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .industries-grid { grid-template-columns: repeat(3, 1fr); }
+      .experience-grid { grid-template-columns: repeat(2, 1fr); }
+      .exp-card:nth-child(2) { border-right: none; }
+      .exp-card:nth-child(1), .exp-card:nth-child(2) { border-bottom: 0.5px solid var(--color-rule); }
+      .services-grid, .notes-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-head { grid-template-columns: 1fr; gap: 32px; }
+      .about-layout { grid-template-columns: 1fr; gap: 60px; }
+      .approach-layout { grid-template-columns: 1fr; gap: 60px; }
+      .contact { grid-template-columns: 1fr; gap: 56px; }
+      .hero-stamp { display: none; }
+    }
+
+    /* Tablet ────────────────────────────────────────────── */
+    @media (max-width: 880px) {
+      section { padding: 88px 56px; }
+      .statement { padding: 64px 56px; }
+      .about-intro { flex-direction: column; gap: 28px; }
+      .about-portrait { width: 240px; flex-basis: 240px; }
+      .hero-cairn { width: 200px; left: auto; right: 32px; bottom: 14%; opacity: 0.65; }
+    }
+
+    /* Phone ─────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      nav { padding: 14px 20px; }
+      .nav-right { gap: 14px; }
+      .nav-links { display: none; }
+      .nav-cta { padding: 10px 16px; font-size: 10px; }
+      .nav-mark { width: 36px; }
+
+      section, .statement, .experience, .contact { padding-left: 24px; padding-right: 24px; }
+      section { padding-top: 72px; padding-bottom: 72px; }
+      .statement { padding: 56px 24px; }
+
+      /* Hero — wrap headline, hide decorations */
+      .hero { min-height: auto; padding-top: 96px; padding-bottom: 80px; }
+      .hero-content { padding: 0 24px 0; max-width: 100%; }
+      .hero-cairn { display: none; }
+      .hero-stamp { display: none; }
+      .hero::after {
+        background: linear-gradient(to bottom, rgba(244,237,224,0.55) 0%, rgba(244,237,224,0.2) 100%);
+      }
+      .hero-headline {
+        white-space: normal;
+        font-size: clamp(40px, 11vw, 56px);
+        line-height: 1.04;
+        margin-bottom: 24px;
+      }
+      .hero-headline em { white-space: normal; }
+      .hero-sub { font-size: 16px; line-height: 1.65; margin-bottom: 32px; }
+      .hero-actions { gap: 18px; width: 100%; justify-content: flex-start; }
+      .btn-hero-primary { padding: 14px 28px; }
+
+      /* Section titles & body type */
+      h2.sec-title { font-size: clamp(32px, 8vw, 44px); margin-bottom: 32px; line-height: 1.05; }
+      .sec-tag { font-size: 11px; margin-bottom: 14px; }
+      .statement-text { font-size: clamp(22px, 5.5vw, 28px); line-height: 1.4; }
+      .statement-meta { margin-top: 36px; }
+      .about-pull-quote { font-size: clamp(24px, 6vw, 30px); margin-bottom: 28px; }
+      .about-bio p { font-size: 16px; line-height: 1.78; }
+      .about-portrait { width: 60%; max-width: 240px; }
+      .about-intro .about-pull-quote { font-size: clamp(22px, 5.6vw, 28px); }
+
+      .stat-card { padding: 28px 24px; }
+      .stat-number { font-size: 44px; }
+      .stat-number sup { font-size: 22px; }
+
+      /* Grids collapse */
+      .industries-grid, .services-grid, .notes-grid, .experience-grid { grid-template-columns: 1fr; }
+      .exp-card { border-right: none; border-bottom: 0.5px solid var(--color-rule); padding-top: 32px; padding-bottom: 32px; }
+      .exp-card:last-child { border-bottom: none; }
+
+      /* Notes section head — stack */
+      .notes-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr; gap: 32px; align-items: start; }
+      .footer-links { flex-wrap: wrap; gap: 14px 20px; }
+      footer { padding: 48px 24px 32px; }
+      .credentials { gap: 14px 18px; margin-top: 36px; padding-top: 28px; }
+    }
+
+    /* Small phone ───────────────────────────────────────── */
+    @media (max-width: 420px) {
+      section, .statement, .experience, .contact { padding-left: 20px; padding-right: 20px; }
+      .hero-content { padding: 0 20px 0; }
+      .hero-headline { font-size: clamp(34px, 10.5vw, 44px); }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+      .btn-hero-primary { text-align: center; }
+      .btn-hero-ghost { text-align: center; padding-top: 6px; }
+      h2.sec-title { font-size: clamp(28px, 8vw, 36px); }
+      .stat-number { font-size: 38px; }
+      .nav-cta { font-size: 9px; padding: 9px 12px; letter-spacing: 0.18em; }
+      .nav-wordmark .w-cairn { font-size: 12px; letter-spacing: 4px; }
+      .nav-wordmark .w-advisory { font-size: 6.5px; letter-spacing: 3px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="#top" class="nav-logo" aria-label="Cairn Advisory home">
+      <img src="homepage-assets/cairn-mark-vibrant.png" alt="" class="nav-mark">
+      <div class="nav-wordmark">
+        <span class="w-cairn" data-wm-cairn="nav">Cairn</span>
+        <span class="w-advisory" data-wm-advisory="nav">Advisory</span>
+      </div>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#services">Work</a></li>
+        <li><a href="#notes">Notes</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero" id="top" style="border-top: none;">
+    <div class="hero-cairn" aria-hidden="true">
+      <img src="homepage-assets/cairn-mark-cutout.png" alt="">
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">AI Advisory for Established Operators</span>
+      </div>
+      <h1 class="hero-headline">Find your <em>path forward</em>.</h1>
+      <p class="hero-sub">Twenty years running product, marketing, and operations at Amazon, StockX, and GoFundMe. Now helping established businesses find their footing with AI — without the jargon, and without the consultants who've never run anything.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-hero-primary">Start a Conversation</a>
+        <a href="#about" class="btn-hero-ghost">About Jacob</a>
+      </div>
+    </div>
+
+    <div class="hero-stamp">
+      <span class="hero-stamp-text">Est. 2026 — Detroit, MI</span>
+      <div class="hero-stamp-rule"></div>
+    </div>
+  </section>
+
+  <!-- ══ STATEMENT ══ -->
+  <section class="statement">
+    <div class="statement-inner">
+      <p class="statement-text">
+        Most AI consultants shows up with a deck and an agenda. <span class="grey">We bring years of real operating experience to the table. We've run the business, owned the numbers, and answered for results.</span><br><br><em>Cairn is built by an operator, for an operator.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="about" id="about">
+    <span class="sec-tag">About Me</span>
+    <div class="about-layout">
+      <div class="about-left">
+        <div class="about-intro">
+          <div class="about-portrait">
+            <div class="about-portrait-frame">
+              <img src="homepage-assets/jacob-fenton-headshot.jpeg" alt="Jacob Fenton">
+            </div>
+            <div class="about-portrait-cap">
+              <span>Jacob Fenton, Founder &amp; CEO</span>
+            </div>
+          </div>
+          <p class="about-pull-quote">I've spent 20 years building inside some of the most demanding digital businesses in the world. <em>
+Not consulting them. Running them.</em></p>
+        </div>
+        <div class="about-bio">
+          <p>At Amazon, I led product management for Kindle and helped pioneer the Dash Replenishment Service — a new recurring-revenue channel built on connected devices. At CrowdRise, I ran Business Operations through its acquisition by GoFundMe. At StockX, I built a global Customer Experience program from the ground up — managing 500 million CRM messages annually, lifting brand trust from 27% to 48%, and cutting return rates nearly in half.</p>
+          <p>That experience — the real, unglamorous, cross-functional work of making businesses grow — is what I bring to Cairn. I know what it looks like when AI lands inside an organization, and what it looks like when it doesn't. The systems, the resistance, the shortcuts that work, and the ones that don't.</p>
+          <p>I founded Cairn because I kept seeing talented operators facing AI decisions they didn't sign up for, surrounded by consultants who'd never run a team, managed a CRM, or shipped a product. I've done all of it — and I can help you do it too, starting where your business actually is, not where a deck says it should be.</p>
+        </div>
+        <div class="credentials">
+          <span class="credential-item">MBA · Booth, Chicago</span>
+          <div class="credential-dot"></div>
+          <span class="credential-item">BBA · Ross, Michigan</span>
+          <div class="credential-dot"></div>
+          <span class="credential-item">CCXP Certified</span>
+          <div class="credential-dot"></div>
+          <span class="credential-item">MIT Sloan · CX Strategy</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">20<sup>+</sup></div>
+          <div class="stat-label">Years leading marketing, CX, and product at global digital brands</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">500<sup>M</sup></div>
+          <div class="stat-label">CRM messages managed annually at StockX</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">75<sup>%</sup></div>
+          <div class="stat-label">Increase in brand trust over three years at StockX</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$10<sup>M</sup></div>
+          <div class="stat-label">New advertising revenue driven in first year</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EXPERIENCE ══ -->
+  <section class="experience" id="experience">
+    <div class="experience-head">
+      <span class="sec-tag">Where I've Operated</span>
+      <span class="experience-note"><em></em></span>
+    </div>
+    <div class="experience-grid">
+      <div class="exp-card">
+        <div class="exp-name">Amazon</div>
+        <div class="exp-role">Senior Product Manager</div>
+        <p class="exp-desc">Led Kindle and pioneered the Dash Replenishment Service — a recurring-revenue channel built across four major OEMs, with strategy presented directly to Amazon's CEO.</p>
+        <div class="exp-meta">
+          <span class="exp-meta-item">Product Management</span>
+          <span class="exp-meta-item">Seattle</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-name">StockX</div>
+        <div class="exp-role">VP, CX &amp; Product Marketing</div>
+        <p class="exp-desc">Built the global CX program from scratch. Managed 500M+ CRM messages annually, drove brand trust from 27% to 48%, and applied AI to unstructured customer data.</p>
+        <div class="exp-meta">
+          <span class="exp-meta-item">Marketplace</span>
+          <span class="exp-meta-item">Detroit</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-name">GoFundMe</div>
+        <div class="exp-role">VP, Business Operations</div>
+        <p class="exp-desc">Ran Business Operations across CrowdRise through its acquisition by GoFundMe — managing 30-person teams, building KPIs, and representing the company through due diligence.</p>
+        <div class="exp-meta">
+          <span class="exp-meta-item">Platform</span>
+          <span class="exp-meta-item">Detroit / SF</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-name">Tespo</div>
+        <div class="exp-role">Chief Marketing Officer</div>
+        <p class="exp-desc">Delivered 67% YoY revenue growth via a redesigned e-commerce experience, an enhanced loyalty program, and three high-impact affiliate partnerships.</p>
+        <div class="exp-meta">
+          <span class="exp-meta-item">DTC</span>
+          <span class="exp-meta-item">Ann Arbor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ INDUSTRIES — DARK ══ -->
+  <section class="industries" id="industries">
+    <span class="sec-tag">Industries</span>
+    <h2 class="sec-title">Where I work, and <em>where I don't.</em></h2>
+    <div class="industries-grid">
+      <div class="industry-card">
+        <span class="industry-num">01</span>
+        <span class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 15 L35 15 L33 36 L11 36 Z"/>
+            <path d="M16 15 V12 a6 6 0 0 1 12 0 V15"/>
+          </svg>
+        </span>
+        <div class="industry-name">E-Commerce &amp; Retail</div>
+        <p class="industry-desc">Marketplaces, DTC brands, and omnichannel retailers navigating AI-driven personalization, CRM, and operations.</p>
+      </div>
+      <div class="industry-card">
+        <span class="industry-num">02</span>
+        <span class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="13" y="6" width="18" height="32" rx="3"/>
+            <line x1="18" y1="11" x2="26" y2="11"/>
+            <circle cx="22" cy="33" r="1.2" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <div class="industry-name">Consumer Tech</div>
+        <p class="industry-desc">Apps, platforms, and software companies integrating AI into product experience and the customer journey.</p>
+      </div>
+      <div class="industry-card">
+        <span class="industry-num">03</span>
+        <span class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="6" y1="36" x2="38" y2="36"/>
+            <line x1="11" y1="29" x2="11" y2="36"/>
+            <line x1="19" y1="22" x2="19" y2="36"/>
+            <line x1="27" y1="16" x2="27" y2="36"/>
+            <line x1="35" y1="10" x2="35" y2="36"/>
+            <polyline points="11,26 19,19 27,13 35,7"/>
+            <polyline points="33,7 35,7 35,9" stroke-linejoin="miter"/>
+          </svg>
+        </span>
+        <div class="industry-name">Financial Services</div>
+        <p class="industry-desc">Fintech, payments, and financial platforms implementing AI while navigating regulatory complexity and customer trust.</p>
+      </div>
+      <div class="industry-card">
+        <span class="industry-num">04</span>
+        <span class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="22" r="15"/>
+            <polyline points="9,22 14,22 17,16 21,28 24,19 27,22 35,22"/>
+          </svg>
+        </span>
+        <div class="industry-name">Healthcare</div>
+        <p class="industry-desc">Health systems and digital health platforms applying AI to patient experience and clinical workflows.</p>
+      </div>
+      <div class="industry-card">
+        <span class="industry-num">05</span>
+        <span class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- head: tall egg shape with defined jaw -->
+            <path d="M14 14 C14 8 17.5 5 22 5 C26.5 5 30 8 30 14 V18 C30 22 28 24.5 25.5 25.7 C24 26.4 23 27 22 27 C21 27 20 26.4 18.5 25.7 C16 24.5 14 22 14 18 Z"/>
+            <!-- single swept-bang: leaf-shaped curl across the forehead -->
+            <path d="M14.5 12.5 C17 8.5 21 7 25 8 C28 8.7 29.5 11 29.7 13 C26 11.5 22 12.5 19 14.5 C17 15.8 15.5 14.5 14.5 12.5 Z"/>
+            <!-- shoulders / body: smooth dome -->
+            <path d="M7 39 V33 C7 29 11 26.5 16 26.5 H28 C33 26.5 37 29 37 33 V39 Z"/>
+            <!-- stethoscope: both tubes emerge from neckline, drape onto chest -->
+            <!-- left tube: down chest, ends in small earpiece U-bend -->
+            <path d="M19 27 C18 30 16 33 15.5 36"/>
+            <path d="M15.5 36 a1.4 1.4 0 0 0 2.8 0 V35"/>
+            <!-- right tube: down chest, ends in chest piece circle -->
+            <path d="M25 27 C26 30 27.5 33 28 36"/>
+            <circle cx="28" cy="37.4" r="1.5"/>
+          </svg>
+        </span>
+        <div class="industry-name">Concierge Medicine</div>
+        <p class="industry-desc">Independent and boutique practices using AI to elevate the patient relationship and reduce operational friction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SERVICES ══ -->
+  <section class="services" id="services">
+    <div class="services-head">
+      <div>
+        <span class="sec-tag">How I Help</span>
+        <h2 class="sec-title">Work we do<br>together.</h2>
+      </div>
+      <p class="services-head-aside" style="width: 380px">Every engagement starts with the same question — <em>where does your business actually stand today</em> — and proceeds in steady, useful steps from there. No big-bang transformations. No tools bought before the work is understood.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-title">AI Readiness Assessment</div>
+        <p class="service-text">A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify your highest-leverage opportunities and the gaps in the way. Honest, specific, actionable.</p>
+        <div class="service-rule"></div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-title">Implementation &amp; Integration</div>
+        <p class="service-text">We work inside your operations to build AI into the systems your team already uses. No big-bang transformations — steady progress that sticks because we built it with your people, not for them.</p>
+        <div class="service-rule"></div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-title">Ongoing Advisory</div>
+        <p class="service-text">AI moves fast. Your business does too. I stay alongside you as a trusted resource — helping navigate new tools, prevent expensive mistakes, and build internal capability that doesn't leave when I do.</p>
+        <div class="service-rule"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ APPROACH ══ -->
+  <section class="approach" id="approach">
+    <span class="sec-tag">How I Work</span>
+    <div class="approach-layout">
+      <div class="approach-left">
+        <h2 class="sec-title">Not from<br>a deck.</h2>
+        <p class="approach-intro">I've been in the rooms where these decisions get made. I know what "we don't have time for this" feels like. Every engagement is built around that reality — practical, direct, and inside the work.</p>
+      </div>
+      <div class="approach-right">
+        <div class="approach-item">
+          <div class="approach-num">01</div>
+          <div class="approach-body">
+            <div class="approach-title">Straight talk, always</div>
+            <p class="approach-text">No jargon. No acronyms for their own sake. I tell you what's actually going on, what your options are, and what I'd do in your position — because I've been in a version of it.</p>
+          </div>
+        </div>
+        <div class="approach-item">
+          <div class="approach-num">02</div>
+          <div class="approach-body">
+            <div class="approach-title">Inside the work</div>
+            <p class="approach-text">I don't hand you a report and leave. I build alongside your team, in the systems and rhythms you already have — so the work doesn't evaporate when I step back.</p>
+          </div>
+        </div>
+        <div class="approach-item">
+          <div class="approach-num">03</div>
+          <div class="approach-body">
+            <div class="approach-title">Earned confidence</div>
+            <p class="approach-text">My goal isn't dependency — it's capability. Every engagement is designed to leave your team more capable than when we started. You should need me less over time, not more.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FIELD NOTES ══ -->
+  <section class="notes" id="notes">
+    <div class="notes-head">
+      <div>
+        <span class="sec-tag">Field Notes</span>
+        <h2 class="sec-title">Recent thinking from <em>inside the work.</em></h2>
+      </div>
+      <a href="articles/index.html" class="notes-link">All Notes →</a>
+    </div>
+    <div class="notes-grid">
+      <a href="articles/01-start-with-the-problem.html" class="note-card">
+        <div class="note-meta">
+          <span class="note-kind">Essay</span>
+          <span class="note-meta-dot"></span>
+          <span class="note-date">March 2026 — 6 min read</span>
+        </div>
+        <div class="note-title">The first AI investment most businesses should make is patience.</div>
+        <p class="note-excerpt">Every operator I've spoken with this year is being told they're already late. They aren't — and the cost of moving badly is higher than the cost of moving slowly.</p>
+        <span class="note-read">Read the note</span>
+      </a>
+      <a href="articles/02-someone-actually-knows.html" class="note-card">
+        <div class="note-meta">
+          <span class="note-kind">Field note</span>
+          <span class="note-meta-dot"></span>
+          <span class="note-date">February 2026 — 4 min read</span>
+        </div>
+        <div class="note-title">What "AI-ready" actually means when you've already got a CRM, a data lake, and 80 employees.</div>
+        <p class="note-excerpt">Readiness isn't a posture or a rebrand. It's a plain inventory — of data, of process, of the people who will be doing the work after the consultants leave.</p>
+        <span class="note-read">Read the note</span>
+      </a>
+      <a href="articles/03-running-an-ai-assessment.html" class="note-card">
+        <div class="note-meta">
+          <span class="note-kind">Conversation</span>
+          <span class="note-meta-dot"></span>
+          <span class="note-date">January 2026 — 8 min read</span>
+        </div>
+        <div class="note-title">A CEO asked me which model to use. I asked her about Tuesdays.</div>
+        <p class="note-excerpt">The right starting question is rarely the technical one. It's the one that surfaces where the work actually lives — and where, if anything broke, your team would feel it first.</p>
+        <span class="note-read">Read the note</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section class="contact" id="contact">
+    <div class="contact-left">
+      <span class="sec-tag">Get in Touch</span>
+      <h2 class="sec-title">Let's find<br><em>your footing.</em></h2>
+      <p class="contact-text">Most conversations start the same way: <em>"Where do we even begin?"</em> That's exactly the right place to start. Let's talk — no agenda, no pitch deck.</p>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:jacob@cairnadvisory.co" class="contact-link" style="padding: 20px 32px">
+        <span class="contact-link-icon">@</span>
+        <div>
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">jacob@cairnadvisory.co</span>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/jacobfenton" target="_blank" rel="noopener" class="contact-link" style="padding: 20px 32px">
+        <span class="contact-link-icon">in</span>
+        <div>
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/jacobfenton</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="homepage-assets/cairn-mark-cutout.png" alt="" class="footer-mark">
+        <div class="footer-wordmark">
+          <span class="w-cairn" data-wm-cairn="footer">Cairn</span>
+          <span class="w-advisory" data-wm-advisory="footer">Advisory</span>
+        </div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#services">Work</a></li>
+        <li><a href="#notes">Notes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Cairn Advisory</span>
+      <span class="footer-tag"><em></em></span>
+    </div>
+  </footer>
+
+  <script>
+    /* ── CAIRN / ADVISORY width-matching (canonical brand rule) ──
+       ADVISORY must letter-space to exactly match CAIRN's rendered width.
+       Measure both elements' total box widths, zero ADVISORY LS, then
+       distribute the deficit evenly across all 8 letter-spacing slots
+       (one per letter, including the trailing slot CAIRN also carries). */
+    function doMatch() {
+      document.querySelectorAll('[data-wm-cairn]').forEach(function(ce) {
+        var id = ce.getAttribute('data-wm-cairn');
+        var ae = document.querySelector('[data-wm-advisory="' + id + '"]');
+        if (!ae) return;
+        var cairnTotal = ce.getBoundingClientRect().width;
+        if (cairnTotal <= 0) return;
+        ae.style.letterSpacing = '0px';
+        var advNat = ae.getBoundingClientRect().width;
+        if (advNat <= 0) return;
+        ae.style.letterSpacing = Math.max(0, (cairnTotal - advNat) / 8) + 'px';
+      });
+    }
+    function matchWordmarks() {
+      requestAnimationFrame(function() { requestAnimationFrame(doMatch); });
+    }
+    Promise.all([
+      document.fonts.load('300 26px Figtree'),
+      document.fonts.load('500 9px Figtree'),
+      document.fonts.load('300 17px Figtree'),
+      document.fonts.load('500 7px Figtree')
+    ]).then(function() {
+      matchWordmarks();
+      setTimeout(matchWordmarks, 200);
+    }).catch(function() {
+      setTimeout(matchWordmarks, 400);
+      setTimeout(matchWordmarks, 1000);
+    });
+    document.fonts.ready.then(matchWordmarks);
+    window.addEventListener('load', function() {
+      matchWordmarks();
+      setTimeout(matchWordmarks, 300);
+      setTimeout(matchWordmarks, 900);
+    });
+    window.addEventListener('resize', matchWordmarks);
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(matchWordmarks);
+      document.querySelectorAll('[data-wm-cairn]').forEach(function(el) { ro.observe(el); });
+    }
+
+    /* ── Nav bg deepens slightly on scroll ── */
+    var nav = document.querySelector('nav');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 60) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
+</body>
+</html>
