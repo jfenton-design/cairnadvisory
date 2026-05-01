@@ -1199,13 +1199,27 @@
 <body>
 <script>
 window.addEventListener('load', function() {
-  var first = document.body.firstElementChild;
-  var r = first.getBoundingClientRect();
-  var s = window.getComputedStyle(first);
-  var nav = document.querySelector('nav:not(.mobile-nav)');
-  var nr = nav ? nav.getBoundingClientRect() : {top:0,height:0};
-  var ns = nav ? window.getComputedStyle(nav) : {display:'?'};
-  alert('FIRST: top=' + Math.round(r.top) + ' h=' + Math.round(r.height) + ' display=' + s.display + ' vis=' + s.visibility + ' opacity=' + s.opacity + '\nNAV: display=' + ns.display + ' h=' + Math.round(nr.height) + ' top=' + Math.round(nr.top));
+  var out = document.getElementById('dbg-out');
+  if (!out) return;
+  var lines = [];
+  var hs = window.getComputedStyle(document.documentElement);
+  lines.push('HTML h=' + document.documentElement.offsetHeight + ' ovf=' + hs.overflow + ' vis=' + hs.visibility);
+  var bs = window.getComputedStyle(document.body);
+  lines.push('BODY h=' + document.body.offsetHeight + ' ovf=' + bs.overflow + ' vis=' + bs.visibility + ' op=' + bs.opacity);
+  var all = document.querySelectorAll('*'), fixed = [];
+  for (var i = 0; i < all.length; i++) {
+    var cs = window.getComputedStyle(all[i]);
+    if (cs.position === 'fixed') {
+      var rr = all[i].getBoundingClientRect();
+      var tag = all[i].tagName.toLowerCase() + (all[i].className && typeof all[i].className==='string' ? '.' + all[i].className.trim().split(/\s+/)[0] : '');
+      fixed.push(tag + ' z=' + cs.zIndex + ' t=' + Math.round(rr.top) + ' h=' + Math.round(rr.height));
+    }
+  }
+  lines.push('FIXED ' + fixed.length + ': ' + fixed.join(' | '));
+  var blue = document.querySelector('[style*="background:blue"]');
+  if (blue) { var br = blue.getBoundingClientRect(); var bcs = window.getComputedStyle(blue); lines.push('BLUE t=' + Math.round(br.top) + ' h=' + Math.round(br.height) + ' d=' + bcs.display + ' v=' + bcs.visibility); }
+  out.style.fontSize = '11px'; out.style.textAlign = 'left'; out.style.whiteSpace = 'pre'; out.style.lineHeight = '1.5'; out.style.background = 'rgba(0,0,0,0.9)';
+  out.innerText = lines.join('\n');
 });
 </script>
 <div style="background:blue;color:white;font-size:32px;padding:40px;width:100%;box-sizing:border-box;position:static;z-index:auto;">STATIC BODY TEST</div>
@@ -1232,7 +1246,7 @@ window.addEventListener('load', function() {
   </nav>
 
   <!-- ══ DEBUG ══ -->
-  <div style="position:fixed;top:20px;left:20px;right:20px;background:red;color:white;font-size:24px;font-weight:bold;z-index:9999;padding:16px;text-align:center;border-radius:8px;">DEBUG VISIBLE</div>
+  <div id="dbg-out" style="position:fixed;top:20px;left:20px;right:20px;background:red;color:white;font-size:20px;font-weight:bold;z-index:9999;padding:16px;border-radius:8px;font-family:monospace;">Loading...</div>
 
   <!-- ══ HERO ══ -->
   <section class="hero" id="top" style="border-top: none;">
