@@ -32,7 +32,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 60px;
+      padding: 14px 48px;
       background: var(--cairn-linen);
       border-bottom: 0.5px solid rgba(196, 168, 122, 0.3);
       transition: box-shadow var(--dur-base) var(--ease);
@@ -126,7 +126,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      padding: 140px 96px 120px;
+      padding: 140px 72px 120px;
       text-align: left;
     }
     /* Watercolor shoreline backdrop — painted on .hero directly */
@@ -284,7 +284,7 @@
        SHARED SECTION
     ══════════════════════════════════════════ */
     section {
-      padding: 120px 96px;
+      padding: 120px 72px;
       border-top: 0.5px solid var(--color-rule);
     }
 
@@ -322,7 +322,7 @@
     ══════════════════════════════════════════ */
     .statement {
       background: var(--cairn-linen);
-      padding: 70px 96px;
+      padding: 70px 72px;
       border-top: none;
     }
     .statement-inner {
@@ -510,7 +510,7 @@
     ══════════════════════════════════════════ */
     .experience {
       background: var(--cairn-linen);
-      padding: 100px 96px 120px;
+      padding: 100px 72px 120px;
     }
     .experience-head {
       display: flex;
@@ -882,7 +882,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
-      padding: 120px 96px;
+      padding: 120px 72px;
     }
     .contact .sec-tag { color: var(--cairn-parchment); }
     .contact .sec-tag .sec-tag-num { color: var(--cairn-amber); }
@@ -958,7 +958,7 @@
     ══════════════════════════════════════════ */
     footer {
       background: var(--cairn-dark-bg);
-      padding: 56px 96px 44px;
+      padding: 56px 72px 44px;
       border-top: 0.5px solid var(--color-rule-dark);
     }
     .footer-top {
@@ -1068,8 +1068,8 @@
 
     /* Tablet ────────────────────────────────────────────── */
     @media (max-width: 880px) {
-      section { padding: 88px 56px; }
-      .statement { padding: 64px 56px; }
+      section { padding: 88px 40px; }
+      .statement { padding: 64px 40px; }
       .about-intro { flex-direction: column; gap: 28px; }
       .about-portrait { width: 240px; flex-basis: 240px; }
       .hero-cairn { width: 200px; left: auto; right: 32px; bottom: 14%; opacity: 0.65; }
@@ -1090,7 +1090,7 @@
       /* Hero — wrap headline, hide decorations */
       .hero { min-height: auto; padding-top: 96px; padding-bottom: 80px; }
       .hero-content { padding: 0 24px 0; max-width: 100%; }
-      .hero-cairn { display: none; }
+      .hero-cairn { display: block; width: 130px; left: auto; right: -18px; bottom: 60px; opacity: 0.5; }
       .hero-stamp { display: none; }
       .hero::after {
         background: linear-gradient(to bottom, rgba(244,237,224,0.55) 0%, rgba(244,237,224,0.2) 100%);
@@ -1145,9 +1145,55 @@
       .btn-hero-ghost { text-align: center; padding-top: 6px; }
       h2.sec-title { font-size: clamp(28px, 8vw, 36px); }
       .stat-number { font-size: 38px; }
-      .nav-cta { font-size: 9px; padding: 9px 12px; letter-spacing: 0.18em; }
+      .nav-cta { display: none; }
       .nav-wordmark .w-cairn { font-size: 12px; letter-spacing: 4px; }
       .nav-wordmark .w-advisory { font-size: 6.5px; letter-spacing: 3px; }
+      body { padding-bottom: calc(58px + env(safe-area-inset-bottom)); }
+    }
+
+    /* ══════════════════════════════════════════
+       MOBILE BOTTOM NAV
+    ══════════════════════════════════════════ */
+    .mobile-nav { display: none; }
+
+    @media (max-width: 720px) {
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 300;
+        background: var(--cairn-linen);
+        border-top: 0.5px solid rgba(196, 168, 122, 0.35);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .mn-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 10px 4px 8px;
+        text-decoration: none;
+        color: var(--cairn-umber);
+        font-family: var(--font-display);
+        font-size: 8.5px;
+        font-weight: var(--fw-medium);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        transition: color var(--dur-fast) var(--ease);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mn-item svg {
+        width: 20px; height: 20px;
+        display: block;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .mn-item.active { color: var(--cairn-obsidian); }
+      .mn-item:active { color: var(--cairn-ironwood); }
     }
   </style>
 </head>
@@ -1596,6 +1642,46 @@ Not consulting them. Running them.</em></p>
       if (window.scrollY > 60) nav.classList.add('scrolled');
       else nav.classList.remove('scrolled');
     });
+
+    /* ── Mobile bottom nav: highlight active section ── */
+    if (window.IntersectionObserver) {
+      var sections = document.querySelectorAll('section[id], footer[id]');
+      var mnItems = document.querySelectorAll('.mn-item');
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            mnItems.forEach(function(a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      sections.forEach(function(s) { io.observe(s); });
+    }
   </script>
+
+  <!-- ══ MOBILE BOTTOM NAV ══ -->
+  <nav class="mobile-nav" aria-label="Page sections">
+    <a href="#about" class="mn-item">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+      <span>About</span>
+    </a>
+    <a href="#experience" class="mn-item">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="7" width="14" height="10" rx="1.5"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg>
+      <span>Experience</span>
+    </a>
+    <a href="#services" class="mn-item">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="11" width="14" height="4" rx="1"/><rect x="3" y="5" width="14" height="4" rx="1"/></svg>
+      <span>Work</span>
+    </a>
+    <a href="#notes" class="mn-item">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="13" y2="10"/><line x1="7" y1="13" x2="10" y2="13"/></svg>
+      <span>Notes</span>
+    </a>
+    <a href="#contact" class="mn-item">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="5" width="14" height="10" rx="1.5"/><polyline points="3,5 10,12 17,5"/></svg>
+      <span>Contact</span>
+    </a>
+  </nav>
 </body>
 </html>
