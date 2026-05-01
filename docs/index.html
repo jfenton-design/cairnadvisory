@@ -25,7 +25,7 @@
     /* ══════════════════════════════════════════
        NAV
     ══════════════════════════════════════════ */
-    nav {
+    nav:not(.mobile-nav) {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 200;
@@ -1067,7 +1067,7 @@
 
     /* Phone ─────────────────────────────────────────────── */
     @media (max-width: 720px) {
-      nav { display: none; }
+      nav:not(.mobile-nav) { display: none; }
       .nav-right { gap: 14px; }
       .nav-links { display: none; }
       .nav-cta { padding: 10px 16px; font-size: 10px; }
@@ -1197,32 +1197,7 @@
   </style>
 </head>
 <body>
-<script>
-window.addEventListener('load', function() {
-  var out = document.getElementById('dbg-out');
-  if (!out) return;
-  var lines = [];
-  var hs = window.getComputedStyle(document.documentElement);
-  lines.push('HTML h=' + document.documentElement.offsetHeight + ' ovf=' + hs.overflow + ' vis=' + hs.visibility);
-  var bs = window.getComputedStyle(document.body);
-  lines.push('BODY h=' + document.body.offsetHeight + ' ovf=' + bs.overflow + ' vis=' + bs.visibility + ' op=' + bs.opacity);
-  var all = document.querySelectorAll('*'), fixed = [];
-  for (var i = 0; i < all.length; i++) {
-    var cs = window.getComputedStyle(all[i]);
-    if (cs.position === 'fixed') {
-      var rr = all[i].getBoundingClientRect();
-      var tag = all[i].tagName.toLowerCase() + (all[i].className && typeof all[i].className==='string' ? '.' + all[i].className.trim().split(/\s+/)[0] : '');
-      fixed.push(tag + ' z=' + cs.zIndex + ' t=' + Math.round(rr.top) + ' h=' + Math.round(rr.height));
-    }
-  }
-  lines.push('FIXED ' + fixed.length + ': ' + fixed.join(' | '));
-  var blue = document.querySelector('[style*="background:blue"]');
-  if (blue) { var br = blue.getBoundingClientRect(); var bcs = window.getComputedStyle(blue); lines.push('BLUE t=' + Math.round(br.top) + ' h=' + Math.round(br.height) + ' d=' + bcs.display + ' v=' + bcs.visibility); }
-  out.style.fontSize = '11px'; out.style.textAlign = 'left'; out.style.whiteSpace = 'pre'; out.style.lineHeight = '1.5'; out.style.background = 'rgba(0,0,0,0.9)';
-  out.innerText = lines.join('\n');
-});
-</script>
-<div style="background:blue;color:white;font-size:32px;padding:40px;width:100%;box-sizing:border-box;position:static;z-index:auto;">STATIC BODY TEST</div>
+
 
   <!-- ══ NAV ══ -->
   <nav>
@@ -1245,20 +1220,17 @@ window.addEventListener('load', function() {
     </div>
   </nav>
 
-  <!-- ══ DEBUG ══ -->
-  <div id="dbg-out" style="position:fixed;top:20px;left:20px;right:20px;background:red;color:white;font-size:20px;font-weight:bold;z-index:9999;padding:16px;border-radius:8px;font-family:monospace;">Loading...</div>
-
   <!-- ══ HERO ══ -->
   <section class="hero" id="top" style="border-top: none;">
     <div class="hero-cairn" aria-hidden="true">
       <img src="homepage-assets/cairn-mark-cutout.png" alt="">
     </div>
-    <div class="hero-content" style="display:block;color:#2C1E10;position:relative;z-index:10;">
+    <div class="hero-content">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-line"></div>
         <span class="hero-eyebrow-text" style="color:#2C1E10;">AI Advisory for Established Operators</span>
       </div>
-      <h1 class="hero-headline" style="color:#2C1E10;font-size:36px;white-space:normal;overflow:visible;">Find your <em style="color:#8B6A48;">path forward</em>.</h1>
+      <h1 class="hero-headline">Find your <em style="color:#8B6A48;">path forward</em>.</h1>
       <p class="hero-sub" style="color:#2C1E10;">Twenty years running product, marketing, and operations at Amazon, StockX, and GoFundMe. Now helping established businesses find their footing with AI — without the jargon, and without the consultants who've never run anything.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-hero-primary">Start a Conversation</a>
