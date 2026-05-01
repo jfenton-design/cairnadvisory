@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Tell If Someone Actually Knows What They're Doing in AI — Cairn Advisory</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="article.css">
+<style>
+  /* ── Article 02 — slate accent variant ────────────────────── */
+  .meta-strip { color: var(--cairn-slate); }
+  .meta-strip .dot { background: var(--cairn-slate); }
+  .meta-strip .reading { color: var(--cairn-amber); }
+
+  .prose h2 .h2-num { color: var(--cairn-slate); }
+  .prose .lede-p::first-letter { color: var(--cairn-slate); text-shadow: 0 0 16px rgba(var(--wc-slate-rgb), 0.22); }
+  .pull-quote { border-left-color: var(--cairn-slate); }
+  .prose ul li::before { background: var(--cairn-slate); }
+
+  /* Two-up "ask vs. avoid" comparison */
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 56px 0;
+    border: var(--border-hair);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    background: var(--cairn-white);
+    max-width: 760px;
+  }
+  .compare > div { padding: 32px 36px; position: relative; }
+  .compare > div + div { border-left: var(--border-hair); }
+  .compare-eyebrow {
+    font-family: var(--font-display); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    margin-bottom: 18px; display: block;
+  }
+  .compare .ask .compare-eyebrow { color: var(--cairn-slate); }
+  .compare .avoid .compare-eyebrow { color: var(--cairn-umber); }
+  .compare ul { margin: 0; padding: 0; list-style: none; }
+  .compare ul li {
+    padding: 12px 0;
+    border-top: 0.5px solid rgba(var(--wc-slate-rgb), 0.25);
+    font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+    color: var(--cairn-ironwood);
+  }
+  .compare ul li:first-child { border-top: none; }
+  .compare ul li::before { content: none; }
+  .compare .avoid ul li { color: var(--cairn-umber); }
+
+  @media (max-width: 720px) {
+    .compare { grid-template-columns: 1fr; }
+    .compare > div + div { border-left: none; border-top: var(--border-hair); }
+  }
+</style>
+</head>
+<body class="cairn">
+<div class="article-page">
+
+  <!-- ══ NAV ══ -->
+  <nav class="site-nav">
+    <a class="logo" href="../Cairn Advisory Homepage.html" aria-label="Cairn Advisory home">
+      <img src="../assets/logos/cairn-mark-float.png" alt="">
+      <span class="wm">
+        <span class="wm-cairn">CAIRN</span>
+        <span class="wm-adv">ADVISORY</span>
+      </span>
+    </a>
+    <ul class="links">
+      <li><a href="../Cairn Advisory Homepage.html#about">About</a></li>
+      <li><a href="../Cairn Advisory Homepage.html#experience">Experience</a></li>
+      <li><a href="../Cairn Advisory Homepage.html#services">Services</a></li>
+      <li><a href="../Cairn Advisory Homepage.html#industries">Industries</a></li>
+      <li><a href="index.html" class="active">Notes</a></li>
+    </ul>
+    <a class="cta" href="../Cairn Advisory Homepage.html#contact">Get in Touch</a>
+  </nav>
+
+  <!-- ══ ARTICLE ══ -->
+  <article class="article">
+
+    <div class="meta-strip">
+      <span>Field note</span>
+      <span class="dot"></span>
+      <span>Hiring &amp; vendors</span>
+      <span class="dot"></span>
+      <span class="reading">6 min read</span>
+    </div>
+
+    <header class="article-header cool">
+      <div class="head-numeral">02</div>
+      <div class="head-text">
+        <h1 class="article-title">How to tell if someone <em>actually knows</em> what they're doing in AI.</h1>
+        <p class="article-deck">There's a lot of confidence in the AI market right now. There's not nearly as much competence. Here's how to tell the difference before you spend.</p>
+        <div class="byline">
+          <span class="name">Jacob Fenton</span>
+          <span>·</span>
+          <span>Cairn Advisory</span>
+          <span>·</span>
+          <span>April 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <figure class="hero-figure vista" style="background-image:url('../assets/vistas/mountain.svg');">
+      <span class="caption">Distance · the long view</span>
+    </figure>
+
+    <div class="prose">
+
+      <p class="lede-p">There's a lot of confidence in the AI market right now. There's not nearly as much competence.</p>
+
+      <p>For a business owner, this creates a real risk. You can spend meaningful time and money on someone who sounds credible — but can't deliver anything durable.</p>
+
+      <p>So the question becomes: <em>how do you tell the difference?</em></p>
+
+      <h2><span class="h2-num">01 · Curiosity, not credentials</span>The best signal isn't a certificate.</h2>
+
+      <p>It's behavior. People who are actually good at AI:</p>
+
+      <ul>
+        <li>Constantly test new tools</li>
+        <li>Break things on purpose to understand limits</li>
+        <li>Change their opinions as the technology evolves</li>
+      </ul>
+
+      <p>If someone presents AI as a fixed playbook, they're already behind.</p>
+
+      <aside class="callout slate">
+        <span class="callout-eyebrow">Two questions to ask in the first meeting</span>
+        <h3 class="callout-title">If they don't have clear answers, they're likely not doing real work.</h3>
+        <ol class="callout-list">
+          <li>What did you try recently that <strong>didn't work?</strong></li>
+          <li>What's something you believed three months ago that you've <strong>changed your mind on?</strong></li>
+        </ol>
+      </aside>
+
+      <h2><span class="h2-num">02 · Credentials in context</span>Necessary but never sufficient.</h2>
+
+      <p>There are plenty of courses, certifications, and "AI experts" right now. None are meaningless. None are sufficient. What you actually want to understand:</p>
+
+      <ul>
+        <li>Have they worked inside <strong>real businesses</strong>?</li>
+        <li>Have they dealt with messy data and unclear processes?</li>
+        <li>Have they shipped something that people <em>actually use</em>?</li>
+      </ul>
+
+      <blockquote class="pull-quote">AI in theory is easy. <em>AI in operations is not.</em></blockquote>
+
+      <h2><span class="h2-num">03 · Evidence of applied work</span>The clearest filter.</h2>
+
+      <p>Ask for:</p>
+
+      <ul>
+        <li>Specific workflows they've improved</li>
+        <li>Before-and-after metrics — time saved, errors reduced, cost impact</li>
+        <li>What broke during implementation, and how they fixed it</li>
+      </ul>
+
+      <p>If everything sounds clean and linear, it probably wasn't real. Real work is messy. Good operators are comfortable talking about that.</p>
+
+      <h2><span class="h2-num">04 · Tool-centric thinking</span>The most common red flag.</h2>
+
+      <p>You'll hear it as:</p>
+
+      <ul>
+        <li>"We'll use this model."</li>
+        <li>"We'll connect these platforms."</li>
+        <li>"We'll build a custom GPT."</li>
+      </ul>
+
+      <p><strong>Tools change constantly. Workflows persist.</strong> The right person talks about process design, decision points, and where humans stay involved versus where they don't.</p>
+
+      <p>If the conversation is mostly about tools, you're not talking to a strategist. You're talking to a technician — or worse, a salesperson.</p>
+
+      <h2><span class="h2-num">05 · The trust test</span>Look for honest framing.</h2>
+
+      <p>Ultimately, this comes down to trust — but not in a vague sense. You're looking for someone who admits uncertainty, frames tradeoffs clearly, and doesn't oversell outcomes.</p>
+
+      <div class="compare">
+        <div class="ask">
+          <span class="compare-eyebrow">A clear thinker says…</span>
+          <ul>
+            <li>"This part is well-suited to AI; this part isn't."</li>
+            <li>"Here's what could go wrong, and how we'd catch it."</li>
+            <li>"We'd need a human in this loop."</li>
+            <li>"This will probably take two iterations to get right."</li>
+            <li>"I don't know yet — I'd want to test it."</li>
+          </ul>
+        </div>
+        <div class="avoid">
+          <span class="compare-eyebrow">Walk away when you hear…</span>
+          <ul>
+            <li>"AI can do anything you want it to."</li>
+            <li>"This will pay for itself in 90 days, guaranteed."</li>
+            <li>"You won't need that team anymore."</li>
+            <li>"Just let the model handle it end-to-end."</li>
+            <li>"It just works."</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>AI has real upside — but also real limitations: <em>it can hallucinate, it can degrade without oversight, it can introduce risk if misapplied.</em> If someone doesn't talk about these things, they're either inexperienced or not being honest.</p>
+
+      <p class="close-line">If you walk away thinking <em>"this feels clearer and more grounded,"</em> that's a good sign. If you walk away thinking <em>"this sounds like magic,"</em> it's not.</p>
+
+    </div>
+  </article>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="article-footer">
+    <nav class="read-next" aria-label="Read next">
+      <span class="read-next-eyebrow">Continue · Field Notes</span>
+      <a class="next-card dir-prev" href="01-start-with-the-problem.html">
+        <span class="nc-num">Previous · 01</span>
+        <h3 class="nc-title">Start with the problem, not the model.</h3>
+        <span class="nc-meta">5 min read</span>
+      </a>
+      <a class="next-card dir-next" href="03-running-an-ai-assessment.html">
+        <span class="nc-num">Next · 03</span>
+        <h3 class="nc-title">What it actually means to run an AI assessment.</h3>
+        <span class="nc-meta">7 min read</span>
+      </a>
+    </nav>
+    <div class="site-foot">
+      <span>© 2026 Cairn Advisory · Jacob Fenton</span>
+      <a href="index.html">All field notes →</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
