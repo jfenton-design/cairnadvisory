@@ -120,34 +120,24 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      isolation: isolate;
       background-color: var(--cairn-linen);
-      background-image: url('homepage-assets/shoreline-bg.jpg');
+      background-image:
+        linear-gradient(
+          to right,
+          rgba(244, 237, 224, 0.72) 0%,
+          rgba(244, 237, 224, 0.45) 28%,
+          rgba(244, 237, 224, 0.10) 50%,
+          rgba(244, 237, 224, 0) 65%
+        ),
+        url('homepage-assets/shoreline-bg.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       padding: 140px 72px 120px;
       text-align: left;
     }
-    /* Watercolor shoreline backdrop — painted on .hero directly */
-    .hero::before {
-      content: none;
-    }
-    /* Cream veil so the left-side copy stays legible over the painting */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(244, 237, 224, 0.72) 0%,
-        rgba(244, 237, 224, 0.45) 28%,
-        rgba(244, 237, 224, 0.10) 50%,
-        rgba(244, 237, 224, 0) 65%
-      );
-      z-index: 0;
-      pointer-events: none;
-    }
+    .hero::before { content: none; }
+    .hero::after { content: none; }
 
     /* Floating cairn planted on the shoreline path */
     .hero-cairn {
@@ -164,7 +154,6 @@
 
     .hero-content {
       position: relative;
-      z-index: 2;
       max-width: 720px;
       width: 100%;
       display: flex;
@@ -1092,8 +1081,10 @@
       .hero-content { padding: 0 24px 0; max-width: 100%; }
       .hero-cairn { display: block; width: 130px; left: auto; right: -18px; bottom: 60px; opacity: 0.5; }
       .hero-stamp { display: none; }
-      .hero::after {
-        background: linear-gradient(to bottom, rgba(244,237,224,0.55) 0%, rgba(244,237,224,0.2) 100%);
+      .hero {
+        background-image:
+          linear-gradient(to bottom, rgba(244,237,224,0.55) 0%, rgba(244,237,224,0.2) 100%),
+          url('homepage-assets/shoreline-bg.jpg');
       }
       .hero-headline {
         white-space: normal;
