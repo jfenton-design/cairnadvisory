@@ -1197,6 +1197,17 @@
   </style>
 </head>
 <body>
+<script>
+window.addEventListener('load', function() {
+  var first = document.body.firstElementChild;
+  var r = first.getBoundingClientRect();
+  var s = window.getComputedStyle(first);
+  var nav = document.querySelector('nav:not(.mobile-nav)');
+  var nr = nav ? nav.getBoundingClientRect() : {top:0,height:0};
+  var ns = nav ? window.getComputedStyle(nav) : {display:'?'};
+  alert('FIRST: top=' + Math.round(r.top) + ' h=' + Math.round(r.height) + ' display=' + s.display + ' vis=' + s.visibility + ' opacity=' + s.opacity + '\nNAV: display=' + ns.display + ' h=' + Math.round(nr.height) + ' top=' + Math.round(nr.top));
+});
+</script>
 <div style="background:blue;color:white;font-size:32px;padding:40px;width:100%;box-sizing:border-box;position:static;z-index:auto;">STATIC BODY TEST</div>
 
   <!-- ══ NAV ══ -->
