@@ -52,7 +52,7 @@ body.cairn { background: var(--cairn-linen); }
 .article {
   max-width: 860px;
   margin: 0 auto;
-  padding: 40px 48px 160px;
+  padding: 32px 48px 120px;
 }
 
 /* ── Back link ─────────────────────────────────────────────── */
@@ -61,7 +61,7 @@ body.cairn { background: var(--cairn-linen); }
   font-family: var(--font-display); font-size: 11px; font-weight: 500;
   letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--cairn-umber); text-decoration: none;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   transition: color var(--dur-fast) var(--ease);
 }
 .back-link:hover { color: var(--cairn-ironwood); }
@@ -127,17 +127,17 @@ body.cairn { background: var(--cairn-linen); }
 .head-text { padding-top: 0; }
 .article-title {
   font-family: var(--font-display); font-weight: 300;
-  font-size: 56px; line-height: 1.04; letter-spacing: -0.02em;
+  font-size: 52px; line-height: 1.05; letter-spacing: -0.02em;
   color: var(--color-text); margin: 0 0 18px;
   text-wrap: balance;
 }
 .article-title em { font-style: italic; color: var(--cairn-umber); }
 .article-deck {
-  font-size: 19px; line-height: 1.7; color: var(--cairn-umber);
+  font-size: 18px; line-height: 1.7; color: var(--cairn-umber);
   margin: 0; font-weight: 300;
 }
 .byline {
-  margin-top: 36px;
+  margin-top: 20px;
   display: flex; align-items: center; gap: 14px;
   font-family: var(--font-display); font-size: 12px;
   letter-spacing: 0.16em; text-transform: uppercase;
@@ -170,9 +170,9 @@ body.cairn { background: var(--cairn-linen); }
   inset: 0;
   background: linear-gradient(to bottom,
     rgba(248,245,240,0.0) 0%,
-    rgba(248,245,240,0.55) 45%,
-    rgba(248,245,240,0.92) 72%,
-    rgba(248,245,240,1.0) 100%
+    rgba(248,245,240,0.0) 30%,
+    rgba(248,245,240,0.65) 65%,
+    rgba(248,245,240,1.0) 88%
   );
   pointer-events: none;
   z-index: 1;
@@ -183,7 +183,7 @@ body.cairn { background: var(--cairn-linen); }
   width: 100%;
   max-width: 860px;
   margin: 0 auto;
-  padding: 0 48px 48px;
+  padding: 0 48px 40px;
 }
 .article-breadcrumb {
   display: flex; align-items: center; gap: 10px;
@@ -214,9 +214,9 @@ body.cairn { background: var(--cairn-linen); }
 
 .prose h2 {
   font-family: var(--font-display); font-weight: 300;
-  font-size: 32px; line-height: 1.18; letter-spacing: -0.01em;
+  font-size: 30px; line-height: 1.18; letter-spacing: -0.01em;
   color: var(--color-text);
-  margin: 64px 0 24px;
+  margin: 56px 0 20px;
   text-wrap: balance;
 }
 .prose h2 .h2-num {
@@ -237,11 +237,11 @@ body.cairn { background: var(--cairn-linen); }
 
 /* ── First-paragraph drop cap (sparing) ────────────────────── */
 .prose .lede-p {
-  font-size: 21px;
-  line-height: 1.65;
+  font-size: 18px;
+  line-height: 1.78;
   color: var(--cairn-ironwood);
   font-weight: 400;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 }
 .prose .lede-p::first-letter {
   font-family: var(--font-display); font-weight: 300;
@@ -259,9 +259,9 @@ body.cairn { background: var(--cairn-linen); }
   padding: 0 0 0 32px;
   border-left: 2px solid var(--cairn-amber);
   font-family: var(--font-display); font-weight: 300;
-  font-size: 28px; line-height: 1.32; letter-spacing: -0.01em;
+  font-size: 24px; line-height: 1.35; letter-spacing: -0.01em;
   color: var(--cairn-ironwood);
-  max-width: 600px;
+  max-width: 680px;
   text-wrap: balance;
 }
 .pull-quote em { font-style: italic; color: var(--cairn-umber); }
@@ -292,7 +292,7 @@ body.cairn { background: var(--cairn-linen); }
 }
 .callout.slate .callout-eyebrow { color: var(--cairn-slate); }
 .callout-title {
-  font-family: var(--font-display); font-weight: 400; font-size: 22px;
+  font-family: var(--font-display); font-weight: 400; font-size: 20px;
   line-height: 1.32; letter-spacing: -0.005em; color: var(--cairn-ironwood);
   margin: 0 0 22px; text-wrap: balance;
 }
@@ -337,7 +337,7 @@ body.cairn { background: var(--cairn-linen); }
   padding-top: 32px;
   border-top: 0.5px solid rgba(var(--wc-amber-rgb), 0.35);
   font-family: var(--font-display); font-weight: 300;
-  font-size: 28px; line-height: 1.3; letter-spacing: -0.01em;
+  font-size: 24px; line-height: 1.35; letter-spacing: -0.01em;
   color: var(--cairn-ironwood);
   max-width: 600px;
   text-wrap: balance;
@@ -410,12 +410,12 @@ body.cairn { background: var(--cairn-linen); }
   .article-breadcrumb { font-size: 10px; margin-bottom: 14px; }
 
   .article { padding: 32px 20px 80px; }
-  .article-title { font-size: clamp(28px, 7.5vw, 40px); }
+  .article-title { font-size: clamp(26px, 7vw, 38px); }
   .article-deck { font-size: 17px; }
   .byline { flex-wrap: wrap; gap: 8px; }
 
   .prose { font-size: 17px; }
-  .prose h2 { font-size: clamp(22px, 5.5vw, 28px); margin-top: 48px; }
+  .prose h2 { font-size: clamp(20px, 5.5vw, 26px); margin-top: 44px; }
   .prose .lede-p::first-letter { display: none; float: none; font-size: inherit; padding: 0; }
 
   .pull-quote { margin-left: 0; padding-left: 16px; font-size: 20px; }
