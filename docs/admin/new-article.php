@@ -156,7 +156,7 @@ foreach ($existing as $f) {
 <body>
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <img src="../homepage-assets/cairn-mark-vibrant.png" alt="" class="sb-mark">
+      <img src="../homepage-assets/cairn-mark-cutout.png" alt="" class="sb-mark">
       <div>
         <div class="sb-cairn">Cairn</div>
         <div class="sb-advisory">Content Studio</div>
@@ -166,6 +166,7 @@ foreach ($existing as $f) {
       <a href="dashboard.php" class="sn-item">Dashboard</a>
       <a href="articles.php" class="sn-item">Field Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight active">+ New Article</a>
+      <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item">Homepage Copy</a>
     </nav>
     <a href="logout.php" class="sb-logout">Sign out</a>
