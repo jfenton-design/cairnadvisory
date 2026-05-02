@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'hero-eyebrow', 'hero-headline', 'hero-sub',
         'statement',
         'about-quote', 'about-bio',
+        'cred-1', 'cred-2', 'cred-3', 'cred-4',
         'stat-1-num', 'stat-1-label', 'stat-2-num', 'stat-2-label',
         'stat-3-num', 'stat-3-label', 'stat-4-num', 'stat-4-label',
         'exp-1-name', 'exp-1-role', 'exp-1-desc',
@@ -162,6 +163,15 @@ $eyebrow_size = $szm[1] ?? 10;
         <label class="field-label">Bio Paragraphs</label>
         <textarea name="about_bio" class="field-input field-textarea" rows="10"><?= $e('about-bio') ?></textarea>
         <span class="field-hint">Include &lt;p&gt;...&lt;/p&gt; tags for each paragraph.</span>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Credentials</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <input type="text" name="cred_1" class="field-input" value="<?= $e('cred-1') ?>" placeholder="Credential 1">
+          <input type="text" name="cred_2" class="field-input" value="<?= $e('cred-2') ?>" placeholder="Credential 2">
+          <input type="text" name="cred_3" class="field-input" value="<?= $e('cred-3') ?>" placeholder="Credential 3">
+          <input type="text" name="cred_4" class="field-input" value="<?= $e('cred-4') ?>" placeholder="Credential 4">
+        </div>
       </div>
 
       <!-- ── ABOUT STATS ── -->
