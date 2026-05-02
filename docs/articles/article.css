@@ -341,7 +341,7 @@ body.cairn { background: var(--cairn-linen); }
 .next-card {
   display: block;
   padding: 36px 36px 32px;
-  background: var(--cairn-white);
+  background: var(--cairn-white) center/cover no-repeat;
   border: var(--border-hair);
   border-radius: var(--r-xl);
   text-decoration: none;
