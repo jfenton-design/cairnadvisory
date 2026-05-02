@@ -98,7 +98,7 @@ body.login-page {
   padding-bottom: 28px;
   border-bottom: 0.5px solid rgba(255,255,255,0.1);
 }
-.sb-mark { width: 36px; height: auto; filter: brightness(1.2); }
+.sb-mark { width: 36px; height: auto; mix-blend-mode: screen; opacity: 0.9; }
 .sb-cairn { font-size: 14px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #F4EDE0; line-height: 1; margin-bottom: 3px; }
 .sb-advisory { font-size: 8px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(196,168,122,0.7); line-height: 1; }
 
