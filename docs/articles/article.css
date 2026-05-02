@@ -390,9 +390,9 @@ body.cairn { background: var(--cairn-linen); }
   .site-nav { padding: 16px 24px; }
   .site-nav .links { display: none; }
   .site-nav .cta { padding: 9px 16px; font-size: 9px; letter-spacing: 0.18em; }
-  .site-nav .logo img { width: 36px; }
-  .site-nav .logo .wm-cairn { font-size: 12px; letter-spacing: 4px; }
-  .site-nav .logo .wm-adv { font-size: 7px; letter-spacing: 4px; }
+  .site-nav .logo img { width: 48px; }
+  .site-nav .logo .wm-cairn { font-size: 20px; letter-spacing: 6px; }
+  .site-nav .logo .wm-adv { font-size: 9px; letter-spacing: 5px; }
 
   .article { padding: 40px 20px 96px; }
   .meta-strip { font-size: 11px; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
