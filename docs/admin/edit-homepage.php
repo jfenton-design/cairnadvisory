@@ -61,6 +61,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
     }
 
+    // Credentials font size (inline style on div)
+    if (!empty($_POST['cred_size'])) {
+        $size = max(8, min(24, (int)$_POST['cred_size']));
+        $html = preg_replace(
+            '/(<div class="credentials" style=")([^"]*)(")/i',
+            '${1}font-size:' . $size . 'px${3}',
+            $html
+        );
+    }
+
     if (file_put_contents($filepath, $html) !== false) {
         $saved = true;
         require_once __DIR__ . '/github-sync.php';
@@ -78,6 +88,9 @@ $e = function($key) use ($html) {
 
 preg_match('/hero-eyebrow-text" style="[^"]*font-size:\s*(\d+)px/i', $html, $szm);
 $eyebrow_size = $szm[1] ?? 10;
+
+preg_match('/credentials" style="[^"]*font-size:\s*(\d+)px/i', $html, $csm);
+$cred_size = $csm[1] ?? 10;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,13 +177,19 @@ $eyebrow_size = $szm[1] ?? 10;
         <textarea name="about_bio" class="field-input field-textarea" rows="10"><?= $e('about-bio') ?></textarea>
         <span class="field-hint">Include &lt;p&gt;...&lt;/p&gt; tags for each paragraph.</span>
       </div>
-      <div class="form-field">
-        <label class="field-label">Credentials</label>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <input type="text" name="cred_1" class="field-input" value="<?= $e('cred-1') ?>" placeholder="Credential 1">
-          <input type="text" name="cred_2" class="field-input" value="<?= $e('cred-2') ?>" placeholder="Credential 2">
-          <input type="text" name="cred_3" class="field-input" value="<?= $e('cred-3') ?>" placeholder="Credential 3">
-          <input type="text" name="cred_4" class="field-input" value="<?= $e('cred-4') ?>" placeholder="Credential 4">
+      <div class="form-row" style="grid-template-columns: 1fr 160px; gap: 16px; align-items: start;">
+        <div class="form-field">
+          <label class="field-label">Credentials</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <input type="text" name="cred_1" class="field-input" value="<?= $e('cred-1') ?>" placeholder="Credential 1">
+            <input type="text" name="cred_2" class="field-input" value="<?= $e('cred-2') ?>" placeholder="Credential 2">
+            <input type="text" name="cred_3" class="field-input" value="<?= $e('cred-3') ?>" placeholder="Credential 3">
+            <input type="text" name="cred_4" class="field-input" value="<?= $e('cred-4') ?>" placeholder="Credential 4">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Font Size (px)</label>
+          <input type="number" name="cred_size" class="field-input" value="<?= (int)$cred_size ?>" min="8" max="24">
         </div>
       </div>
 
