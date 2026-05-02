@@ -4,59 +4,50 @@ if (empty($_SESSION['cairn_admin_auth'])) { header('Location: index.php'); exit;
 
 $filepath = dirname(__DIR__) . '/index.html';
 $saved = false;
+$error = '';
+
+function get_editable($html, $key) {
+    preg_match('/<!-- editable:' . preg_quote($key, '/') . ' -->(.*?)<!-- \/editable -->/si', $html, $m);
+    return isset($m[1]) ? trim($m[1]) : '';
+}
+
+function set_editable($html, $key, $value) {
+    $pattern = '/<!-- editable:' . preg_quote($key, '/') . ' -->.*?<!-- \/editable -->/si';
+    $replacement = '<!-- editable:' . $key . ' -->' . $value . '<!-- /editable -->';
+    return preg_replace($pattern, $replacement, $html);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $html = file_get_contents($filepath);
 
-    // Hero sub
-    if (isset($_POST['hero_sub'])) {
-        $html = preg_replace('/(<p class="hero-sub"[^>]*>).*?(<\/p>)/si',
-            '${1}' . htmlspecialchars(trim($_POST['hero_sub'])) . '${2}', $html);
-    }
+    $fields = [
+        'hero-headline', 'hero-sub',
+        'statement',
+        'about-quote', 'about-bio',
+        'services-title', 'services-aside',
+        'notes-title',
+        'contact-title', 'contact-text',
+    ];
 
-    // About pull quote
-    if (isset($_POST['about_quote'])) {
-        $html = preg_replace('/(<p class="about-pull-quote">).*?(<\/p>)/si',
-            '${1}' . trim($_POST['about_quote']) . '${2}', $html, 1);
-    }
-
-    // Bio paragraphs
-    if (!empty($_POST['bio'])) {
-        $paras = array_filter(array_map('trim', explode("\n\n", trim($_POST['bio']))));
-        $bio_html = '';
-        foreach ($paras as $p) {
-            $bio_html .= '          <p>' . htmlspecialchars($p) . '</p>' . "\n";
+    foreach ($fields as $key) {
+        $post_key = str_replace('-', '_', $key);
+        if (isset($_POST[$post_key])) {
+            $html = set_editable($html, $key, $_POST[$post_key]);
         }
-        $html = preg_replace('/(<div class="about-bio">).*?(<\/div>)/si',
-            '${1}' . "\n" . $bio_html . '        ${2}', $html);
     }
 
-    // Statement text
-    if (isset($_POST['statement'])) {
-        $html = preg_replace('/(<p class="statement-text">).*?(<\/p>)/si',
-            '${1}' . trim($_POST['statement']) . '${2}', $html);
+    if (file_put_contents($filepath, $html) !== false) {
+        $saved = true;
+    } else {
+        $error = 'Could not save file. Check server write permissions.';
     }
-
-    file_put_contents($filepath, $html);
-    $saved = true;
-    $html = file_get_contents($filepath); // re-read for display
 }
 
 $html = file_get_contents($filepath);
 
-preg_match('/<p class="hero-sub"[^>]*>(.*?)<\/p>/si', $html, $hs);
-$hero_sub = isset($hs[1]) ? strip_tags($hs[1]) : '';
-
-preg_match('/<p class="about-pull-quote">(.*?)<\/p>/si', $html, $aq);
-$about_quote = isset($aq[1]) ? trim($aq[1]) : '';
-
-preg_match('/<div class="about-bio">(.*?)<\/div>/si', $html, $bm);
-$bio_html_raw = isset($bm[1]) ? $bm[1] : '';
-preg_match_all('/<p>(.*?)<\/p>/si', $bio_html_raw, $bp_m);
-$bio_text = implode("\n\n", array_map('strip_tags', $bp_m[1] ?? []));
-
-preg_match('/<p class="statement-text">(.*?)<\/p>/si', $html, $sm);
-$statement = isset($sm[1]) ? trim($sm[1]) : '';
+function e($key) use ($html) {
+    return htmlspecialchars(get_editable($html, $key));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +60,7 @@ $statement = isset($sm[1]) ? trim($sm[1]) : '';
 <body>
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <img src="../homepage-assets/cairn-mark-vibrant.png" alt="" class="sb-mark">
+      <img src="../homepage-assets/cairn-mark-cutout.png" alt="" class="sb-mark">
       <div>
         <div class="sb-cairn">Cairn</div>
         <div class="sb-advisory">Content Studio</div>
@@ -79,6 +70,7 @@ $statement = isset($sm[1]) ? trim($sm[1]) : '';
       <a href="dashboard.php" class="sn-item">Dashboard</a>
       <a href="articles.php" class="sn-item">Field Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight">+ New Article</a>
+      <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item active">Homepage Copy</a>
     </nav>
     <a href="logout.php" class="sb-logout">Sign out</a>
@@ -93,38 +85,82 @@ $statement = isset($sm[1]) ? trim($sm[1]) : '';
     <?php if ($saved): ?>
       <div class="notice notice-success">Saved. <a href="../index.html" target="_blank">View homepage →</a></div>
     <?php endif; ?>
+    <?php if ($error): ?>
+      <div class="notice notice-error"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
 
     <form method="post" class="article-form">
 
       <div class="form-section-label">Hero</div>
+
       <div class="form-field">
-        <label class="field-label">Hero subheadline</label>
-        <textarea name="hero_sub" class="field-input field-textarea" rows="4"><?= htmlspecialchars($hero_sub) ?></textarea>
-        <span class="field-hint">The paragraph that appears below "Find your path forward."</span>
+        <label class="field-label">Hero Headline</label>
+        <input type="text" name="hero_headline" class="field-input field-input-lg" value="<?= e('hero-headline') ?>">
+        <span class="field-hint">Use &lt;em style="color:#8B6A48;"&gt;italic part&lt;/em&gt; for the styled italic portion.</span>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Hero Subtext</label>
+        <textarea name="hero_sub" class="field-input field-textarea" rows="3"><?= e('hero-sub') ?></textarea>
       </div>
 
       <div class="form-section-label">Statement</div>
+
       <div class="form-field">
-        <label class="field-label">Statement text</label>
-        <textarea name="statement" class="field-input field-textarea" rows="5"><?= htmlspecialchars($statement) ?></textarea>
-        <span class="field-hint">The large quote in the section after the hero. HTML tags like &lt;span&gt; and &lt;em&gt; are preserved.</span>
+        <label class="field-label">Statement Text</label>
+        <textarea name="statement" class="field-input field-textarea" rows="4"><?= e('statement') ?></textarea>
+        <span class="field-hint">You can use &lt;em&gt; for italic, &lt;span class="grey"&gt; for grey text, and &lt;br&gt; for line breaks.</span>
       </div>
 
       <div class="form-section-label">About</div>
+
       <div class="form-field">
-        <label class="field-label">Pull quote</label>
-        <textarea name="about_quote" class="field-input field-textarea" rows="3"><?= htmlspecialchars($about_quote) ?></textarea>
-        <span class="field-hint">The large quote next to your photo. Use &lt;em&gt; for italic.</span>
+        <label class="field-label">Pull Quote</label>
+        <textarea name="about_quote" class="field-input field-textarea" rows="3"><?= e('about-quote') ?></textarea>
+        <span class="field-hint">Use &lt;em&gt; for the italic portion.</span>
       </div>
       <div class="form-field">
-        <label class="field-label">Bio paragraphs</label>
-        <textarea name="bio" class="field-input field-textarea" rows="10"><?= htmlspecialchars($bio_text) ?></textarea>
-        <span class="field-hint">Separate paragraphs with a blank line.</span>
+        <label class="field-label">Bio Paragraphs</label>
+        <textarea name="about_bio" class="field-input field-textarea" rows="10"><?= e('about-bio') ?></textarea>
+        <span class="field-hint">Include the full &lt;p&gt;...&lt;/p&gt; tags for each paragraph.</span>
+      </div>
+
+      <div class="form-section-label">Work / Services</div>
+
+      <div class="form-field">
+        <label class="field-label">Section Headline</label>
+        <input type="text" name="services_title" class="field-input field-input-lg" value="<?= e('services-title') ?>">
+        <span class="field-hint">Use &lt;br&gt; for a line break.</span>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Section Intro</label>
+        <textarea name="services_aside" class="field-input field-textarea" rows="3"><?= e('services-aside') ?></textarea>
+      </div>
+
+      <div class="form-section-label">Field Notes Section</div>
+
+      <div class="form-field">
+        <label class="field-label">Section Headline</label>
+        <input type="text" name="notes_title" class="field-input field-input-lg" value="<?= e('notes-title') ?>">
+        <span class="field-hint">Use &lt;em&gt; for italic.</span>
+      </div>
+
+      <div class="form-section-label">Contact</div>
+
+      <div class="form-field">
+        <label class="field-label">Contact Headline</label>
+        <input type="text" name="contact_title" class="field-input field-input-lg" value="<?= e('contact-title') ?>">
+        <span class="field-hint">Use &lt;br&gt; for line break, &lt;em&gt; for italic.</span>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Contact Subtext</label>
+        <textarea name="contact_text" class="field-input field-textarea" rows="3"><?= e('contact-text') ?></textarea>
       </div>
 
       <div class="form-actions">
         <button type="submit" class="btn-primary btn-large">Save Changes</button>
+        <a href="../index.html" target="_blank" class="btn-ghost">Preview →</a>
       </div>
+
     </form>
   </main>
 </body>
