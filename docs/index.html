@@ -818,9 +818,9 @@
       gap: 18px;
       text-decoration: none;
       color: inherit;
-      transition: border-color var(--dur-base) var(--ease);
+      transition: border-color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
     }
-    .note-card:hover { border-color: var(--cairn-amber); }
+    .note-card:hover { border-color: var(--cairn-amber); transform: translateY(-2px); box-shadow: var(--shadow-card); }
 
     .note-meta {
       display: flex;
