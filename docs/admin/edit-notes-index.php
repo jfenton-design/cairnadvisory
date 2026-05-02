@@ -36,10 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $html = file_get_contents($filepath);
-
-function e($key) use ($html) {
+$e = function($key) use ($html) {
     return htmlspecialchars(get_editable($html, $key));
-}
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,12 +86,12 @@ function e($key) use ($html) {
 
       <div class="form-field">
         <label class="field-label">Main Headline</label>
-        <input type="text" name="index_headline" class="field-input field-input-lg" value="<?= e('index-headline') ?>">
+        <input type="text" name="index_headline" class="field-input field-input-lg" value="<?= $e('index-headline') ?>">
         <span class="field-hint">Use &lt;em&gt; for the italic portion.</span>
       </div>
       <div class="form-field">
         <label class="field-label">Deck / Description</label>
-        <textarea name="index_deck" class="field-input field-textarea" rows="3"><?= e('index-deck') ?></textarea>
+        <textarea name="index_deck" class="field-input field-textarea" rows="3"><?= $e('index-deck') ?></textarea>
         <span class="field-hint">Use &lt;strong&gt; for bold text.</span>
       </div>
 
@@ -100,12 +99,12 @@ function e($key) use ($html) {
 
       <div class="form-field">
         <label class="field-label">Set Label</label>
-        <input type="text" name="set_label" class="field-input" value="<?= e('set-label') ?>" placeholder="The current set · April 2026">
+        <input type="text" name="set_label" class="field-input" value="<?= $e('set-label') ?>" placeholder="The current set · April 2026">
         <span class="field-hint">Update when you publish a new batch of articles.</span>
       </div>
       <div class="form-field">
         <label class="field-label">Set Meta</label>
-        <input type="text" name="set_meta" class="field-input" value="<?= e('set-meta') ?>" placeholder="3 essays · 18 minutes total" style="max-width: 300px">
+        <input type="text" name="set_meta" class="field-input" value="<?= $e('set-meta') ?>" placeholder="3 essays · 18 minutes total" style="max-width: 300px">
       </div>
 
       <div class="form-actions">
