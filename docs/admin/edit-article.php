@@ -56,8 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '<div class="prose">' . $body_html . "\n    </div>", $html);
     }
 
-    file_put_contents($filepath, $html);
-    $saved = true;
+    if (file_put_contents($filepath, $html) !== false) {
+        $saved = true;
+        require_once __DIR__ . '/github-sync.php';
+        $sync_err = push_to_github($filepath, 'docs/articles/' . $file);
+        if ($sync_err) $error = $sync_err;
+    } else {
+        $error = 'Could not save. Check server write permissions.';
+    }
 }
 
 // Parse current values from file
