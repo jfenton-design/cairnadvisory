@@ -21,16 +21,16 @@ body.cairn { background: var(--cairn-linen); }
   -webkit-backdrop-filter: saturate(120%) blur(16px);
   border-bottom: var(--border-hair);
 }
-.site-nav .logo { display: flex; align-items: center; gap: 22px; text-decoration: none; }
-.site-nav .logo img { width: 64px; height: auto; display: block; }
-.site-nav .logo .wm { display: inline-flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-.site-nav .logo .wm-cairn {
-  font-family: var(--font-display); font-weight: 300; font-size: 26px;
+.site-nav .nav-logo { display: flex; align-items: center; gap: 22px; text-decoration: none; }
+.nav-mark { width: 64px; height: auto; display: block; }
+.nav-wordmark { display: inline-flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.nav-wordmark .w-cairn {
+  font-family: var(--font-display); font-weight: var(--fw-light); font-size: 26px;
   letter-spacing: 8px; text-transform: uppercase; color: var(--cairn-obsidian);
   display: inline-block; white-space: nowrap; margin-left: -1px; line-height: 1;
 }
-.site-nav .logo .wm-adv {
-  font-family: var(--font-display); font-weight: 500; font-size: 9px;
+.nav-wordmark .w-advisory {
+  font-family: var(--font-display); font-weight: var(--fw-medium); font-size: 9px;
   letter-spacing: 7.6px; margin-right: -7.6px; text-transform: uppercase; color: var(--cairn-slate-lt);
   display: inline-block; white-space: nowrap; line-height: 1;
 }
@@ -381,10 +381,10 @@ body.cairn { background: var(--cairn-linen); }
 @media (max-width: 720px) {
   .site-nav { padding: 14px 20px; }
   .site-nav .links, .site-nav .cta { display: none; }
-  .site-nav .logo img { width: 48px; }
-  .site-nav .logo .wm { gap: 4px; }
-  .site-nav .logo .wm-cairn { font-size: 20px; letter-spacing: 6px; margin-left: 0; }
-  .site-nav .logo .wm-adv { font-size: 9px; letter-spacing: 5px; margin-right: -5px; }
+  .nav-mark { width: 48px; }
+  .nav-wordmark { gap: 4px; }
+  .nav-wordmark .w-cairn { font-size: 20px; letter-spacing: 6px; margin-left: 0; }
+  .nav-wordmark .w-advisory { font-size: 9px; letter-spacing: 5px; margin-right: -5px; }
 
   .banner-img { height: 220px; }
   .banner-content { padding: 28px 20px 8px; }
