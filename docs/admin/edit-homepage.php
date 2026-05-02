@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $html = file_get_contents($filepath);
 
     $fields = [
-        'hero-headline', 'hero-sub',
+        'hero-eyebrow', 'hero-headline', 'hero-sub',
         'statement',
         'about-quote', 'about-bio',
         'services-title', 'services-aside',
@@ -34,6 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST[$post_key])) {
             $html = set_editable($html, $key, $_POST[$post_key]);
         }
+    }
+
+    // Update eyebrow font size via inline style
+    if (!empty($_POST['hero_eyebrow_size'])) {
+        $size = max(8, min(32, (int)$_POST['hero_eyebrow_size']));
+        $html = preg_replace(
+            '/(<span class="hero-eyebrow-text" style=")([^"]*)(")/i',
+            '${1}color:#2C1E10; font-size:' . $size . 'px${3}',
+            $html
+        );
     }
 
     if (file_put_contents($filepath, $html) !== false) {
@@ -91,6 +101,23 @@ $e = function($key) use ($html) {
     <form method="post" class="article-form">
 
       <div class="form-section-label">Hero</div>
+
+      <?php
+        preg_match('/hero-eyebrow-text" style="[^"]*font-size:\s*(\d+)px/i', $html, $szm);
+        $eyebrow_size = $szm[1] ?? 10;
+      ?>
+      <div class="form-row" style="grid-template-columns: 1fr 160px; gap: 16px;">
+        <div class="form-field">
+          <label class="field-label">Eyebrow Text</label>
+          <input type="text" name="hero_eyebrow" class="field-input" value="<?= $e('hero-eyebrow') ?>">
+          <span class="field-hint">The small label above the headline — e.g. "AI Advisory for Established Operators"</span>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Font Size (px)</label>
+          <input type="number" name="hero_eyebrow_size" class="field-input" value="<?= (int)$eyebrow_size ?>" min="8" max="32" step="1">
+          <span class="field-hint">Current: <?= (int)$eyebrow_size ?>px</span>
+        </div>
+      </div>
 
       <div class="form-field">
         <label class="field-label">Hero Headline</label>
