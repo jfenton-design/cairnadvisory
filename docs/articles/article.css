@@ -76,6 +76,8 @@ body.cairn { background: var(--cairn-linen); }
 }
 .meta-strip .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cairn-amber); opacity: 0.6; }
 .meta-strip .reading { color: var(--cairn-slate); letter-spacing: 0.18em; font-weight: 400; }
+.meta-strip a { color: inherit; text-decoration: none; }
+.meta-strip a:hover { text-decoration: underline; }
 
 /* ── Editorial header with integrated drop-numeral ─────────── */
 .article-header {
