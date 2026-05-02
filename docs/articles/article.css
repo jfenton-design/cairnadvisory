@@ -21,23 +21,7 @@ body.cairn { background: var(--cairn-linen); }
   -webkit-backdrop-filter: saturate(120%) blur(16px);
   border-bottom: var(--border-hair);
 }
-/* Nav logo styles live in ../nav.css — shared with homepage */
-.site-nav .links { display: flex; gap: 40px; list-style: none; padding: 0; margin: 0; margin-left: auto; }
-.site-nav .links a {
-  font-family: var(--font-display); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--cairn-umber);
-  text-decoration: none; transition: color var(--dur-fast) var(--ease);
-}
-.site-nav .links a:hover, .site-nav .links a.active { color: var(--cairn-obsidian); }
-.site-nav .cta {
-  font-family: var(--font-display); font-size: 10px; font-weight: 500;
-  letter-spacing: 0.22em; text-transform: uppercase; padding: 11px 22px;
-  background: var(--cairn-ironwood); color: var(--cairn-parchment);
-  border-radius: var(--r-sm); text-decoration: none;
-  transition: background var(--dur-fast) var(--ease);
-  margin-left: 48px;
-}
-.site-nav .cta:hover { background: var(--cairn-obsidian); }
+/* Nav logo, links, and CTA styles live in ../nav.css — shared with homepage */
 
 /* ── Article container ─────────────────────────────────────── */
 .article {
@@ -369,8 +353,7 @@ body.cairn { background: var(--cairn-linen); }
 /* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .site-nav { padding: 12px 20px; }
-  .site-nav .links, .site-nav .cta { display: none; }
-  /* nav logo mobile overrides in ../nav.css */
+  /* nav logo, links, cta mobile overrides in ../nav.css */
 
   .banner-img { height: 220px; }
   .banner-content { padding: 28px 20px 8px; }

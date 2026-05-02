@@ -47,10 +47,49 @@
   margin-right: -7.6px;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--cairn-umber);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--cairn-obsidian); }
+.nav-cta {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--cairn-parchment);
+  background: var(--cairn-ironwood);
+  padding: 11px 22px;
+  text-decoration: none;
+  border-radius: var(--r-sm);
+  transition: background var(--dur-fast) var(--ease);
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--cairn-obsidian); }
+
 @media (max-width: 720px) {
   .nav-logo { gap: 14px; }
   .nav-mark { width: 48px; }
   .nav-wordmark { gap: 4px; }
   .nav-wordmark .w-cairn { font-size: 20px; letter-spacing: 6px; margin-left: 0; }
   .nav-wordmark .w-advisory { font-size: 9px; letter-spacing: 5px; margin-right: -5px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
 }
