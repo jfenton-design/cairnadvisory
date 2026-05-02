@@ -300,8 +300,8 @@ body.cairn { background: var(--cairn-linen); }
 .prose ul li {
   position: relative;
   padding: 0 0 12px 24px;
-  font-size: 18px; line-height: 1.78;
-  color: var(--cairn-ironwood);
+  font-family: inherit; font-size: inherit; line-height: inherit;
+  color: inherit;
 }
 .prose ul li::before {
   content: ""; position: absolute;
