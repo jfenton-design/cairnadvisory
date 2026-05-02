@@ -22,14 +22,14 @@ body.cairn { background: var(--cairn-linen); }
   border-bottom: var(--border-hair);
 }
 .site-nav .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
-.site-nav .logo img { width: 44px; height: auto; display: block; }
+.site-nav .logo img { width: 56px; height: auto; display: block; }
 .site-nav .logo .wm { display: inline-flex; flex-direction: column; gap: 4px; }
 .site-nav .logo .wm-cairn {
-  font-family: var(--font-display); font-weight: 300; font-size: 14px;
-  letter-spacing: 6px; text-transform: uppercase; color: var(--color-text); line-height: 1;
+  font-family: var(--font-display); font-weight: 300; font-size: 24px;
+  letter-spacing: 7px; text-transform: uppercase; color: var(--color-text); line-height: 1;
 }
 .site-nav .logo .wm-adv {
-  font-family: var(--font-display); font-weight: 500; font-size: 8px;
+  font-family: var(--font-display); font-weight: 500; font-size: 9px;
   letter-spacing: 5.27px; text-transform: uppercase; color: var(--cairn-slate); line-height: 1;
 }
 .site-nav .links { display: flex; gap: 36px; list-style: none; padding: 0; margin: 0; }
