@@ -194,17 +194,14 @@ body.cairn { background: var(--cairn-linen); }
 .prose p em { font-style: italic; color: var(--cairn-umber); }
 
 .prose h2 {
-  font-family: var(--font-display); font-weight: 300;
-  font-size: 30px; line-height: 1.18; letter-spacing: -0.01em;
-  color: var(--color-text);
-  margin: 56px 0 20px;
-  text-wrap: balance;
+  font-size: 0;
+  margin: 48px 0 16px;
 }
 .prose h2 .h2-num {
   display: block;
   font-family: var(--font-display); font-size: 12px; font-weight: 500;
   letter-spacing: 0.22em; text-transform: uppercase; color: var(--cairn-amber);
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .prose h3 {
@@ -396,7 +393,7 @@ body.cairn { background: var(--cairn-linen); }
   .byline { flex-wrap: wrap; gap: 8px; }
 
   .prose { font-size: 17px; }
-  .prose h2 { font-size: clamp(20px, 5.5vw, 26px); margin-top: 44px; }
+  .prose h2 { margin-top: 36px; }
   .prose .lede-p::first-letter { display: none; float: none; font-size: inherit; padding: 0; }
 
   .pull-quote { margin-left: 0; padding-left: 16px; font-size: 20px; }
