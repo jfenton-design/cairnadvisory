@@ -25,12 +25,12 @@ body.cairn { background: var(--cairn-linen); }
 .site-nav .logo img { width: 56px; height: auto; display: block; }
 .site-nav .logo .wm { display: inline-flex; flex-direction: column; gap: 4px; }
 .site-nav .logo .wm-cairn {
-  font-family: var(--font-display); font-weight: 300; font-size: 24px;
-  letter-spacing: 7px; text-transform: uppercase; color: var(--color-text); line-height: 1;
+  font-family: var(--font-display); font-weight: 300; font-size: 26px;
+  letter-spacing: 8px; text-transform: uppercase; color: var(--color-text); line-height: 1;
 }
 .site-nav .logo .wm-adv {
   font-family: var(--font-display); font-weight: 500; font-size: 9px;
-  letter-spacing: 5.27px; text-transform: uppercase; color: var(--cairn-slate); line-height: 1;
+  letter-spacing: 7.6px; margin-right: -7.6px; text-transform: uppercase; color: var(--cairn-slate); line-height: 1;
 }
 .site-nav .links { display: flex; gap: 36px; list-style: none; padding: 0; margin: 0; }
 .site-nav .links a {
