@@ -62,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (file_put_contents($filepath, $html) !== false) {
         $saved = true;
+        require_once __DIR__ . '/github-sync.php';
+        $sync_err = push_to_github($filepath, 'docs/index.html');
+        if ($sync_err) $error = $sync_err;
     } else {
         $error = 'Could not save. Check server write permissions.';
     }
