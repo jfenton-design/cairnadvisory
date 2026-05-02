@@ -1,0 +1,56 @@
+/* ══════════════════════════════════════════════════════════════════
+   CAIRN ADVISORY — SHARED NAV LOGO
+   Single source of truth for the nav logo across all pages.
+   Inherits from tokens.css.
+══════════════════════════════════════════════════════════════════════ */
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  text-decoration: none;
+}
+.nav-mark {
+  width: 64px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+.nav-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.nav-wordmark .w-cairn {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: 26px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--cairn-obsidian);
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  margin-left: -1px;
+}
+.nav-wordmark .w-advisory {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--cairn-slate-lt);
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: 7.6px;
+  margin-right: -7.6px;
+}
+
+@media (max-width: 720px) {
+  .nav-logo { gap: 14px; }
+  .nav-mark { width: 48px; }
+  .nav-wordmark { gap: 4px; }
+  .nav-wordmark .w-cairn { font-size: 20px; letter-spacing: 6px; margin-left: 0; }
+  .nav-wordmark .w-advisory { font-size: 9px; letter-spacing: 5px; margin-right: -5px; }
+}
