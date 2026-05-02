@@ -4,24 +4,49 @@ if (empty($_SESSION['cairn_admin_auth'])) { header('Location: index.php'); exit;
 
 $saved = false;
 $error = '';
+$vistas_dir = dirname(__DIR__) . '/assets/vistas/';
+$vistas_url = '../assets/vistas/';
 
-$watercolors = [
-    'shoreline.png'        => 'Shoreline',
-    'river watercolor.png' => 'River',
-    'mountain vista.png'   => 'Mountain Vista',
-];
+// Handle watercolor upload
+if (!empty($_FILES['new_watercolor']['name'])) {
+    $allowed = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $_FILES['new_watercolor']['tmp_name']);
+    finfo_close($finfo);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!in_array($mime, $allowed)) {
+        $error = 'Uploaded file must be a PNG, JPG, or WebP image.';
+    } elseif ($_FILES['new_watercolor']['size'] > 10 * 1024 * 1024) {
+        $error = 'Image must be under 10MB.';
+    } else {
+        $ext = pathinfo($_FILES['new_watercolor']['name'], PATHINFO_EXTENSION);
+        $upload_name = preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', pathinfo($_FILES['new_watercolor']['name'], PATHINFO_FILENAME)))) . '.' . strtolower($ext);
+        $upload_path = $vistas_dir . $upload_name;
+        if (move_uploaded_file($_FILES['new_watercolor']['tmp_name'], $upload_path)) {
+            $_POST['watercolor'] = $upload_name;
+        } else {
+            $error = 'Upload failed. Check directory write permissions.';
+        }
+    }
+}
+
+// Scan available watercolors
+$watercolors = [];
+foreach (glob($vistas_dir . '*.{png,jpg,jpeg,webp}', GLOB_BRACE) as $f) {
+    $watercolors[] = basename($f);
+}
+sort($watercolors);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
     $num        = preg_replace('/[^0-9]/', '', $_POST['num'] ?? '');
     $slug       = preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', trim($_POST['slug'] ?? ''))));
     $title      = trim($_POST['title'] ?? '');
     $title_em   = trim($_POST['title_em'] ?? '');
     $deck       = trim($_POST['deck'] ?? '');
-    $eyebrow    = trim($_POST['eyebrow'] ?? '');
     $reading    = trim($_POST['reading'] ?? '');
     $month      = trim($_POST['month'] ?? '');
     $year       = trim($_POST['year'] ?? date('Y'));
-    $watercolor = $_POST['watercolor'] ?? 'shoreline.png';
+    $watercolor = trim($_POST['watercolor'] ?? ($watercolors[0] ?? 'shoreline.png'));
     $body       = trim($_POST['body'] ?? '');
     $tone       = $_POST['tone'] ?? '';
 
@@ -34,21 +59,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (file_exists($filepath)) {
             $error = 'An article with that slug already exists. Choose a different slug.';
         } else {
-            $wc_encoded = rawurlencode($watercolor);
-            $tone_class = $tone ? ' ' . htmlspecialchars($tone) : '';
             $title_html = $title_em
                 ? htmlspecialchars($title) . ' <em>' . htmlspecialchars($title_em) . '</em>'
                 : htmlspecialchars($title);
             $num_padded = sprintf('%02d', (int)$num);
             $page_title = strip_tags($title . ($title_em ? ' ' . $title_em : ''));
 
-            // Build body HTML from textarea — wrap bare paragraphs
             $sections = preg_split('/\n{2,}/', $body);
             $body_html = '';
             foreach ($sections as $s) {
                 $s = trim($s);
                 if ($s === '') continue;
-                // Pass through existing HTML tags unchanged
                 if (preg_match('/^\s*<[a-z]/', $s)) {
                     $body_html .= "\n      " . $s . "\n";
                 } else {
@@ -138,8 +159,7 @@ HTML;
 }
 
 $next_num = 1;
-$existing = glob(dirname(__DIR__) . '/articles/[0-9]*.html');
-foreach ($existing as $f) {
+foreach (glob(dirname(__DIR__) . '/articles/[0-9]*.html') as $f) {
     if (preg_match('/^(\d+)-/', basename($f), $m)) {
         $next_num = max($next_num, (int)$m[1] + 1);
     }
@@ -152,6 +172,33 @@ foreach ($existing as $f) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cairn CMS — New Article</title>
 <link rel="stylesheet" href="admin.css">
+<style>
+  .wc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .wc-card { position: relative; }
+  .wc-card input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .wc-thumb {
+    display: block; cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px; overflow: hidden;
+    aspect-ratio: 3/2; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .wc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .wc-thumb-name {
+    display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cairn-umber); margin-top: 6px; text-align: center;
+  }
+  .wc-card input:checked + .wc-thumb { border-color: var(--cairn-amber); box-shadow: 0 0 0 3px rgba(196,168,122,0.25); }
+  .wc-upload-box {
+    border: 1.5px dashed rgba(196,168,122,0.5); border-radius: 8px;
+    padding: 24px; text-align: center; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: var(--cairn-white);
+  }
+  .wc-upload-box:hover { border-color: var(--cairn-amber); background: var(--cairn-linen); }
+  .wc-upload-box input[type="file"] { display: none; }
+  .wc-upload-label { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cairn-umber); }
+  .wc-upload-sub { font-size: 11px; color: var(--cairn-slate); margin-top: 4px; }
+</style>
 </head>
 <body>
   <aside class="sidebar">
@@ -180,15 +227,15 @@ foreach ($existing as $f) {
     <?php if ($saved): ?>
       <div class="notice notice-success">
         Article saved as <strong><?= htmlspecialchars($saved) ?></strong>.
-        <a href="../articles/<?= htmlspecialchars($saved) ?>" target="_blank">View it →</a>
-        <br>Remember to also add it to the <a href="edit-index.php">Field Notes index</a> and <a href="edit-homepage.php">homepage</a>.
+        <a href="../articles/<?= htmlspecialchars($saved) ?>" target="_blank">View it →</a><br>
+        Remember to add it to the <a href="edit-notes-index.php">Notes Index page</a>.
       </div>
     <?php endif; ?>
     <?php if ($error): ?>
       <div class="notice notice-error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <form method="post" class="article-form">
+    <form method="post" enctype="multipart/form-data" class="article-form">
 
       <div class="form-row form-row-3">
         <div class="form-field">
@@ -220,7 +267,6 @@ foreach ($existing as $f) {
       <div class="form-field">
         <label class="field-label">Title — italic ending <span class="field-opt">(optional)</span></label>
         <input type="text" name="title_em" class="field-input" placeholder="before they even start.">
-        <span class="field-hint">This part renders in italic after the main title</span>
       </div>
       <div class="form-field">
         <label class="field-label">Deck</label>
@@ -229,29 +275,44 @@ foreach ($existing as $f) {
 
       <div class="form-row form-row-3">
         <div class="form-field">
-          <label class="field-label">Category eyebrow</label>
-          <input type="text" name="eyebrow" class="field-input" placeholder="Strategy" value="Strategy">
-        </div>
-        <div class="form-field">
           <label class="field-label">Reading time</label>
           <input type="text" name="reading" class="field-input" placeholder="5 min read">
         </div>
         <div class="form-field">
           <label class="field-label">Month</label>
-          <input type="text" name="month" class="field-input" placeholder="April" value="<?= date('F') ?>">
+          <input type="text" name="month" class="field-input" value="<?= date('F') ?>">
+        </div>
+        <div class="form-field">
+          <label class="field-label">Year</label>
+          <input type="text" name="year" class="field-input" value="<?= date('Y') ?>">
+        </div>
+      </div>
+
+      <div class="form-section-label">Banner Image</div>
+
+      <div class="form-field">
+        <label class="field-label">Choose a watercolor</label>
+        <div class="wc-grid">
+          <?php foreach ($watercolors as $i => $wc): ?>
+            <div class="wc-card">
+              <input type="radio" name="watercolor" id="wc_<?= $i ?>" value="<?= htmlspecialchars($wc) ?>" <?= $i === 0 ? 'checked' : '' ?>>
+              <label for="wc_<?= $i ?>" class="wc-thumb">
+                <img src="<?= $vistas_url . rawurlencode($wc) ?>" alt="<?= htmlspecialchars($wc) ?>" loading="lazy">
+              </label>
+              <span class="wc-thumb-name"><?= htmlspecialchars(pathinfo($wc, PATHINFO_FILENAME)) ?></span>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
 
       <div class="form-field">
-        <label class="field-label">Banner image</label>
-        <div class="watercolor-picker">
-          <?php foreach ($watercolors as $file => $label): ?>
-            <label class="wc-option">
-              <input type="radio" name="watercolor" value="<?= htmlspecialchars($file) ?>" <?= $file === 'shoreline.png' ? 'checked' : '' ?>>
-              <span class="wc-label"><?= htmlspecialchars($label) ?></span>
-            </label>
-          <?php endforeach; ?>
+        <label class="field-label">Or upload a new watercolor <span class="field-opt">(PNG, JPG — saves for future use)</span></label>
+        <div class="wc-upload-box" onclick="document.getElementById('new_watercolor').click()">
+          <input type="file" name="new_watercolor" id="new_watercolor" accept="image/png,image/jpeg,image/webp" onchange="document.getElementById('upload-name').textContent = this.files[0]?.name || ''">
+          <div class="wc-upload-label">Click to upload image</div>
+          <div class="wc-upload-sub" id="upload-name">PNG, JPG or WebP · max 10MB</div>
         </div>
+        <span class="field-hint">If you upload an image, it will be used as the banner and saved to the vistas folder for future articles.</span>
       </div>
 
       <div class="form-section-label">Body</div>
