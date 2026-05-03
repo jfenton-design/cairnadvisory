@@ -9,7 +9,7 @@ if (!defined('GH_TOKEN')) define('GH_TOKEN', '');
 define('GH_REPO', 'jfenton-design/cairnadvisory');
 
 function push_to_github($local_file, $github_path, $message = 'CMS: content update') {
-    if (!GH_TOKEN) return null; // silently skip if token not configured
+    if (!GH_TOKEN) return 'GitHub sync skipped: github-config.php not found or GH_TOKEN not set';
     $url = 'https://api.github.com/repos/' . GH_REPO . '/contents/' . $github_path;
     $headers = [
         'Authorization: token ' . GH_TOKEN,
