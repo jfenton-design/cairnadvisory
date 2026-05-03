@@ -27,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'cred-1', 'cred-2', 'cred-3', 'cred-4',
         'stat-1-num', 'stat-1-label', 'stat-2-num', 'stat-2-label',
         'stat-3-num', 'stat-3-label', 'stat-4-num', 'stat-4-label',
-        'exp-1-name', 'exp-1-role', 'exp-1-desc',
-        'exp-2-name', 'exp-2-role', 'exp-2-desc',
-        'exp-3-name', 'exp-3-role', 'exp-3-desc',
+        'exp-1-name', 'exp-1-role', 'exp-1-desc', 'exp-1-meta-1', 'exp-1-meta-2',
+        'exp-2-name', 'exp-2-role', 'exp-2-desc', 'exp-2-meta-1', 'exp-2-meta-2',
+        'exp-3-name', 'exp-3-role', 'exp-3-desc', 'exp-3-meta-1', 'exp-3-meta-2',
         'exp-4-name', 'exp-4-role', 'exp-4-desc',
         'industries-title',
         'ind-1-name', 'ind-1-desc', 'ind-2-name', 'ind-2-desc',
@@ -55,6 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $html = preg_replace(
             '/(<span class="hero-eyebrow-text" style=")([^"]*)(")/i',
             '${1}color:#2C1E10; font-size:' . $size . 'px${3}',
+            $html
+        );
+    }
+
+    // Experience meta font size (inline style on each exp-meta div)
+    if (!empty($_POST['exp_meta_size'])) {
+        $size = max(7, min(18, (int)$_POST['exp_meta_size']));
+        $html = preg_replace_callback(
+            '/(<div class="exp-meta" style=")([^"]*)(")/i',
+            function($m) use ($size) { return $m[1] . 'font-size:' . $size . 'px' . $m[3]; },
             $html
         );
     }
@@ -89,6 +99,9 @@ $eyebrow_size = $szm[1] ?? 10;
 
 preg_match('/credentials" style="[^"]*font-size:\s*(\d+)px/i', $html, $csm);
 $cred_size = $csm[1] ?? 10;
+
+preg_match('/exp-meta" style="[^"]*font-size:\s*(\d+)px/i', $html, $esm);
+$exp_meta_size = $esm[1] ?? 9;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -213,8 +226,8 @@ $cred_size = $csm[1] ?? 10;
       <!-- ── EXPERIENCE ── -->
       <div class="form-section-label">Where I've Operated</div>
       <?php
-        $exp_names = ['Amazon', 'StockX', 'GoFundMe', 'Tespo'];
-        for ($i = 1; $i <= 4; $i++):
+        $exp_names = ['Amazon', 'StockX', 'GoFundMe'];
+        for ($i = 1; $i <= 3; $i++):
       ?>
         <div class="form-field">
           <label class="field-label"><?= $exp_names[$i-1] ?></label>
@@ -223,8 +236,17 @@ $cred_size = $csm[1] ?? 10;
             <input type="text" name="exp_<?= $i ?>_role" class="field-input" value="<?= $e("exp-$i-role") ?>" placeholder="Role">
           </div>
           <textarea name="exp_<?= $i ?>_desc" class="field-input field-textarea" rows="2"><?= $e("exp-$i-desc") ?></textarea>
+          <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+            <input type="text" name="exp_<?= $i ?>_meta_1" class="field-input" value="<?= $e("exp-$i-meta-1") ?>" placeholder="e.g. Product Management">
+            <input type="text" name="exp_<?= $i ?>_meta_2" class="field-input" value="<?= $e("exp-$i-meta-2") ?>" placeholder="e.g. Seattle">
+          </div>
         </div>
       <?php endfor; ?>
+      <div class="form-field">
+        <label class="field-label">Meta Tag Font Size (px)</label>
+        <input type="number" name="exp_meta_size" class="field-input" value="<?= (int)$exp_meta_size ?>" min="7" max="18" style="max-width: 120px;">
+        <span class="field-hint">Controls the size of the small tags (e.g. "Product Management · Seattle") on all cards.</span>
+      </div>
 
       <!-- ── INDUSTRIES ── -->
       <div class="form-section-label">Industries</div>
