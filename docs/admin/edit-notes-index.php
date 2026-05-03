@@ -5,6 +5,7 @@ if (empty($_SESSION['cairn_admin_auth'])) { header('Location: index.php'); exit;
 $filepath = dirname(__DIR__) . '/articles/index.html';
 $saved = false;
 $error = '';
+$sync_warning = '';
 
 function get_editable($html, $key) {
     preg_match('/<!-- editable:' . preg_quote($key, '/') . ' -->(.*?)<!-- \/editable -->/si', $html, $m);
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $saved = true;
         require_once __DIR__ . '/github-sync.php';
         $sync_err = push_to_github($filepath, 'docs/articles/index.html');
-        if ($sync_err) $error = $sync_err;
+        if ($sync_err) $sync_warning = $sync_err;
     } else {
         $error = 'Could not save file. Check server write permissions.';
     }
@@ -76,8 +77,11 @@ $e = function($key) use ($html) {
       <a href="../articles/index.html" target="_blank" class="btn-ghost">View page →</a>
     </header>
 
-    <?php if ($saved): ?>
-      <div class="notice notice-success">Saved. <a href="../articles/index.html" target="_blank">View page →</a></div>
+    <?php if ($saved && !$sync_warning): ?>
+      <div class="notice notice-success">Saved &amp; synced to GitHub. <a href="../articles/index.html" target="_blank">View page →</a></div>
+    <?php elseif ($saved && $sync_warning): ?>
+      <div class="notice notice-success">Saved locally. <a href="../articles/index.html" target="_blank">View page →</a></div>
+      <div class="notice notice-error">GitHub sync failed: <?= htmlspecialchars($sync_warning) ?></div>
     <?php endif; ?>
     <?php if ($error): ?>
       <div class="notice notice-error"><?= htmlspecialchars($error) ?></div>
