@@ -59,7 +59,7 @@ if (empty($_SESSION['cairn_admin_auth'])) { header('Location: index.php'); exit;
 
     <div class="quick-tip">
       <span class="qt-label">How publishing works</span>
-      <p>Changes you make here are saved directly to your site files. After saving, <strong>run the deploy command</strong> on Hostinger to push everything live:<br>
+      <p>Changes you save here are <strong>automatically synced to GitHub</strong> — no extra steps needed. The deploy command below is only needed when new code updates are available:<br>
       <code>cd ~/domains/cairnadvisory.co/public_html && git fetch origin && git reset --hard origin/main</code></p>
     </div>
   </main>
