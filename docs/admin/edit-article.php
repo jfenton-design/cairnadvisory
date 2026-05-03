@@ -12,6 +12,7 @@ if (!file_exists($filepath)) { header('Location: articles.php'); exit; }
 
 $saved = false;
 $error = '';
+$sync_warning = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $html = file_get_contents($filepath);
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $saved = true;
         require_once __DIR__ . '/github-sync.php';
         $sync_err = push_to_github($filepath, 'docs/articles/' . $file);
-        if ($sync_err) $error = $sync_err;
+        if ($sync_err) $sync_warning = $sync_err;
     } else {
         $error = 'Could not save. Check server write permissions.';
     }
@@ -117,8 +118,11 @@ $body_raw = isset($bm[1]) ? trim($bm[1]) : '';
       <a href="../articles/<?= htmlspecialchars($file) ?>" target="_blank" class="btn-ghost">View live →</a>
     </header>
 
-    <?php if ($saved): ?>
-      <div class="notice notice-success">Saved. <a href="../articles/<?= htmlspecialchars($file) ?>" target="_blank">View article →</a></div>
+    <?php if ($saved && !$sync_warning): ?>
+      <div class="notice notice-success">Saved &amp; synced to GitHub. <a href="../articles/<?= htmlspecialchars($file) ?>" target="_blank">View article →</a></div>
+    <?php elseif ($saved && $sync_warning): ?>
+      <div class="notice notice-success">Saved locally. <a href="../articles/<?= htmlspecialchars($file) ?>" target="_blank">View article →</a></div>
+      <div class="notice notice-error">GitHub sync failed: <?= htmlspecialchars($sync_warning) ?></div>
     <?php endif; ?>
 
     <form method="post" class="article-form">
