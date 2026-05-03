@@ -36,10 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'ind-5-name', 'ind-5-desc',
         'services-title', 'services-aside',
         'svc-1-title', 'svc-1-text', 'svc-2-title', 'svc-2-text', 'svc-3-title', 'svc-3-text',
-        'approach-headline', 'approach-intro',
-        'approach-1-title', 'approach-1-text',
-        'approach-2-title', 'approach-2-text',
-        'approach-3-title', 'approach-3-text',
+
         'notes-title',
         'contact-title', 'contact-text',
     ];
@@ -261,25 +258,6 @@ $cred_size = $csm[1] ?? 10;
           <label class="field-label">Service <?= $i ?> — <?= $svc_labels[$i-1] ?></label>
           <input type="text" name="svc_<?= $i ?>_title" class="field-input" value="<?= $e("svc-$i-title") ?>" style="margin-bottom: 8px;">
           <textarea name="svc_<?= $i ?>_text" class="field-input field-textarea" rows="3"><?= $e("svc-$i-text") ?></textarea>
-        </div>
-      <?php endfor; ?>
-
-      <!-- ── APPROACH ── -->
-      <div class="form-section-label">How I Work</div>
-      <div class="form-field">
-        <label class="field-label">Section Headline</label>
-        <input type="text" name="approach_headline" class="field-input field-input-lg" value="<?= $e('approach-headline') ?>">
-        <span class="field-hint">Use &lt;br&gt; for line break.</span>
-      </div>
-      <div class="form-field">
-        <label class="field-label">Section Intro</label>
-        <textarea name="approach_intro" class="field-input field-textarea" rows="3"><?= $e('approach-intro') ?></textarea>
-      </div>
-      <?php for ($i = 1; $i <= 3; $i++): ?>
-        <div class="form-field">
-          <label class="field-label">Principle <?= $i ?></label>
-          <input type="text" name="approach_<?= $i ?>_title" class="field-input" value="<?= $e("approach-$i-title") ?>" style="margin-bottom: 8px;">
-          <textarea name="approach_<?= $i ?>_text" class="field-input field-textarea" rows="3"><?= $e("approach-$i-text") ?></textarea>
         </div>
       <?php endfor; ?>
 
