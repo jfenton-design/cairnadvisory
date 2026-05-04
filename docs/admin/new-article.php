@@ -38,7 +38,6 @@ foreach (glob($vistas_dir . '*.{png,jpg,jpeg,webp}', GLOB_BRACE) as $f) {
 sort($watercolors);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
-    $num        = preg_replace('/[^0-9]/', '', $_POST['num'] ?? '');
     $slug       = preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', trim($_POST['slug'] ?? ''))));
     $title      = trim($_POST['title'] ?? '');
     $title_em   = trim($_POST['title_em'] ?? '');
@@ -69,10 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
     $body       = trim($_POST['body'] ?? '');
     $tone       = $_POST['tone'] ?? '';
 
-    if (!$num || !$slug || !$title || !$body) {
-        $error = 'Number, slug, title, and body are required.';
+    if (!$slug || !$title || !$body) {
+        $error = 'Slug, title, and body are required.';
     } else {
-        $filename = sprintf('%02d-%s.html', (int)$num, $slug);
+        $filename = $slug . '.html';
         $filepath = dirname(__DIR__) . '/articles/' . $filename;
 
         if (file_exists($filepath)) {
@@ -81,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
             $title_html = $title_em
                 ? htmlspecialchars($title) . ' <em>' . htmlspecialchars($title_em) . '</em>'
                 : htmlspecialchars($title);
-            $num_padded = sprintf('%02d', (int)$num);
             $page_title = strip_tags($title . ($title_em ? ' ' . $title_em : ''));
 
             $sections = preg_split('/\n{2,}/', $body);
@@ -177,12 +175,6 @@ HTML;
     }
 }
 
-$next_num = 1;
-foreach (glob(dirname(__DIR__) . '/articles/[0-9]*.html') as $f) {
-    if (preg_match('/^(\d+)-/', basename($f), $m)) {
-        $next_num = max($next_num, (int)$m[1] + 1);
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -256,11 +248,7 @@ foreach (glob(dirname(__DIR__) . '/articles/[0-9]*.html') as $f) {
 
     <form method="post" enctype="multipart/form-data" class="article-form">
 
-      <div class="form-row form-row-3">
-        <div class="form-field">
-          <label class="field-label">Article number</label>
-          <input type="number" name="num" class="field-input" value="<?= $next_num ?>" min="1" max="99" required>
-        </div>
+      <div class="form-row form-row-2">
         <div class="form-field">
           <label class="field-label">Slug (URL)</label>
           <input type="text" name="slug" class="field-input" placeholder="why-ai-fails-operators" required>
