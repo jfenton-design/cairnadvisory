@@ -963,6 +963,13 @@
       text-transform: uppercase;
       color: var(--cairn-umber);
     }
+    .contact-form .form-optional {
+      font-weight: var(--fw-light);
+      letter-spacing: 0.08em;
+      text-transform: none;
+      opacity: 0.7;
+      margin-left: 4px;
+    }
     .contact-form input,
     .contact-form textarea {
       width: 100%;
@@ -1652,8 +1659,8 @@
             <input id="cf-company" name="company" type="text" autocomplete="organization" required>
           </div>
           <div class="form-field">
-            <label for="cf-website">Company website</label>
-            <input id="cf-website" name="website" type="url" autocomplete="url" placeholder="https://" required>
+            <label for="cf-website">Company website <span class="form-optional">(optional)</span></label>
+            <input id="cf-website" name="website" type="url" autocomplete="url" placeholder="https://">
           </div>
         </div>
         <div class="form-field">
