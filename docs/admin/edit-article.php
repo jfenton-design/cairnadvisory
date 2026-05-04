@@ -87,14 +87,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
         }
     }
 
+    // Per-watercolor object-position for optimal banner crop
+    $wc_positions = [
+        'shoreline.png'            => 'center 40%',
+        'shoreline-watercolor.jpg' => 'center 40%',
+        'shoreline-watercolor.png' => 'center 40%',
+        'cairn-watercolor.jpg'     => 'center 50%',
+        'cairn-watercolor.png'     => 'center 50%',
+        'city watercolor.png'      => 'center 65%',
+        'river watercolor.png'     => 'center 50%',
+        'mountain vista.png'       => 'center 35%',
+        'city.svg'                 => 'center 50%',
+        'mountain.svg'             => 'center 35%',
+        'river.svg'                => 'center 50%',
+        'row-houses.svg'           => 'center 55%',
+        'restaurant.svg'           => 'center 50%',
+    ];
+
     // Update watercolor banner
+    $wc_changed = false;
+    $wc = '';
     if (!empty($_POST['watercolor'])) {
         $wc = preg_replace('/[^a-z0-9\-\.\s%]/', '', $_POST['watercolor']);
+        $pos = $wc_positions[$wc] ?? 'center 50%';
+        $html_before = $html;
+        // Replace the whole img tag to update both src and object-position
         $html = preg_replace(
-            '/(<img src="\.\.\\/assets\\/vistas\\/)([^"]+)(" alt="" class="banner-img">)/i',
-            '${1}' . $wc . '${3}',
+            '/<img src="[^"]*" alt="" class="banner-img"[^>]*>/i',
+            '<img src="../assets/vistas/' . $wc . '" alt="" class="banner-img" style="object-position: ' . $pos . ';">',
             $html
         );
+        $wc_changed = ($html !== $html_before);
     }
 
     // Update body prose
@@ -119,6 +142,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
         require_once __DIR__ . '/github-sync.php';
         $sync_err = push_to_github($filepath, 'docs/articles/' . $file);
         if ($sync_err) $sync_warning = $sync_err;
+
+        // Sync watercolor to homepage and notes index cards
+        if ($wc_changed && $wc) {
+            $hp_path = dirname(__DIR__) . '/index.html';
+            $ni_path = dirname(__DIR__) . '/articles/index.html';
+
+            // Homepage: url('assets/vistas/IMAGE')
+            $hp = file_get_contents($hp_path);
+            $hp_new = preg_replace(
+                '/(<a\b[^>]*href="articles\/' . preg_quote($file, '/') . '"[^>]*url\(\')([^\']+)(\'\))/si',
+                '${1}assets/vistas/' . $wc . '${3}',
+                $hp
+            );
+            if ($hp_new !== $hp) {
+                file_put_contents($hp_path, $hp_new);
+                $e2 = push_to_github($hp_path, 'docs/index.html');
+                if ($e2 && !$sync_warning) $sync_warning = $e2;
+            }
+
+            // Notes index: url('../assets/vistas/IMAGE')
+            $ni = file_get_contents($ni_path);
+            $ni_new = preg_replace(
+                '/(<a\b[^>]*href="' . preg_quote($file, '/') . '"[^>]*url\(\')([^\']+)(\'\))/si',
+                '${1}../assets/vistas/' . $wc . '${3}',
+                $ni
+            );
+            if ($ni_new !== $ni) {
+                file_put_contents($ni_path, $ni_new);
+                $e3 = push_to_github($ni_path, 'docs/articles/index.html');
+                if ($e3 && !$sync_warning) $sync_warning = $e3;
+            }
+        }
     } else {
         $error = 'Could not save. Check server write permissions.';
     }
