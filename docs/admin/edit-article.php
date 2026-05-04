@@ -133,8 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
                 $body_html .= "\n      <p>" . nl2br(htmlspecialchars($s)) . "</p>\n";
             }
         }
-        $html = preg_replace('/<div class="prose">(.*?)<\/div>/si',
-            '<div class="prose">' . $body_html . "\n    </div>", $html);
+        // Greedy match so nested divs inside prose are fully replaced
+        $html = preg_replace('/<div class="prose">.*<\/div>(\s*<\/article>)/si',
+            '<div class="prose">' . $body_html . "\n    </div>$1", $html);
     }
 
     if (file_put_contents($filepath, $html) !== false) {
@@ -202,7 +203,8 @@ $year  = $byline_parts[1] ?? date('Y');
 preg_match('/assets\/vistas\/([^"]+)" alt="" class="banner-img"/i', $html, $wm);
 $current_watercolor = $wm[1] ?? ($watercolors[0] ?? '');
 
-preg_match('/<div class="prose">(.*?)<\/div>/si', $html, $bm);
+// Greedy match to capture full prose including any nested divs
+preg_match('/<div class="prose">(.*)<\/div>\s*<\/article>/si', $html, $bm);
 $body_raw = isset($bm[1]) ? trim($bm[1]) : '';
 ?>
 <!DOCTYPE html>
