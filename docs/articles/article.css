@@ -131,9 +131,9 @@ body.cairn { background: var(--cairn-linen); }
 .banner-img {
   display: block;
   width: 100%;
-  height: 320px;
+  height: 380px;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 50%;
 }
 .banner-content {
   width: 100%;
