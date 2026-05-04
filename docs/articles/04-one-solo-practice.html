@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>44 Handouts, Four Tools, One Solo Practice — Cairn Advisory</title>
+<meta name="description" content="A case study from Cairn Advisory — what AI advisory work actually produced inside one solo internal medicine practice for women in midlife. 44 patient handouts, four interactive tools, and the reusable infrastructure that keeps it growing.">
+<meta property="og:title" content="44 Handouts, Four Tools, One Solo Practice — Cairn Advisory">
+<meta property="og:description" content="A case study from Cairn Advisory — what AI advisory work actually produced inside one solo internal medicine practice for women in midlife.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Cairn Advisory">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../nav.css?v=4">
+<link rel="stylesheet" href="article.css?v=4">
+<style>
+  /* ── Article 04 — case study variant.
+       Slate/amber accents to distinguish from the three essay pieces.
+       Adds a "library grid" for handout categories and a "facts" rail. ──── */
+  .meta-strip { color: var(--cairn-slate); }
+  .meta-strip .dot { background: var(--cairn-slate); }
+  .meta-strip .reading { color: var(--cairn-amber); }
+
+  .prose .lede-p::first-letter { color: var(--cairn-slate); text-shadow: 0 0 16px rgba(var(--wc-slate-rgb), 0.22); }
+  .pull-quote { border-left-color: var(--cairn-slate); }
+
+  /* Library grid — main categories only, with handout counts */
+  .library {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 28px 0 8px;
+  }
+  .library-cell {
+    padding: 24px 22px 22px;
+    background: rgba(var(--wc-amber-rgb), 0.06);
+    border: var(--border-hair);
+    border-radius: var(--r-md);
+    display: flex;
+    flex-direction: column;
+    min-height: 132px;
+  }
+  .library-cat {
+    font-family: var(--font-display); font-weight: 500; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cairn-slate);
+    margin: 0 0 10px;
+    display: block;
+  }
+  .library-blurb {
+    font-size: 14.5px; line-height: 1.55; color: var(--cairn-umber);
+    margin: 0 0 14px;
+    flex: 1;
+  }
+  .library-count {
+    font-family: var(--font-display); font-weight: 400; font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--cairn-ironwood);
+    border-top: 0.5px solid rgba(var(--wc-amber-rgb), 0.4);
+    padding-top: 10px;
+  }
+  .library-count strong {
+    font-weight: 500;
+    color: var(--cairn-ironwood);
+  }
+  .library-foot {
+    grid-column: 1 / -1;
+    padding-top: 18px;
+    margin-top: 4px;
+    text-align: right;
+    font-family: var(--font-display); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cairn-slate);
+  }
+  @media (max-width: 900px) {
+    .library { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .library { grid-template-columns: 1fr; }
+  }
+
+  /* Tools list — three numbered tool cards */
+  .tools {
+    margin: 32px 0 12px;
+    display: grid;
+    gap: 16px;
+  }
+  .tool {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 22px;
+    padding: 22px 26px;
+    background: var(--cairn-white);
+    border: var(--border-hair);
+    border-radius: var(--r-md);
+    align-items: start;
+  }
+  .tool-num {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: 38px; line-height: 0.9; letter-spacing: -0.02em;
+    color: var(--cairn-slate);
+    padding-top: 2px;
+  }
+  .tool-name {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 18px; letter-spacing: -0.005em;
+    color: var(--cairn-ironwood);
+    margin: 0 0 4px;
+  }
+  .tool-desc { font-size: 15px; line-height: 1.6; color: var(--cairn-umber); margin: 0; }
+
+  /* Facts rail — quick stats */
+  .facts {
+    margin: 56px 0 32px;
+    padding: 36px 44px 32px;
+    background: var(--cairn-dark-bg, #1F1B16);
+    border-radius: var(--r-xl);
+    color: var(--cairn-parchment);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  .facts-item .num {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: 44px; line-height: 1; letter-spacing: -0.02em;
+    color: var(--cairn-amber);
+    display: block; margin-bottom: 10px;
+  }
+  .facts-item .lab {
+    font-family: var(--font-display); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cairn-parchment);
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+  @media (max-width: 700px) {
+    .facts { grid-template-columns: repeat(2, 1fr); padding: 28px 28px; gap: 24px; }
+    .facts-item .num { font-size: 34px; }
+  }
+
+  /* Testimonial block */
+  .testimonial {
+    margin: 64px 0 48px;
+    padding: 48px 56px 44px;
+    background: rgba(var(--wc-slate-rgb), 0.07);
+    border-radius: var(--r-xl);
+    border-left: 4px solid var(--cairn-slate);
+    position: relative;
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+  .testimonial-portrait {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--cairn-parchment);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
+    border: 0.5px solid rgba(var(--wc-slate-rgb), 0.4);
+  }
+  .testimonial-portrait img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+  .testimonial-body { min-width: 0; }
+  .testimonial-eyebrow {
+    font-family: var(--font-display); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cairn-slate);
+    margin-bottom: 18px; display: block;
+  }
+  .testimonial-quote {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: 24px; line-height: 1.45; letter-spacing: -0.005em;
+    color: var(--cairn-ironwood);
+    margin: 0 0 28px;
+    text-wrap: balance;
+  }
+  .testimonial-quote em { color: var(--cairn-umber); font-style: italic; }
+  .testimonial-attr {
+    font-family: var(--font-display); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--cairn-ironwood);
+    display: block;
+  }
+  .testimonial-attr .role {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cairn-slate);
+    margin-top: 4px;
+  }
+  @media (max-width: 700px) {
+    .testimonial {
+      padding: 32px 28px;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      justify-items: start;
+    }
+    .testimonial-portrait { width: 96px; height: 96px; }
+    .testimonial-quote { font-size: 19px; }
+  }
+
+  /* Disclosure footer note */
+  .disclosure {
+    margin: 48px 0 0;
+    padding: 18px 22px;
+    border: 0.5px dashed rgba(var(--wc-slate-rgb), 0.5);
+    border-radius: var(--r-sm);
+    font-size: 13px; line-height: 1.6;
+    color: var(--cairn-slate);
+    font-style: italic;
+  }
+</style>
+</head>
+<body class="cairn">
+<div class="article-page">
+
+  <!-- ══ NAV ══ -->
+  <nav class="site-nav">
+    <a class="nav-logo" href="../index.html" aria-label="Cairn Advisory home">
+      <img src="../homepage-assets/cairn-mark-vibrant.png" alt="" class="nav-mark">
+      <div class="nav-wordmark">
+        <span class="w-cairn" data-wm-cairn="nav">Cairn</span>
+        <span class="w-advisory" data-wm-advisory="nav">Advisory</span>
+      </div>
+    </a>
+    <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#industries">Industries</a></li>
+      <li><a href="../index.html#services">Work</a></li>
+      <li><a href="index.html" class="active">Notes</a></li>
+    </ul>
+      <a class="nav-cta" href="../index.html#contact">Get in Touch</a>
+    </div>
+  </nav>
+
+
+  <!-- ══ BANNER + HEADER ══ -->
+  <div class="article-banner">
+    <img src="../assets/vistas/shoreline-watercolor.png" alt="" class="banner-img">
+    <div class="banner-content">
+      <div class="meta-strip">
+        <a href="index.html">Field Notes</a>
+        <span class="dot"></span>
+        <span>Case study</span>
+        <span class="dot"></span>
+        <span>6 min read</span>
+      </div>
+      <h1 class="article-title">44 handouts, four tools, <em>one solo practice.</em></h1>
+      <p class="article-deck">What AI advisory work actually looks like when it's pointed at the real work of running a small business — and the compounding return that shows up after the first week.</p>
+      <div class="byline">
+        <span class="name">Jacob Fenton</span>
+        <span>·</span>
+        <span>May 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ARTICLE ══ -->
+  <article class="article">
+
+    <div class="prose">
+
+      <p class="lede-p">A solo physician started with a folder of half-finished patient handouts. Six weeks later, her practice had a complete library, four interactive tools, and a way to make every future addition take fifteen minutes instead of an afternoon. This is what AI looks like when you point it at a real, mid-sized problem instead of a buzzword.</p>
+
+      <h2><span class="h2-num">The setup</span>Why a solo practice is a fair test for AI.</h2>
+
+      <p>Most stories about AI in healthcare are hospital-scale stories — RFPs, change-management programs, six-figure pilots. None of which are useful if you are one doctor, one office, and a handful of staff.</p>
+
+      <p>The real opportunity for AI inside a small business isn't the moonshot. It's the mile-deep backlog of things you'd already do <em>if you had the time.</em> For <strong>Dr. Carrie Leff, DO</strong> — a board-certified internist and certified menopause provider running her own primary-care practice for women in midlife — that backlog included:</p>
+
+      <ul>
+        <li>Patient handouts she'd written notes for in the margins of charts but never finished.</li>
+        <li>Calculators she'd been recreating from a paper risk chart printed in 1989.</li>
+        <li>A menopause intake she walked through verbally, in pieces, on every fourth visit.</li>
+      </ul>
+
+      <p>None of that is glamorous. All of it is the work.</p>
+
+      <h2><span class="h2-num">The library</span>Forty-four branded patient handouts.</h2>
+
+      <p>The first deliverable was a complete library — every handout self-contained, mobile-friendly, printable to letter-size, and matched to her existing brand (burgundy and rose, custom typography, embedded fonts so it works offline). Topics span the full surface area of an internal medicine practice focused on women's midlife health:</p>
+
+      <div class="library">
+        <div class="library-cell">
+          <span class="library-cat">Hormone therapy &amp; menopause</span>
+          <p class="library-blurb">Patch, cream, and oral protocols — application, schedules, overlap, and context.</p>
+          <div class="library-count"><strong>8</strong> handouts</div>
+        </div>
+        <div class="library-cell">
+          <span class="library-cat">Bone &amp; reproductive health</span>
+          <p class="library-blurb">Bone density, calcium, contraception, and menstrual care across age groups.</p>
+          <div class="library-count"><strong>8</strong> handouts</div>
+        </div>
+        <div class="library-cell">
+          <span class="library-cat">Women's &amp; sexual health</span>
+          <p class="library-blurb">Breast health, vulvar care, pelvic conditions, and curated specialist resources.</p>
+          <div class="library-count"><strong>8</strong> handouts</div>
+        </div>
+        <div class="library-cell">
+          <span class="library-cat">GI, metabolic &amp; nutrition</span>
+          <p class="library-blurb">Digestive issues, food guidance, GLP-1 protocols, and kidney-stone prevention.</p>
+          <div class="library-count"><strong>8</strong> handouts</div>
+        </div>
+        <div class="library-cell">
+          <span class="library-cat">Wellness, sleep &amp; mental health</span>
+          <p class="library-blurb">Sleep, light therapy, migraine care, and mental-health referral resources.</p>
+          <div class="library-count"><strong>6</strong> handouts</div>
+        </div>
+        <div class="library-cell">
+          <span class="library-cat">Skin, ENT &amp; everyday care</span>
+          <p class="library-blurb">Skin protocols, vertigo, leg cramps, thyroid, and at-home device guidance.</p>
+          <div class="library-count"><strong>6</strong> handouts</div>
+        </div>
+        <div class="library-foot">44 handouts · all branded · all printable · all hers</div>
+      </div>
+
+      <h2><span class="h2-num">The tools</span>Four interactive utilities, each replacing a manual workflow.</h2>
+
+      <p>Beyond the library, four web utilities — each one collapsing something she had been stitching together with paper, memory, or a third-party site:</p>
+
+      <div class="tools">
+        <div class="tool">
+          <div class="tool-num">01</div>
+          <div>
+            <h3 class="tool-name">Breast Cancer Risk Calculator</h3>
+            <p class="tool-desc">A guided, multi-step intake that produces a risk read patients can take home — and that gives her something concrete to talk through in the room. Built to her brand, no third-party login, runs entirely in the browser.</p>
+          </div>
+        </div>
+        <div class="tool">
+          <div class="tool-num">02</div>
+          <div>
+            <h3 class="tool-name">Menopause Symptom Checklist</h3>
+            <p class="tool-desc">A structured intake patients fill out before the visit. The conversation now starts at the second question, not the first — the symptom map is already in front of her when the patient sits down.</p>
+          </div>
+        </div>
+        <div class="tool">
+          <div class="tool-num">03</div>
+          <div>
+            <h3 class="tool-name">Oral Contraceptive Quick Reference</h3>
+            <p class="tool-desc">A fast-lookup sheet for in-room decision-making. Replaces a pile of pharmacology notes she'd been carrying around in her head for a decade.</p>
+          </div>
+        </div>
+        <div class="tool">
+          <div class="tool-num">04</div>
+          <div>
+            <h3 class="tool-name">In-Room Order Builder</h3>
+            <p class="tool-desc">A live, searchable catalog of supplements, medications, labs, and procedures — with codes and pricing — that builds a running patient order in real time. Category filters, a fee section, and a clean total panel the patient can see her work on. Replaces a paper charge sheet and a back-of-the-envelope calculation.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2><span class="h2-num">The compounding</span>The part that keeps paying back after week one.</h2>
+
+      <p>The library and the tools matter. The thing that <em>keeps mattering</em> is what got built underneath them — two reusable automations the practice can call by name from now on:</p>
+
+      <aside class="callout">
+        <span class="callout-eyebrow">Two reusable skills, built once</span>
+        <h3 class="callout-title">The infrastructure that makes the next forty handouts cheap.</h3>
+        <ol class="callout-list">
+          <li><strong>Handout generator.</strong> She drops in source content — notes, a draft, a journal excerpt — and a fully branded, mobile- and print-ready HTML page comes back. About fifteen minutes of work, end to end.</li>
+          <li><strong>Image rebrander.</strong> A medical diagram pulled from a textbook gets re-colored to her palette, the original publisher's logo removed, and the title re-set in her typography. Drop in. Rebrand. Done.</li>
+        </ol>
+      </aside>
+
+      <blockquote class="pull-quote">The first time a tool runs, it saves an afternoon. The fifteenth time, it saves a season. The forty-fifth time, you stop thinking of it as a tool — it's just how new handouts get made.</blockquote>
+
+      <h2><span class="h2-num">The math</span>What this would have cost the old way.</h2>
+
+      <p>Conservative numbers, freelance market rates:</p>
+
+      <ul>
+        <li>A custom-designed, written, formatted patient handout from a medical writer plus a designer: <strong>4–8 hours</strong> and a few hundred dollars apiece.</li>
+        <li>Forty-four of them: somewhere between <strong>200 and 350 hours</strong> of paid work.</li>
+        <li>Four custom web tools at typical freelance rates: another <strong>120–280 hours</strong>.</li>
+      </ul>
+
+      <p>Roughly six months of part-time work and tens of thousands of dollars. The actual project ran in <strong>weeks</strong>.</p>
+
+      <p>The fairer comparison isn't cost, though. It's <em>whether the work happens at all.</em> A solo practice rarely has the runway to commission a forty-piece patient education library. Without AI, this work simply doesn't exist. The patient walks out without the handout. The doctor explains the same thing for the seven hundredth time. Everybody loses an inch.</p>
+
+      <div class="facts">
+        <div class="facts-item"><span class="num">44</span><span class="lab">Branded patient handouts</span></div>
+        <div class="facts-item"><span class="num">4</span><span class="lab">Interactive web tools</span></div>
+        <div class="facts-item"><span class="num">2</span><span class="lab">Reusable skills built in</span></div>
+        <div class="facts-item"><span class="num">~15<span style="font-size:0.55em; letter-spacing:0;">min</span></span><span class="lab">Time to add the next handout</span></div>
+      </div>
+
+      <h2><span class="h2-num">In her words</span>What it looks like from the doctor's side.</h2>
+
+      <div class="testimonial">
+        <div class="testimonial-portrait">
+          <img src="https://images.prismic.io/monarch-leff/aafXZlxvIZEnjTS3_leff-photo.jpg?auto=format,compress&w=480&h=480&fit=facearea&facepad=3.8" alt="Dr. Carrie Leff, DO">
+        </div>
+        <div class="testimonial-body">
+          <span class="testimonial-eyebrow">Testimonial</span>
+          <p class="testimonial-quote">"I had a folder of half-finished patient handouts I'd been meaning to clean up for years. Jacob turned that folder into a full library — branded, printable, and built to keep growing — in a few weeks. He also built me tools I'd assumed were out of reach for a solo practice: a risk calculator, a menopause intake, a quick-reference for oral contraceptives, and an in-room order builder I now use on every visit. The patient experience is better. My time on every visit is better. And every new handout I make from here on takes <em>minutes.</em>"</p>
+          <span class="testimonial-attr">
+            Dr. Carrie Leff, DO
+            <span class="role">Internist · Certified menopause provider · drcarrieleff.com</span>
+          </span>
+        </div>
+      </div>
+
+      <h2><span class="h2-num">The takeaway</span>What this means if you run something small.</h2>
+
+      <p>This is what AI advisory work looks like when it's done well — not a deck, not a chatbot, not a vague "transformation." A specific list of things the business already needed, built once, branded once, and made cheap to repeat.</p>
+
+      <p>Every small business has a version of this list. Half-written documents. A calculator a competitor charges for. A workflow that lives in one person's head. A backlog of the things you'd do if a Tuesday afternoon ever opened up.</p>
+
+      <p class="close-line">The companies that win the next decade won't be the ones who experimented the most with AI. They'll be the ones who pointed it, calmly, at the work <em>they were already trying to do.</em></p>
+
+      <p class="disclosure">Published with the permission of Dr. Carrie Leff. Specific handout content, patient interactions, and clinical details are not represented here — this case study is about the build itself, not the medicine.</p>
+
+    </div>
+  </article>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="article-footer">
+    <nav class="read-next" aria-label="Read next">
+      <span class="read-next-eyebrow">Continue · Field Notes</span>
+      <a class="next-card dir-prev" style="background: linear-gradient(rgba(248,245,240,0.62), rgba(248,245,240,0.62)), url('../assets/vistas/mountain%20vista.png'); background-size: cover; background-position: center;" href="03-running-an-ai-assessment.html">
+        <span class="nc-num">Previous · 03</span>
+        <h3 class="nc-title">What it actually means to run an AI assessment.</h3>
+        <span class="nc-meta">7 min read</span>
+      </a>
+      <a class="next-card dir-prev" style="background: linear-gradient(rgba(248,245,240,0.62), rgba(248,245,240,0.62)), url('../assets/vistas/shoreline.png'); background-size: cover; background-position: center;" href="01-start-with-the-problem.html">
+        <span class="nc-num">Start at · 01</span>
+        <h3 class="nc-title">Start with the problem, not the model.</h3>
+        <span class="nc-meta">5 min read</span>
+      </a>
+    </nav>
+    <div class="site-foot">
+      <span>© 2026 Cairn Advisory · Jacob Fenton</span>
+      <a href="index.html">All field notes →</a>
+    </div>
+  </footer>
+
+</div>
+  <script src="../nav-wordmark.js"></script>
+</body>
+</html>

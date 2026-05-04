@@ -646,6 +646,61 @@
       color: var(--cairn-umber);
     }
 
+    /* Case-study mini-card inside an industry card.
+       Used on Concierge Medicine to anchor the card to a real piece of work. */
+    .industry-card--has-case { padding-bottom: 28px; }
+    .industry-case {
+      display: block;
+      margin-top: 18px;
+      padding: 16px 18px 18px;
+      border: 0.5px solid rgba(196, 168, 122, 0.35);
+      border-radius: 10px;
+      background: rgba(196, 168, 122, 0.06);
+      text-decoration: none;
+      transition: border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+    .industry-case:hover {
+      border-color: var(--cairn-amber);
+      background: rgba(196, 168, 122, 0.10);
+      transform: translateY(-1px);
+    }
+    .industry-case .ic-eyebrow {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cairn-amber);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .industry-case .ic-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--cairn-parchment);
+      display: block;
+      margin-bottom: 10px;
+      letter-spacing: -0.005em;
+      text-wrap: balance;
+    }
+    .industry-case .ic-title em {
+      color: var(--cairn-amber);
+      font-style: italic;
+    }
+    .industry-case .ic-cta {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cairn-amber);
+      display: inline-block;
+      transition: transform .2s ease;
+    }
+    .industry-case:hover .ic-cta { transform: translateX(4px); }
+
     /* ══════════════════════════════════════════
        SERVICES
     ══════════════════════════════════════════ */
@@ -1353,7 +1408,7 @@
         <div class="industry-name"><!-- editable:ind-4-name -->Healthcare<!-- /editable --></div>
         <p class="industry-desc"><!-- editable:ind-4-desc -->Health systems and digital health platforms applying AI to patient experience and clinical workflows.<!-- /editable --></p>
       </div>
-      <div class="industry-card">
+      <div class="industry-card industry-card--has-case">
         <span class="industry-num">05</span>
         <span class="industry-icon" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1374,6 +1429,11 @@
         </span>
         <div class="industry-name"><!-- editable:ind-5-name -->Concierge Medicine<!-- /editable --></div>
         <p class="industry-desc"><!-- editable:ind-5-desc -->Independent and boutique practices using AI to elevate the patient relationship and reduce operational friction.<!-- /editable --></p>
+        <a class="industry-case" href="articles/04-one-solo-practice.html">
+          <span class="ic-eyebrow">Case study</span>
+          <span class="ic-title">44 handouts, four tools, <em>one solo practice.</em></span>
+          <span class="ic-cta">Read the build →</span>
+        </a>
       </div>
     </div>
   </section>
