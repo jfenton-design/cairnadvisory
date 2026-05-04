@@ -121,21 +121,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
     }
 
     // Update body prose
-    if (!empty($_POST['body'])) {
-        $sections = preg_split('/\n{2,}/', trim($_POST['body']));
-        $body_html = '';
-        foreach ($sections as $s) {
-            $s = trim($s);
-            if ($s === '') continue;
-            if (preg_match('/^\s*<[a-z]/', $s)) {
-                $body_html .= "\n      " . $s . "\n";
-            } else {
-                $body_html .= "\n      <p>" . nl2br(htmlspecialchars($s)) . "</p>\n";
+    if (isset($_POST['body']) && trim($_POST['body']) !== '') {
+        $body_input = trim($_POST['body']);
+        // If the body is raw HTML, preserve it verbatim.
+        // Otherwise treat as plain-text paragraphs separated by blank lines.
+        if (preg_match('/^\s*</i', $body_input)) {
+            $body_html = "\n" . $body_input . "\n    ";
+        } else {
+            $sections = preg_split('/\n{2,}/', $body_input);
+            $body_html = "\n";
+            foreach ($sections as $s) {
+                $s = trim($s);
+                if ($s === '') continue;
+                $body_html .= "      <p>" . nl2br(htmlspecialchars($s)) . "</p>\n\n";
             }
+            $body_html .= "    ";
         }
-        // Greedy match so nested divs inside prose are fully replaced
-        $html = preg_replace('/<div class="prose">.*<\/div>(\s*<\/article>)/si',
-            '<div class="prose">' . $body_html . "\n    </div>$1", $html);
+        // Use callback to safely embed body without PCRE backreference issues
+        $html = preg_replace_callback(
+            '/<div class="prose">.*<\/div>(\s*<\/article>)/si',
+            function ($m) use ($body_html) {
+                return '<div class="prose">' . $body_html . '</div>' . $m[1];
+            },
+            $html
+        );
     }
 
     if (file_put_contents($filepath, $html) !== false) {
