@@ -89,14 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
 
     // Per-watercolor object-position for optimal banner crop
     $wc_positions = [
+        'bistro.png'               => 'center 50%',
         'shoreline.png'            => 'center 40%',
         'shoreline-watercolor.jpg' => 'center 40%',
         'shoreline-watercolor.png' => 'center 40%',
         'cairn-watercolor.jpg'     => 'center 50%',
         'cairn-watercolor.png'     => 'center 50%',
         'city watercolor.png'      => 'center 65%',
+        'mountain-vista.png'       => 'center 35%',
+        'river.png'                => 'center 50%',
         'river watercolor.png'     => 'center 50%',
-        'mountain vista.png'       => 'center 35%',
+        'row-houses.png'           => 'center 55%',
         'city.svg'                 => 'center 50%',
         'mountain.svg'             => 'center 35%',
         'river.svg'                => 'center 50%',
