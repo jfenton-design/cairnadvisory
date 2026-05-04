@@ -47,6 +47,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
     $month      = trim($_POST['month'] ?? '');
     $year       = trim($_POST['year'] ?? date('Y'));
     $watercolor = trim($_POST['watercolor'] ?? ($watercolors[0] ?? 'shoreline.png'));
+    $wc_positions = [
+        'shoreline.png'            => 'center 40%',
+        'shoreline-watercolor.jpg' => 'center 40%',
+        'shoreline-watercolor.png' => 'center 40%',
+        'cairn-watercolor.jpg'     => 'center 50%',
+        'cairn-watercolor.png'     => 'center 50%',
+        'city watercolor.png'      => 'center 65%',
+        'river watercolor.png'     => 'center 50%',
+        'mountain vista.png'       => 'center 35%',
+        'city.svg'                 => 'center 50%',
+        'mountain.svg'             => 'center 35%',
+        'river.svg'                => 'center 50%',
+        'row-houses.svg'           => 'center 55%',
+        'restaurant.svg'           => 'center 50%',
+    ];
+    $wc_pos = $wc_positions[$watercolor] ?? 'center 50%';
     $body       = trim($_POST['body'] ?? '');
     $tone       = $_POST['tone'] ?? '';
 
@@ -114,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
 
   <!-- ══ BANNER + HEADER ══ -->
   <div class="article-banner">
-    <img src="../assets/vistas/{$watercolor}" alt="" class="banner-img">
+    <img src="../assets/vistas/{$watercolor}" alt="" class="banner-img" style="object-position: {$wc_pos};">
     <div class="banner-content">
       <div class="meta-strip">
         <a href="index.html">Field Notes</a>
