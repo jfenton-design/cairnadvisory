@@ -975,7 +975,7 @@
       width: 100%;
       padding: 14px 16px;
       background: transparent;
-      border: 0.5px solid var(--color-rule-dark);
+      border: 0.5px solid rgba(196,168,122,0.5);
       border-radius: var(--r-sm);
       color: var(--cairn-parchment);
       font-family: var(--font-display);
@@ -998,7 +998,7 @@
     }
     .contact-form input:hover,
     .contact-form textarea:hover {
-      border-color: rgba(196,168,122,0.5);
+      border-color: var(--cairn-amber);
     }
     .contact-form input:focus,
     .contact-form textarea:focus {
@@ -1006,9 +1006,9 @@
       border-color: var(--cairn-amber);
       background: rgba(196,168,122,0.04);
     }
-    .contact-form input:invalid:not(:placeholder-shown),
-    .contact-form textarea:invalid:not(:placeholder-shown) {
-      border-color: rgba(196,168,122,0.35);
+    .contact-form input:invalid,
+    .contact-form textarea:invalid {
+      box-shadow: none;
     }
     .contact-submit {
       align-self: flex-start;
@@ -1348,7 +1348,7 @@
         <span class="hero-eyebrow-text" style="color:#2C1E10; font-size:12px"><!-- editable:hero-eyebrow -->AI Advisory for business<!-- /editable --></span>
       </div>
       <h1 class="hero-headline"><!-- editable:hero-headline -->Find your <em style="color:#8B6A48;">path forward</em>.<!-- /editable --></h1>
-      <p class="hero-sub" style="color:#2C1E10;"><!-- editable:hero-sub -->I help new and established businesses find their footing with AI. No jargon. No hype. Just results.<!-- /editable --></p>
+      <p class="hero-sub" style="color:#2C1E10;"><!-- editable:hero-sub -->I help businesses improve the customer experience through smarter systems and automation.<!-- /editable --></p>
       <div class="hero-actions">
         <a href="#contact" class="btn-hero-primary">Start a Conversation</a>
       </div>
@@ -1385,7 +1385,7 @@
         </div>
         <div class="about-bio"><!-- editable:about-bio --><p>I'm a customer-focused growth executive with 20+ years of experience leading marketing, customer experience, and product functions for global digital and marketplace brands. I specialize in helping companies solve problems by building the teams, systems, and processes that increase loyalty, trust, and lifetime value.</p>
           <p>My leadership spans startup through global scale, from Amazon's early connected-device ecosystem to StockX's worldwide dual-sided platform.</p><!-- /editable --></div>
-        <div class="credentials" style="font-size:12px">
+        <div class="credentials" style="font-size:13px">
           <span class="credential-item"><!-- editable:cred-1 -->Booth School of Business, University Chicago (MBA)<!-- /editable --></span>
           <div class="credential-dot"></div>
           <span class="credential-item"><!-- editable:cred-2 -->Ross School of Business, University of Michigan (BBA)<!-- /editable --></span>
@@ -1551,19 +1551,19 @@
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-title"><!-- editable:svc-1-title -->AI Readiness Assessment<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-1-text -->A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify your highest-leverage opportunities and the gaps in the way. Honest, specific, actionable.<!-- /editable --></p>
+        <p class="service-text"><!-- editable:svc-1-text -->A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify the highest-leverage opportunities and provide specific, actionable feedback.<!-- /editable --></p>
         <div class="service-rule"></div>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
         <div class="service-title"><!-- editable:svc-2-title -->Implementation &amp; Integration<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-2-text -->We work inside your operations to build AI into the systems your team already uses. No big-bang transformations — steady progress that sticks because we built it with your people, not for them.<!-- /editable --></p>
+        <p class="service-text"><!-- editable:svc-2-text -->We work inside your operations to build AI into the systems your team already uses. No big-bang transformations — steady progress that sticks because we built it with your people.<!-- /editable --></p>
         <div class="service-rule"></div>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
         <div class="service-title"><!-- editable:svc-3-title -->Ongoing Advisory<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-3-text -->AI moves fast. Your business does too. I stay alongside you as a trusted resource — helping navigate new tools, prevent expensive mistakes, and build internal capability that doesn't leave when I do.<!-- /editable --></p>
+        <p class="service-text"><!-- editable:svc-3-text -->AI moves fast. Your business does too. I stay alongside you as a trusted resource — helping navigate new tools, prevent expensive mistakes, and build internal capabilities.<!-- /editable --></p>
         <div class="service-rule"></div>
       </div>
     </div>
