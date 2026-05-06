@@ -866,7 +866,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: center;
+      align-items: start;
       padding: 120px 72px;
     }
     .contact .sec-tag { color: var(--cairn-parchment); }
@@ -887,16 +887,18 @@
       color: var(--cairn-parchment);
     }
 
-    .contact-right {
+    .contact-channels {
       display: flex;
       flex-direction: column;
       gap: 14px;
+      margin-top: 40px;
+      max-width: 480px;
     }
     .contact-link {
       display: flex;
       align-items: center;
       gap: 24px;
-      padding: 28px 32px;
+      padding: 20px 32px;
       border: 0.5px solid var(--color-rule-dark);
       border-radius: var(--r-lg);
       text-decoration: none;
@@ -937,6 +939,103 @@
       font-family: var(--font-display);
       font-weight: var(--fw-light);
     }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .contact-form .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .contact-form label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: var(--fw-medium);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cairn-umber);
+    }
+    .contact-form .form-optional {
+      font-weight: var(--fw-light);
+      letter-spacing: 0.08em;
+      text-transform: none;
+      opacity: 0.7;
+      margin-left: 4px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: transparent;
+      border: 0.5px solid rgba(196,168,122,0.5);
+      border-radius: var(--r-sm);
+      color: var(--cairn-parchment);
+      font-family: var(--font-display);
+      font-weight: var(--fw-light);
+      font-size: 15px;
+      line-height: 1.5;
+      transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: var(--font-body);
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--cairn-umber);
+      opacity: 0.6;
+    }
+    .contact-form input:hover,
+    .contact-form textarea:hover {
+      border-color: var(--cairn-amber);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--cairn-amber);
+      background: rgba(196,168,122,0.04);
+    }
+    .contact-form input:invalid,
+    .contact-form textarea:invalid {
+      box-shadow: none;
+    }
+    .contact-submit {
+      align-self: flex-start;
+      margin-top: 8px;
+      padding: 16px 36px;
+      background: var(--cairn-amber);
+      color: var(--cairn-dark-bg);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+    }
+    .contact-submit:hover { background: var(--cairn-parchment); }
+    .contact-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-note {
+      margin-top: 4px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--cairn-parchment);
+    }
+    .form-note.is-error { color: #d98a6e; }
 
     /* ══════════════════════════════════════════
        FOOTER
@@ -1048,6 +1147,7 @@
       .about-layout { grid-template-columns: 1fr; gap: 60px; }
       .approach-layout { grid-template-columns: 1fr; gap: 60px; }
       .contact { grid-template-columns: 1fr; gap: 56px; }
+      .contact-form .form-row { grid-template-columns: 1fr; gap: 20px; }
       .hero-stamp { display: none; }
     }
 
@@ -1248,7 +1348,7 @@
         <span class="hero-eyebrow-text" style="color:#2C1E10; font-size:12px"><!-- editable:hero-eyebrow -->AI Advisory for business<!-- /editable --></span>
       </div>
       <h1 class="hero-headline"><!-- editable:hero-headline -->Find your <em style="color:#8B6A48;">path forward</em>.<!-- /editable --></h1>
-      <p class="hero-sub" style="color:#2C1E10;"><!-- editable:hero-sub -->I help new and established businesses find their footing with AI. No jargon. No hype. Just results.<!-- /editable --></p>
+      <p class="hero-sub" style="color:#2C1E10;"><!-- editable:hero-sub -->I help businesses improve the customer experience through smarter systems and automation.<!-- /editable --></p>
       <div class="hero-actions">
         <a href="#contact" class="btn-hero-primary">Start a Conversation</a>
       </div>
@@ -1263,7 +1363,7 @@
   <!-- ══ STATEMENT ══ -->
   <section class="statement">
     <div class="statement-inner">
-      <p class="statement-text"><!-- editable:statement -->We bring over 20 years of real operating experience to the table. We've run the business, owned the numbers, and answered for results.<br><br><em>Cairn is built by operators, for operators.</em><!-- /editable --></p>
+      <p class="statement-text"><!-- editable:statement -->I bring over 20 years of real operating experience to the table. I've run the business, owned the numbers, and answered for results.<br><br><em>Cairn is built by operators, for operators.</em><!-- /editable --></p>
     </div>
   </section>
 
@@ -1283,9 +1383,9 @@
           </div>
           <p class="about-pull-quote"><!-- editable:about-quote -->I've built my career inside some of the most demanding digital businesses in the world.<!-- /editable --></p>
         </div>
-        <div class="about-bio"><!-- editable:about-bio --><p>I'm a customer-focused growth executive with 20+ years of experience leading marketing, customer experience, and product functions for global digital and marketplace brands. I specialize in helping companies solve problems by building the teams, systems, and processes that increase loyalty, trust, and lifetime value.</p>
-          <p>My leadership spans startup through global scale, from Amazon's early connected-device ecosystem to StockX's worldwide dual-sided platform.</p><!-- /editable --></div>
-        <div class="credentials" style="font-size:12px">
+        <div class="about-bio"><!-- editable:about-bio --><p>I bring 20+ years of experience leading marketing, customer experience, and product functions for global brands. I specialize in helping companies solve problems by building the systems and processes that increase loyalty, trust, and lifetime value. </p>
+<p>My leadership spans startup through global scale, from Amazon's early connected-device ecosystem to StockX's worldwide dual-sided platform.</p><!-- /editable --></div>
+        <div class="credentials" style="font-size:13px">
           <span class="credential-item"><!-- editable:cred-1 -->Booth School of Business, University Chicago (MBA)<!-- /editable --></span>
           <div class="credential-dot"></div>
           <span class="credential-item"><!-- editable:cred-2 -->Ross School of Business, University of Michigan (BBA)<!-- /editable --></span>
@@ -1356,7 +1456,7 @@
   <!-- ══ INDUSTRIES — DARK ══ -->
   <section class="industries" id="industries">
     <span class="sec-tag">Industries</span>
-    <h2 class="sec-title"><!-- editable:industries-title -->Where I work, and <em>where I don't.</em><!-- /editable --></h2>
+    <h2 class="sec-title"><!-- editable:industries-title -->Where I focus...<!-- /editable --></h2>
     <div class="industries-grid">
       <div class="industry-card">
         <span class="industry-num">01</span>
@@ -1451,19 +1551,19 @@
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-title"><!-- editable:svc-1-title -->AI Readiness Assessment<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-1-text -->A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify your highest-leverage opportunities and the gaps in the way. Honest, specific, actionable.<!-- /editable --></p>
+        <p class="service-text"><!-- editable:svc-1-text -->A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify the highest-leverage opportunities and provide specific, actionable feedback.<!-- /editable --></p>
         <div class="service-rule"></div>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
         <div class="service-title"><!-- editable:svc-2-title -->Implementation &amp; Integration<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-2-text -->We work inside your operations to build AI into the systems your team already uses. No big-bang transformations — steady progress that sticks because we built it with your people, not for them.<!-- /editable --></p>
+        <p class="service-text"><!-- editable:svc-2-text -->We work inside your operations to build AI into the systems your team already uses. No big-bang transformations — steady progress that sticks because we built it with your people.<!-- /editable --></p>
         <div class="service-rule"></div>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
         <div class="service-title"><!-- editable:svc-3-title -->Ongoing Advisory<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-3-text -->AI moves fast. Your business does too. I stay alongside you as a trusted resource — helping navigate new tools, prevent expensive mistakes, and build internal capability that doesn't leave when I do.<!-- /editable --></p>
+        <p class="service-text"><!-- editable:svc-3-text -->AI moves fast. Your business does too. I stay alongside you as a trusted resource — helping navigate new tools, prevent expensive mistakes, and build internal capabilities.<!-- /editable --></p>
         <div class="service-rule"></div>
       </div>
     </div>
@@ -1518,22 +1618,58 @@
       <span class="sec-tag">Get in Touch</span>
       <h2 class="sec-title"><!-- editable:contact-title -->Let's find<br><em>your footing.</em><!-- /editable --></h2>
       <p class="contact-text"><!-- editable:contact-text -->It's never been a better time to build. Let's talk.<!-- /editable --></p>
+      <div class="contact-channels">
+        <a href="mailto:jacob@cairnadvisory.co" class="contact-link">
+          <span class="contact-link-icon">@</span>
+          <div>
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">jacob@cairnadvisory.co</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/jacobfenton" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">in</span>
+          <div>
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">linkedin.com/in/jacobfenton</span>
+          </div>
+        </a>
+      </div>
     </div>
     <div class="contact-right">
-      <a href="mailto:jacob@cairnadvisory.co" class="contact-link" style="padding: 20px 32px">
-        <span class="contact-link-icon">@</span>
-        <div>
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">jacob@cairnadvisory.co</span>
+      <form class="contact-form" action="https://formspree.io/f/mojrdjbd" method="POST">
+        <input type="hidden" name="_subject" value="New Cairn Advisory inquiry">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-first-name">First name</label>
+            <input id="cf-first-name" name="first_name" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-last-name">Last name</label>
+            <input id="cf-last-name" name="last_name" type="text" autocomplete="family-name" required>
+          </div>
         </div>
-      </a>
-      <a href="https://linkedin.com/in/jacobfenton" target="_blank" rel="noopener" class="contact-link" style="padding: 20px 32px">
-        <span class="contact-link-icon">in</span>
-        <div>
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">linkedin.com/in/jacobfenton</span>
+        <div class="form-field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required>
         </div>
-      </a>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-company">Company</label>
+            <input id="cf-company" name="company" type="text" autocomplete="organization" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-website">Company website <span class="form-optional">(optional)</span></label>
+            <input id="cf-website" name="website" type="url" autocomplete="url" placeholder="https://">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="cf-goals">Tell us about your goals for AI</label>
+          <textarea id="cf-goals" name="goals" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="contact-submit">Send Message</button>
+        <p class="form-note" hidden></p>
+      </form>
     </div>
   </section>
 
@@ -1614,6 +1750,53 @@
       if (window.scrollY > 60) nav.classList.add('scrolled');
       else nav.classList.remove('scrolled');
     });
+
+    /* ── Contact form: AJAX submit (Formspree-compatible) ── */
+    (function() {
+      var form = document.querySelector('.contact-form');
+      if (!form) return;
+      var note = form.querySelector('.form-note');
+      var btn = form.querySelector('.contact-submit');
+      form.addEventListener('submit', function(e) {
+        if (!form.action || form.action.indexOf('YOUR_FORM_ID') !== -1) {
+          e.preventDefault();
+          showNote('Form endpoint not configured yet.', true);
+          return;
+        }
+        if (!form.checkValidity()) return;
+        e.preventDefault();
+        var data = new FormData(form);
+        btn.disabled = true;
+        var originalLabel = btn.textContent;
+        btn.textContent = 'Sending…';
+        fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(function(res) {
+          if (res.ok) {
+            form.reset();
+            showNote('Thanks — we\'ll be in touch shortly.', false);
+          } else {
+            res.json().then(function(d) {
+              showNote((d && d.error) || 'Something went wrong. Try again.', true);
+            }).catch(function() {
+              showNote('Something went wrong. Try again.', true);
+            });
+          }
+        }).catch(function() {
+          showNote('Network error. Try again.', true);
+        }).finally(function() {
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+        });
+      });
+      function showNote(msg, isError) {
+        note.textContent = msg;
+        note.classList.toggle('is-error', !!isError);
+        note.hidden = false;
+      }
+    })();
 
     /* ── Mobile bottom nav: highlight active section ── */
     if (window.IntersectionObserver) {
