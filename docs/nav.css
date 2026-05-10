@@ -16,6 +16,12 @@
   display: block;
   flex-shrink: 0;
 }
+.nav-lockup {
+  height: 48px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
 .nav-wordmark {
   display: inline-flex;
   flex-direction: column;
@@ -89,6 +95,7 @@
 @media (max-width: 720px) {
   .nav-logo { gap: 14px; }
   .nav-mark { width: 48px; }
+  .nav-lockup { height: 36px; }
   .nav-right { display: none; }
   .nav-links { display: none; }
 }

@@ -100,13 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
 
   <!-- ══ NAV ══ -->
   <nav class="site-nav">
-    <a class="nav-logo" href="../index.html" aria-label="Cairn Advisory home">
-      <img src="../homepage-assets/cairn-mark-master.png" alt="" class="nav-mark">
-      <div class="nav-wordmark">
-        <span class="w-cairn" data-wm-cairn="nav">Cairn</span>
-        <span class="w-advisory" data-wm-advisory="nav">Advisory</span>
-      </div>
-    </a>
+    <a class="nav-logo" href="../index.html" aria-label="Cairn Advisory home"><img src="../homepage-assets/cairn-lockup-horizontal-dark.png" alt="Cairn Advisory" class="nav-lockup"></a>
     <div class="nav-right">
     <ul class="nav-links">
       <li><a href="../index.html#about">About</a></li>
@@ -154,7 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
   </footer>
 
 </div>
-  <script src="../nav-wordmark.js"></script>
 </body>
 </html>
 HTML;
