@@ -247,7 +247,7 @@ $body_raw = isset($bm[1]) ? trim($bm[1]) : '';
 <body>
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <img src="../homepage-assets/cairn-mark-cutout.png" alt="" class="sb-mark">
+      <img src="../homepage-assets/cairn-mark-master.png" alt="" class="sb-mark">
       <div>
         <div class="sb-cairn">Cairn</div>
         <div class="sb-advisory">Content Studio</div>

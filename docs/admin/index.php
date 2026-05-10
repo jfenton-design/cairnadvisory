@@ -29,7 +29,7 @@ if (!empty($_SESSION[SESSION_KEY])) {
 <body class="login-page">
   <div class="login-wrap">
     <div class="login-logo">
-      <img src="../homepage-assets/cairn-mark-vibrant.png" alt="Cairn" class="login-mark">
+      <img src="../homepage-assets/cairn-mark-master.png" alt="Cairn" class="login-mark">
       <div class="login-wordmark">
         <span class="lw-cairn">Cairn</span>
         <span class="lw-advisory">Advisory</span>
