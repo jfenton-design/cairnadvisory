@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
   <!-- ══ NAV ══ -->
   <nav class="site-nav">
     <a class="nav-logo" href="../index.html" aria-label="Cairn Advisory home">
-      <img src="../homepage-assets/cairn-mark-vibrant.png" alt="" class="nav-mark">
+      <img src="../homepage-assets/cairn-mark-master.png" alt="" class="nav-mark">
       <div class="nav-wordmark">
         <span class="w-cairn" data-wm-cairn="nav">Cairn</span>
         <span class="w-advisory" data-wm-advisory="nav">Advisory</span>
@@ -204,7 +204,7 @@ HTML;
 <body>
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <img src="../homepage-assets/cairn-mark-cutout.png" alt="" class="sb-mark">
+      <img src="../homepage-assets/cairn-mark-master.png" alt="" class="sb-mark">
       <div>
         <div class="sb-cairn">Cairn</div>
         <div class="sb-advisory">Content Studio</div>
