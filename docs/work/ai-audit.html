@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Audit — Cairn Advisory</title>
+<meta name="description" content="A fixed-fee, two-week audit that produces a clear picture of where AI belongs in your business — and where it doesn't.">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../nav.css?v=4">
+<link rel="stylesheet" href="../articles/article.css?v=4">
+<style>
+  /* ── Page-specific styles ───────────────────────────────────────── */
+
+  body.cairn { background: var(--cairn-linen); }
+
+  .service-page { min-height: 100vh; }
+
+  /* Banner adopts the article-banner pattern but with a service crest */
+  .service-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--cairn-linen);
+  }
+  .service-banner .banner-img {
+    display: block;
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    object-position: center 55%;
+  }
+  .service-banner .banner-content {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 48px 12px;
+  }
+  .service-banner .meta-strip { margin-bottom: 28px; }
+  .service-title {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(36px, 5.4vw, 60px);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0 0 22px;
+    text-wrap: balance;
+    max-width: 760px;
+  }
+  .service-title em { font-style: italic; color: var(--cairn-umber); }
+  .service-deck {
+    font-size: 18px; line-height: 1.7;
+    color: var(--cairn-umber);
+    font-weight: 300;
+    max-width: 640px;
+    margin: 0;
+  }
+
+  /* ── Main container ─────────────────────────────────────────────── */
+  .service-body {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 48px 96px;
+  }
+
+  /* ── Engagement fact strip ─────────────────────────────────────── */
+  .fact-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: var(--border-hair);
+    border-bottom: var(--border-hair);
+    background: var(--cairn-white);
+    margin: 0 0 64px;
+  }
+  .fact-item {
+    padding: 22px 24px;
+    border-right: 0.5px solid var(--color-rule);
+  }
+  .fact-item:last-child { border-right: none; }
+  .fact-label {
+    font-family: var(--font-display);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cairn-amber);
+    display: block; margin-bottom: 8px;
+  }
+  .fact-value {
+    font-family: var(--font-display);
+    font-size: 17px; font-weight: 400;
+    color: var(--cairn-ironwood);
+    line-height: 1.25;
+  }
+
+  /* ── Section heading (shared) ──────────────────────────────────── */
+  .sec-eyebrow {
+    font-family: var(--font-display); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cairn-amber);
+    display: block; margin-bottom: 14px;
+  }
+  .sec-h {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(26px, 3.4vw, 34px);
+    line-height: 1.15; letter-spacing: -0.01em;
+    color: var(--cairn-ironwood);
+    margin: 0 0 32px;
+    text-wrap: balance;
+    max-width: 700px;
+  }
+  .sec-h em { font-style: italic; color: var(--cairn-umber); }
+
+  /* ── How it works — phase grid ─────────────────────────────────── */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 72px;
+  }
+  .phase-card {
+    background: var(--cairn-white);
+    border: 0.5px solid var(--color-rule);
+    border-radius: var(--r-xl);
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .phase-num {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cairn-amber);
+    margin-bottom: 18px;
+  }
+  .phase-title {
+    font-family: var(--font-display);
+    font-size: 21px; font-weight: 400;
+    color: var(--cairn-ironwood);
+    line-height: 1.25; letter-spacing: -0.005em;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+  .phase-list {
+    margin: 0; padding: 0;
+    list-style: none;
+    border-top: 0.5px solid rgba(var(--wc-amber-rgb), 0.35);
+  }
+  .phase-list li {
+    position: relative;
+    padding: 14px 0 14px 20px;
+    border-bottom: 0.5px solid rgba(var(--wc-amber-rgb), 0.35);
+    font-family: var(--font-body);
+    font-size: 14.5px; line-height: 1.6;
+    color: var(--cairn-ironwood);
+    font-weight: 400;
+  }
+  .phase-list li:last-child { border-bottom: none; }
+  .phase-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.85em;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cairn-amber);
+    transform: translateY(-50%);
+  }
+
+  /* ── Timeline block ────────────────────────────────────────────── */
+  .timeline-block {
+    background: var(--cairn-white);
+    border: 0.5px solid var(--color-rule);
+    border-radius: var(--r-xl);
+    padding: 40px 44px;
+    margin-bottom: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .timeline-block::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--wc-wash-slate);
+    opacity: 0.5; pointer-events: none;
+    border-radius: inherit;
+  }
+  .timeline-block > * { position: relative; }
+  .timeline-block .sec-h { margin-bottom: 18px; }
+  .timeline-block p {
+    font-size: 16px; line-height: 1.75;
+    color: var(--cairn-ironwood);
+    margin: 0 0 14px;
+    max-width: 620px;
+  }
+  .timeline-block p em {
+    font-style: normal;
+    color: var(--cairn-ironwood);
+    font-weight: 500;
+  }
+  .timeline-block p.tl-meta {
+    font-family: var(--font-display);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cairn-umber);
+    margin-top: 22px;
+  }
+
+  /* ── The Point — dark callout ──────────────────────────────────── */
+  .point {
+    background: var(--cairn-dark-bg);
+    border-radius: var(--r-xl);
+    padding: 44px 48px;
+    margin-bottom: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .point::after {
+    content: "";
+    position: absolute; top: -80px; right: -80px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,168,122,0.18), rgba(30,28,23,0) 62%);
+    pointer-events: none;
+  }
+  .point .sec-eyebrow {
+    color: var(--cairn-amber);
+  }
+  .point-text {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 300;
+    line-height: 1.4; letter-spacing: -0.005em;
+    color: var(--cairn-parchment);
+    max-width: 720px;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .point-text em {
+    font-style: italic;
+    color: var(--cairn-amber);
+  }
+
+  /* ── Bottom CTA ────────────────────────────────────────────────── */
+  .cta-band {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 56px;
+    border-top: var(--border-hair);
+    flex-wrap: wrap;
+  }
+  .cta-text {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 300;
+    line-height: 1.35; letter-spacing: -0.01em;
+    color: var(--cairn-ironwood);
+    margin: 0;
+    text-wrap: balance;
+    max-width: 480px;
+  }
+  .cta-text em { font-style: italic; color: var(--cairn-umber); }
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--cairn-ironwood);
+    color: var(--cairn-linen);
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease);
+    white-space: nowrap;
+  }
+  .cta-btn:hover { background: var(--cairn-obsidian); }
+
+  /* ── Footer ────────────────────────────────────────────────────── */
+  .site-foot-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+  .site-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 36px;
+    border-top: var(--border-hair);
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cairn-umber);
+  }
+  .site-foot a { color: var(--cairn-umber); text-decoration: none; }
+  .site-foot a:hover { color: var(--cairn-ironwood); }
+
+  /* ── Mobile ────────────────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .service-banner .banner-img { height: 240px; }
+    .service-banner .banner-content { padding: 32px 22px 8px; }
+    .service-body { padding: 32px 22px 64px; }
+
+    .service-title { font-size: clamp(28px, 7vw, 38px); }
+    .service-deck { font-size: 16.5px; }
+
+    .fact-strip {
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 48px;
+    }
+    .fact-item {
+      padding: 18px 18px;
+      border-bottom: 0.5px solid var(--color-rule);
+    }
+    .fact-item:nth-child(2) { border-right: none; }
+    .fact-item:nth-child(3), .fact-item:nth-child(4) { border-bottom: none; }
+    .fact-value { font-size: 16px; }
+
+    .phases {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 56px;
+    }
+    .phase-card { padding: 28px 24px 24px; }
+
+    .timeline-block { padding: 28px 24px; margin-bottom: 48px; }
+    .point { padding: 32px 26px; margin-bottom: 48px; }
+
+    .cta-band {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding-top: 40px;
+    }
+    .cta-text { font-size: 20px; }
+
+    .site-foot-wrap { padding: 0 22px 56px; }
+    .site-foot {
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .fact-strip { grid-template-columns: 1fr; }
+    .fact-item {
+      border-right: none;
+      border-bottom: 0.5px solid var(--color-rule);
+    }
+    .fact-item:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body class="cairn">
+<div class="service-page">
+
+  <!-- ══ NAV ══ -->
+  <nav class="site-nav">
+    <a class="nav-logo" href="../index.html" aria-label="Cairn Advisory home">
+      <img src="../homepage-assets/cairn-lockup-horizontal-dark.png" alt="Cairn Advisory" class="nav-lockup">
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#industries">Industries</a></li>
+        <li><a href="../index.html#services" class="active">Work</a></li>
+        <li><a href="../articles/index.html">Notes</a></li>
+      </ul>
+      <a class="nav-cta" href="../index.html#contact">Get in Touch</a>
+    </div>
+  </nav>
+
+  <!-- ══ BANNER + HEADER ══ -->
+  <header class="service-banner">
+    <img src="../assets/vistas/mountain-vista.png" alt="" class="banner-img">
+    <div class="banner-content">
+      <div class="meta-strip">
+        <a href="../index.html#services">Work</a>
+        <span class="dot"></span>
+        <span>Service overview</span>
+      </div>
+      <h1 class="service-title">The AI Audit — <em>a clear picture of where AI belongs in your business.</em></h1>
+      <p class="service-deck">Most businesses don't lack ideas for AI. They lack clarity on what to prioritize, what to ignore, and what will actually work in their environment. The AI Audit cuts through the noise and produces decisions — not a slide deck of possibilities.</p>
+    </div>
+  </header>
+
+  <!-- ══ BODY ══ -->
+  <main class="service-body">
+
+    <!-- Engagement fact strip -->
+    <div class="fact-strip">
+      <div class="fact-item">
+        <span class="fact-label">Engagement</span>
+        <span class="fact-value">Fixed-fee audit</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Timeline</span>
+        <span class="fact-value">1–2 weeks</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Format</span>
+        <span class="fact-value">Remote or on-site</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Investment</span>
+        <span class="fact-value">$2,500 flat</span>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <span class="sec-eyebrow">How it works</span>
+    <h2 class="sec-h">Three steps. <em>One useful answer.</em></h2>
+
+    <div class="phases">
+      <div class="phase-card">
+        <span class="phase-num">A · Discovery</span>
+        <h3 class="phase-title">Understanding how your business actually operates.</h3>
+        <ul class="phase-list">
+          <li>One leadership interview with the primary stakeholder (up to 60 min)</li>
+          <li>Two to three team or operator interviews (~30 min each)</li>
+          <li>Review of relevant documents, systems, and tools you provide</li>
+          <li>Observation of key workflows, as agreed upon</li>
+        </ul>
+      </div>
+
+      <div class="phase-card">
+        <span class="phase-num">B · Analysis</span>
+        <h3 class="phase-title">Where AI fits — and where it doesn't.</h3>
+        <ul class="phase-list">
+          <li>Identification of gaps between current state and AI-ready operations</li>
+          <li>Mapping of automation and AI opportunities across the business</li>
+          <li>Assessment of overall AI readiness</li>
+        </ul>
+      </div>
+
+      <div class="phase-card">
+        <span class="phase-num">C · Deliverables</span>
+        <h3 class="phase-title">A written AI Audit &amp; Roadmap report.</h3>
+        <ul class="phase-list">
+          <li>A summary of the current state of operations</li>
+          <li>3–5 prioritized opportunities, ranked by impact and feasibility</li>
+          <li>High-level recommendations with rough cost and effort estimates</li>
+          <li>Suggested next steps and a proposed timeline</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Timeline & delivery -->
+    <section class="timeline-block">
+      <span class="sec-eyebrow">Timeline &amp; delivery</span>
+      <h2 class="sec-h">Delivered within <em>1–2 weeks</em> of signed kickoff.</h2>
+      <p>The final deliverable is a written AI Audit &amp; Roadmap report, accompanied by a 60-minute walkthrough meeting to review findings and answer questions.</p>
+      <p class="tl-meta">Implementation &amp; execution support available as a separate engagement.</p>
+    </section>
+
+    <!-- The Point -->
+    <section class="point">
+      <span class="sec-eyebrow">The point</span>
+      <p class="point-text">The AI Audit isn't about "getting ready for AI." It's about making disciplined decisions on where it belongs in your business — and where it doesn't. <em>The real risk right now isn't missing AI. It's wasting time on the wrong version of it.</em></p>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <p class="cta-text">Ready to find out where AI <em>actually</em> belongs in your business?</p>
+      <a href="../index.html#contact" class="cta-btn">Start the conversation</a>
+    </div>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-foot-wrap">
+    <div class="site-foot">
+      <span>© 2026 Cairn Advisory · Jacob Fenton</span>
+      <a href="../index.html#services">All work →</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  /* Subtle nav shadow on scroll, matching the homepage behavior */
+  (function () {
+    var nav = document.querySelector('nav.site-nav');
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 60) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  })();
+</script>
+
+</body>
+</html>
