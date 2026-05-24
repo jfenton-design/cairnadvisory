@@ -26,7 +26,7 @@ foreach ($files as $file) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cairn CMS — Field Notes</title>
+<title>Cairn CMS — Trail Notes</title>
 <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -40,7 +40,7 @@ foreach ($files as $file) {
     </div>
     <nav class="sidebar-nav">
       <a href="dashboard.php" class="sn-item">Dashboard</a>
-      <a href="articles.php" class="sn-item active">Field Notes</a>
+      <a href="articles.php" class="sn-item active">Trail Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight">+ New Article</a>
       <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item">Homepage Copy</a>
@@ -50,7 +50,7 @@ foreach ($files as $file) {
 
   <main class="main-content">
     <header class="page-header">
-      <h1 class="page-title">Field Notes</h1>
+      <h1 class="page-title">Trail Notes</h1>
       <a href="new-article.php" class="btn-primary">+ New Article</a>
     </header>
 

@@ -6,7 +6,7 @@
 <title>The AI Audit — Cairn Advisory</title>
 <meta name="description" content="A fixed-fee, two-week audit that produces a clear picture of where AI belongs in your business — and where it doesn't.">
 <link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="../nav.css?v=4">
+<link rel="stylesheet" href="../nav.css?v=5">
 <link rel="stylesheet" href="../articles/article.css?v=4">
 <style>
   /* ── Page-specific styles ───────────────────────────────────────── */
@@ -72,7 +72,7 @@
   }
   .fact-item {
     padding: 22px 24px;
-    border-right: 0.5px solid var(--color-rule);
+    border-right: 1px solid var(--color-rule);
   }
   .fact-item:last-child { border-right: none; }
   .fact-label {
@@ -304,12 +304,11 @@
       grid-template-columns: 1fr 1fr;
       margin-bottom: 48px;
     }
-    .fact-item {
-      padding: 18px 18px;
-      border-bottom: 0.5px solid var(--color-rule);
-    }
-    .fact-item:nth-child(2) { border-right: none; }
-    .fact-item:nth-child(3), .fact-item:nth-child(4) { border-bottom: none; }
+    .fact-item { padding: 18px 18px; }
+    /* 2-col: every even item ends a row, drop its right border */
+    .fact-item:nth-child(2n) { border-right: none; }
+    /* horizontal divider between rows (top border on items 3+) */
+    .fact-item:nth-child(n+3) { border-top: 1px solid var(--color-rule); }
     .fact-value { font-size: 16px; }
 
     .phases {
@@ -340,11 +339,9 @@
 
   @media (max-width: 420px) {
     .fact-strip { grid-template-columns: 1fr; }
-    .fact-item {
-      border-right: none;
-      border-bottom: 0.5px solid var(--color-rule);
-    }
-    .fact-item:last-child { border-bottom: none; }
+    .fact-item { border-right: none; }
+    /* 1-col: horizontal divider between every consecutive pair */
+    .fact-item:nth-child(n+2) { border-top: 1px solid var(--color-rule); }
   }
 </style>
 </head>
@@ -366,11 +363,28 @@
       </ul>
       <a class="nav-cta" href="../index.html#contact">Get in Touch</a>
     </div>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+      <ul class="nav-drawer-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#industries">Industries</a></li>
+      <li><a href="../index.html#services">Work</a></li>
+      <li><a href="../articles/index.html">Trail Notes</a></li>
+    </ul>
+    <div class="nav-drawer-cta-wrap">
+      <a href="../index.html#contact" class="nav-drawer-cta">Get in Touch</a>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- ══ BANNER + HEADER ══ -->
   <header class="service-banner">
-    <img src="../assets/vistas/mountain-vista.png" alt="" class="banner-img">
+    <img src="../assets/vistas/forest.png" alt="" class="banner-img">
     <div class="banner-content">
       <div class="meta-strip">
         <a href="../index.html#services">Work</a>
@@ -487,5 +501,30 @@
   })();
 </script>
 
+
+  <script>
+    /* ── Hamburger menu ── */
+    (function() {
+      var btn = document.querySelector('.nav-hamburger');
+      var drawer = document.getElementById('navDrawer');
+      var overlay = document.getElementById('navOverlay');
+      function open() {
+        btn.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true');
+        drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        btn.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false');
+        drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true');
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      btn.addEventListener('click', function() { btn.classList.contains('is-open') ? close() : open(); });
+      overlay.addEventListener('click', close);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
 </body>
 </html>

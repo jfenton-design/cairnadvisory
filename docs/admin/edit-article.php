@@ -255,7 +255,7 @@ $body_raw = isset($bm[1]) ? trim($bm[1]) : '';
     </div>
     <nav class="sidebar-nav">
       <a href="dashboard.php" class="sn-item">Dashboard</a>
-      <a href="articles.php" class="sn-item active">Field Notes</a>
+      <a href="articles.php" class="sn-item active">Trail Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight">+ New Article</a>
       <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item">Homepage Copy</a>

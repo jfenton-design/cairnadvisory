@@ -63,7 +63,7 @@ $e = function($key) use ($html) {
     </div>
     <nav class="sidebar-nav">
       <a href="dashboard.php" class="sn-item">Dashboard</a>
-      <a href="articles.php" class="sn-item">Field Notes</a>
+      <a href="articles.php" class="sn-item">Trail Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight">+ New Article</a>
       <a href="edit-notes-index.php" class="sn-item active">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item">Homepage Copy</a>

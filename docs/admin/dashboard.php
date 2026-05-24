@@ -21,7 +21,7 @@ if (empty($_SESSION['cairn_admin_auth'])) { header('Location: index.php'); exit;
     </div>
     <nav class="sidebar-nav">
       <a href="dashboard.php" class="sn-item active">Dashboard</a>
-      <a href="articles.php" class="sn-item">Field Notes</a>
+      <a href="articles.php" class="sn-item">Trail Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight">+ New Article</a>
       <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item">Homepage Copy</a>
@@ -37,7 +37,7 @@ if (empty($_SESSION['cairn_admin_auth'])) { header('Location: index.php'); exit;
     <div class="dash-cards">
       <a href="articles.php" class="dash-card">
         <span class="dc-eyebrow">Content</span>
-        <span class="dc-title">Field Notes</span>
+        <span class="dc-title">Trail Notes</span>
         <p class="dc-desc">Edit existing articles or view all published notes.</p>
         <span class="dc-arrow">View all →</span>
       </a>

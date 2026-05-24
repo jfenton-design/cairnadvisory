@@ -10,7 +10,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Cairn Advisory">
 <link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="../nav.css?v=4">
+<link rel="stylesheet" href="../nav.css?v=5">
 <link rel="stylesheet" href="article.css?v=4">
 <style>
   /* ── Article 04 — case study variant.
@@ -234,7 +234,24 @@
     </ul>
       <a class="nav-cta" href="../index.html#contact">Get in Touch</a>
     </div>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+      <ul class="nav-drawer-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#industries">Industries</a></li>
+      <li><a href="../index.html#services">Work</a></li>
+      <li><a href="../articles/index.html">Trail Notes</a></li>
+    </ul>
+    <div class="nav-drawer-cta-wrap">
+      <a href="../index.html#contact" class="nav-drawer-cta">Get in Touch</a>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay"></div>
 
 
   <!-- ══ BANNER + HEADER ══ -->
@@ -242,7 +259,7 @@
     <img src="../assets/vistas/bistro.png" alt="" class="banner-img" style="object-position: center 50%;">
     <div class="banner-content">
       <div class="meta-strip">
-        <a href="index.html">Field Notes</a>
+        <a href="index.html">Trail Notes</a>
         <span class="dot"></span>
         <span>Case study · 4 min read</span>
       </div>
@@ -402,7 +419,7 @@
   <!-- ══ FOOTER ══ -->
   <footer class="article-footer">
     <nav class="read-next" aria-label="Read next">
-      <span class="read-next-eyebrow">Continue · Field Notes</span>
+      <span class="read-next-eyebrow">Continue · Trail Notes</span>
       <a class="next-card dir-prev" style="background: linear-gradient(rgba(248,245,240,0.62), rgba(248,245,240,0.62)), url('../assets/vistas/row-houses.png'); background-size: cover; background-position: center;" href="03-running-an-ai-assessment.html">
         <h3 class="nc-title">What it actually means to run an AI assessment.</h3>
         <span class="nc-meta">7 min read</span>
@@ -419,5 +436,30 @@
   </footer>
 
 </div>
+
+  <script>
+    /* ── Hamburger menu ── */
+    (function() {
+      var btn = document.querySelector('.nav-hamburger');
+      var drawer = document.getElementById('navDrawer');
+      var overlay = document.getElementById('navOverlay');
+      function open() {
+        btn.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true');
+        drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        btn.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false');
+        drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true');
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      btn.addEventListener('click', function() { btn.classList.contains('is-open') ? close() : open(); });
+      overlay.addEventListener('click', close);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
 </body>
 </html>

@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error)) {
     <img src="../assets/vistas/{$watercolor}" alt="" class="banner-img" style="object-position: {$wc_pos};">
     <div class="banner-content">
       <div class="meta-strip">
-        <a href="index.html">Field Notes</a>
+        <a href="index.html">Trail Notes</a>
         <span class="dot"></span>
         <span>{$reading}</span>
       </div>
@@ -205,7 +205,7 @@ HTML;
     </div>
     <nav class="sidebar-nav">
       <a href="dashboard.php" class="sn-item">Dashboard</a>
-      <a href="articles.php" class="sn-item">Field Notes</a>
+      <a href="articles.php" class="sn-item">Trail Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight active">+ New Article</a>
       <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item">Homepage Copy</a>

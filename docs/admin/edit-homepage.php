@@ -122,7 +122,7 @@ $exp_meta_size = $esm[1] ?? 9;
     </div>
     <nav class="sidebar-nav">
       <a href="dashboard.php" class="sn-item">Dashboard</a>
-      <a href="articles.php" class="sn-item">Field Notes</a>
+      <a href="articles.php" class="sn-item">Trail Notes</a>
       <a href="new-article.php" class="sn-item sn-highlight">+ New Article</a>
       <a href="edit-notes-index.php" class="sn-item">Notes Index Page</a>
       <a href="edit-homepage.php" class="sn-item active">Homepage Copy</a>
@@ -288,7 +288,7 @@ $exp_meta_size = $esm[1] ?? 9;
       <?php endfor; ?>
 
       <!-- ── FIELD NOTES ── -->
-      <div class="form-section-label">Field Notes Section</div>
+      <div class="form-section-label">Trail Notes Section</div>
       <div class="form-field">
         <label class="field-label">Section Headline</label>
         <input type="text" name="notes_title" class="field-input field-input-lg" value="<?= $e('notes-title') ?>">
