@@ -741,6 +741,27 @@
       background: var(--cairn-amber);
       margin-top: 40px;
     }
+    .service-card-link {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+    }
+    .service-card-link:hover {
+      box-shadow: 0 4px 24px rgba(108, 89, 56, 0.12);
+      transform: translateY(-2px);
+    }
+    .service-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-amber);
+      text-decoration: none;
+    }
 
     /* ══════════════════════════════════════════
        FIELD NOTES
@@ -1467,12 +1488,13 @@
       <p class="services-head-aside"><!-- editable:services-aside -->Every engagement starts with the same question — <em>where does your business actually stand today</em> — and proceeds in steady, useful steps from there. No big-bang transformations. No tools bought before the work is understood.<!-- /editable --></p>
     </div>
     <div class="services-grid">
-      <div class="service-card">
+      <a href="work/ai-audit.html" class="service-card service-card-link">
         <div class="service-num">01</div>
-        <div class="service-title"><!-- editable:svc-1-title -->AI Readiness Assessment<!-- /editable --></div>
-        <p class="service-text"><!-- editable:svc-1-text -->A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify the highest-leverage opportunities and provide specific, actionable feedback.<!-- /editable --></p>
+        <div class="service-title">The AI Audit</div>
+        <p class="service-text">A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify the highest-leverage opportunities and produce decisions, not a slide deck of possibilities.</p>
         <div class="service-rule"></div>
-      </div>
+        <span class="service-link">Read the overview →</span>
+      </a>
       <div class="service-card">
         <div class="service-num">02</div>
         <div class="service-title"><!-- editable:svc-2-title -->Implementation &amp; Integration<!-- /editable --></div>
@@ -1493,7 +1515,7 @@
     <div class="notes-head">
       <div>
         <span class="sec-tag">Trail Notes</span>
-        <h2 class="sec-title"><!-- editable:notes-title -->A cairn on a trail marks the way.<!-- /editable --></h2>
+        <h2 class="sec-title"><!-- editable:notes-title -->A cairn on a trail marks <em>the way.</em><!-- /editable --></h2>
       </div>
       <a href="articles/index.html" class="notes-link">All Notes →</a>
     </div>
