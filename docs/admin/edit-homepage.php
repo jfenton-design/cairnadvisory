@@ -25,16 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'statement',
         'about-quote', 'about-bio',
         'cred-1', 'cred-2', 'cred-3', 'cred-4',
-        'stat-1-num', 'stat-1-label', 'stat-2-num', 'stat-2-label',
-        'stat-3-num', 'stat-3-label', 'stat-4-num', 'stat-4-label',
         'exp-1-name', 'exp-1-role', 'exp-1-desc', 'exp-1-meta-1', 'exp-1-meta-2',
         'exp-2-name', 'exp-2-role', 'exp-2-desc', 'exp-2-meta-1', 'exp-2-meta-2',
         'exp-3-name', 'exp-3-role', 'exp-3-desc', 'exp-3-meta-1', 'exp-3-meta-2',
-        'exp-4-name', 'exp-4-role', 'exp-4-desc',
         'industries-title',
         'ind-1-name', 'ind-1-desc', 'ind-2-name', 'ind-2-desc',
         'ind-3-name', 'ind-3-desc', 'ind-4-name', 'ind-4-desc',
-        'ind-5-name', 'ind-5-desc',
         'services-title', 'services-aside',
         'svc-1-title', 'svc-1-text', 'svc-2-title', 'svc-2-text', 'svc-3-title', 'svc-3-text',
 
@@ -207,24 +203,8 @@ $exp_meta_size = $esm[1] ?? 9;
         </div>
       </div>
 
-      <!-- ── ABOUT STATS ── -->
-      <div class="form-section-label">About — Stat Cards</div>
-      <?php for ($i = 1; $i <= 4; $i++): ?>
-        <div class="form-row" style="grid-template-columns: 140px 1fr; gap: 14px; align-items: start;">
-          <div class="form-field">
-            <label class="field-label">Stat <?= $i ?> Number</label>
-            <input type="text" name="stat_<?= $i ?>_num" class="field-input" value="<?= $e("stat-$i-num") ?>">
-            <span class="field-hint">e.g. 20&lt;sup&gt;+&lt;/sup&gt;</span>
-          </div>
-          <div class="form-field">
-            <label class="field-label">Stat <?= $i ?> Label</label>
-            <input type="text" name="stat_<?= $i ?>_label" class="field-input" value="<?= $e("stat-$i-label") ?>">
-          </div>
-        </div>
-      <?php endfor; ?>
-
-      <!-- ── EXPERIENCE ── -->
-      <div class="form-section-label">Where I've Operated</div>
+      <!-- ── ABOUT COMPANY CARDS ── -->
+      <div class="form-section-label">About — Company Cards</div>
       <?php
         $exp_names = ['Amazon', 'StockX', 'GoFundMe'];
         for ($i = 1; $i <= 3; $i++):
@@ -245,7 +225,7 @@ $exp_meta_size = $esm[1] ?? 9;
       <div class="form-field">
         <label class="field-label">Meta Tag Font Size (px)</label>
         <input type="number" name="exp_meta_size" class="field-input" value="<?= (int)$exp_meta_size ?>" min="7" max="18" style="max-width: 120px;">
-        <span class="field-hint">Controls the size of the small tags (e.g. "Product Management · Seattle") on all cards.</span>
+        <span class="field-hint">Controls the size of the small tags (e.g. "Product Management · Seattle") on the About company cards.</span>
       </div>
 
       <!-- ── INDUSTRIES ── -->
@@ -255,9 +235,12 @@ $exp_meta_size = $esm[1] ?? 9;
         <input type="text" name="industries_title" class="field-input field-input-lg" value="<?= $e('industries-title') ?>">
         <span class="field-hint">Use &lt;em&gt; for italic.</span>
       </div>
-      <?php for ($i = 1; $i <= 5; $i++): ?>
+      <?php
+        $ind_labels = ['Concierge Medicine', 'E-Commerce & Retail', 'Consumer Tech', 'Small Business Entrepreneurs'];
+        for ($i = 1; $i <= 4; $i++):
+      ?>
         <div class="form-field">
-          <label class="field-label">Industry <?= $i ?></label>
+          <label class="field-label"><?= $ind_labels[$i-1] ?></label>
           <div style="margin-bottom: 8px;">
             <input type="text" name="ind_<?= $i ?>_name" class="field-input" value="<?= $e("ind-$i-name") ?>" placeholder="Industry name">
           </div>

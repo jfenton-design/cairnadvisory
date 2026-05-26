@@ -425,6 +425,25 @@
       margin-bottom: 14px;
     }
     .stat-card:last-child { margin-bottom: 0; }
+    /* ── Exp cards stacked in About column ──────────────────────── */
+    .about-exp-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-exp-stack .exp-card {
+      background: var(--cairn-linen);
+      border: 0.5px solid var(--color-rule) !important;
+      border-radius: var(--r-lg);
+      padding: 28px 28px;
+    }
+    .about-exp-stack .exp-card:last-child {
+      border: 0.5px solid var(--color-rule) !important;
+    }
+    .about-exp-stack .exp-meta {
+      padding-top: 14px;
+    }
+
 
     .stat-number {
       font-family: var(--font-display);
@@ -563,7 +582,7 @@
 
     .industries-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
 
@@ -1112,7 +1131,7 @@
        RESPONSIVE
     ══════════════════════════════════════════ */
     @media (max-width: 1100px) {
-      .industries-grid { grid-template-columns: repeat(3, 1fr); }
+      .industries-grid { grid-template-columns: repeat(2, 1fr); }
       .experience-grid { grid-template-columns: repeat(2, 1fr); }
       .exp-card:nth-child(2) { border-right: none; }
       .exp-card:nth-child(1), .exp-card:nth-child(2) { border-bottom: 0.5px solid var(--color-rule); }
@@ -1251,7 +1270,6 @@
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
         <li><a href="#industries">Industries</a></li>
         <li><a href="#services">Work</a></li>
         <li><a href="#notes">Trail Notes</a></li>
@@ -1266,7 +1284,6 @@
   <div class="nav-drawer" id="navDrawer" aria-hidden="true">
     <ul class="nav-drawer-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li><a href="#industries">Industries</a></li>
       <li><a href="#services">Work</a></li>
       <li><a href="#notes">Trail Notes</a></li>
@@ -1335,59 +1352,33 @@
           <span class="credential-item"><!-- editable:cred-4 -->MIT Sloan · CX Strategy Certificate<!-- /editable --></span>
         </div>
       </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-number"><!-- editable:stat-1-num -->20<sup>+</sup><!-- /editable --></div>
-          <div class="stat-label"><!-- editable:stat-1-label -->Years leading marketing, CX, and product at global digital brands<!-- /editable --></div>
+      <div class="about-exp-stack">
+        <div class="exp-card">
+          <div class="exp-name">Amazon</div>
+          <div class="exp-role">Senior Product Manager</div>
+          <p class="exp-desc">Led Kindle and pioneered the Dash Replenishment Service — a recurring-revenue channel built across four major OEMs, with strategy presented directly to Amazon's CEO.</p>
+          <div class="exp-meta" style="font-size: 9px">
+            <span class="exp-meta-item">Product Management</span>
+            <span class="exp-meta-item">Seattle</span>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number"><!-- editable:stat-2-num -->1<sup>B</sup><!-- /editable --></div>
-          <div class="stat-label"><!-- editable:stat-2-label -->CRM messages managed annually at StockX<!-- /editable --></div>
+        <div class="exp-card">
+          <div class="exp-name">StockX</div>
+          <div class="exp-role">VP, CX &amp; Product Marketing</div>
+          <p class="exp-desc">Built the global CX program from scratch. Managed 1B+ CRM messages annually, drove brand trust from 27% to 48%, and applied AI to unstructured customer data.</p>
+          <div class="exp-meta" style="font-size: 9px">
+            <span class="exp-meta-item">Marketplace</span>
+            <span class="exp-meta-item">Detroit</span>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number"><!-- editable:stat-3-num -->75<sup>%</sup><!-- /editable --></div>
-          <div class="stat-label"><!-- editable:stat-3-label -->Increase in brand trust over three years at StockX<!-- /editable --></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number"><!-- editable:stat-4-num -->20<sup>%</sup><!-- /editable --></div>
-          <div class="stat-label"><!-- editable:stat-4-label -->Increase in non-sneaker category market share at StockX<!-- /editable --></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ EXPERIENCE ══ -->
-  <section class="experience" id="experience">
-    <div class="experience-head">
-      <span class="sec-tag">Where I've Operated</span>
-      <span class="experience-note"><em></em></span>
-    </div>
-    <div class="experience-grid">
-      <div class="exp-card">
-        <div class="exp-name"><!-- editable:exp-1-name -->Amazon<!-- /editable --></div>
-        <div class="exp-role"><!-- editable:exp-1-role -->Senior Product Manager<!-- /editable --></div>
-        <p class="exp-desc"><!-- editable:exp-1-desc -->Led Kindle and pioneered the Dash Replenishment Service — a recurring-revenue channel built across four major OEMs, with strategy presented directly to Amazon's CEO.<!-- /editable --></p>
-        <div class="exp-meta" style="font-size:12px">
-          <span class="exp-meta-item"><!-- editable:exp-1-meta-1 -->Product Management<!-- /editable --></span>
-          <span class="exp-meta-item"><!-- editable:exp-1-meta-2 -->Seattle<!-- /editable --></span>
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-name"><!-- editable:exp-2-name -->StockX<!-- /editable --></div>
-        <div class="exp-role"><!-- editable:exp-2-role -->VP, CX &amp; Product Marketing<!-- /editable --></div>
-        <p class="exp-desc"><!-- editable:exp-2-desc -->Built the global CX program from scratch. Managed 1B+ CRM messages annually, drove brand trust from 27% to 48%, and applied AI to unstructured customer data.<!-- /editable --></p>
-        <div class="exp-meta" style="font-size:12px">
-          <span class="exp-meta-item"><!-- editable:exp-2-meta-1 -->Marketplace<!-- /editable --></span>
-          <span class="exp-meta-item"><!-- editable:exp-2-meta-2 -->Detroit<!-- /editable --></span>
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-name"><!-- editable:exp-3-name -->GoFundMe<!-- /editable --></div>
-        <div class="exp-role"><!-- editable:exp-3-role -->VP, Business Operations<!-- /editable --></div>
-        <p class="exp-desc"><!-- editable:exp-3-desc -->Ran Business Operations across CrowdRise through its acquisition by GoFundMe — managing large cross-functional teams, building KPIs, and driving a streamlined customer service experience.<!-- /editable --></p>
-        <div class="exp-meta" style="font-size:12px">
-          <span class="exp-meta-item"><!-- editable:exp-3-meta-1 -->Platform<!-- /editable --></span>
-          <span class="exp-meta-item"><!-- editable:exp-3-meta-2 -->Detroit / SF<!-- /editable --></span>
+        <div class="exp-card">
+          <div class="exp-name">GoFundMe</div>
+          <div class="exp-role">VP, Business Operations</div>
+          <p class="exp-desc">Ran Business Operations across CrowdRise through its acquisition by GoFundMe — managing large cross-functional teams, building KPIs, and driving a streamlined customer service experience.</p>
+          <div class="exp-meta" style="font-size: 9px">
+            <span class="exp-meta-item">Platform</span>
+            <span class="exp-meta-item">Detroit / SF</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1398,19 +1389,40 @@
     <span class="sec-tag">Industries</span>
     <h2 class="sec-title"><!-- editable:industries-title -->Where I focus...<!-- /editable --></h2>
     <div class="industries-grid">
-      <div class="industry-card">
+      <div class="industry-card industry-card--has-case">
         <span class="industry-num">01</span>
+        <span class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 14 C14 8 17.5 5 22 5 C26.5 5 30 8 30 14 V18 C30 22 28 24.5 25.5 25.7 C24 26.4 23 27 22 27 C21 27 20 26.4 18.5 25.7 C16 24.5 14 22 14 18 Z"/>
+            <path d="M14.5 12.5 C17 8.5 21 7 25 8 C28 8.7 29.5 11 29.7 13 C26 11.5 22 12.5 19 14.5 C17 15.8 15.5 14.5 14.5 12.5 Z"/>
+            <path d="M7 39 V33 C7 29 11 26.5 16 26.5 H28 C33 26.5 37 29 37 33 V39 Z"/>
+            <path d="M19 27 C18 30 16 33 15.5 36"/>
+            <path d="M15.5 36 a1.4 1.4 0 0 0 2.8 0 V35"/>
+            <path d="M25 27 C26 30 27.5 33 28 36"/>
+            <circle cx="28" cy="37.4" r="1.5"/>
+          </svg>
+        </span>
+        <div class="industry-name"><!-- editable:ind-1-name -->Concierge Medicine<!-- /editable --></div>
+        <p class="industry-desc"><!-- editable:ind-1-desc -->Independent and boutique practices using AI to elevate the patient relationship and reduce operational friction.<!-- /editable --></p>
+        <a class="industry-case" href="articles/04-one-solo-practice.html">
+          <span class="ic-eyebrow">Case study</span>
+          <span class="ic-title">44 handouts, four tools, <em>one solo practice.</em></span>
+          <span class="ic-cta">Read the build →</span>
+        </a>
+      </div>
+      <div class="industry-card">
+        <span class="industry-num">02</span>
         <span class="industry-icon" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 15 L35 15 L33 36 L11 36 Z"/>
             <path d="M16 15 V12 a6 6 0 0 1 12 0 V15"/>
           </svg>
         </span>
-        <div class="industry-name"><!-- editable:ind-1-name -->E-Commerce &amp; Retail<!-- /editable --></div>
-        <p class="industry-desc"><!-- editable:ind-1-desc -->Marketplaces, DTC brands, and omnichannel retailers navigating AI-driven personalization, CRM, and operations.<!-- /editable --></p>
+        <div class="industry-name"><!-- editable:ind-2-name -->E-Commerce &amp; Retail<!-- /editable --></div>
+        <p class="industry-desc"><!-- editable:ind-2-desc -->Marketplaces, DTC brands, and omnichannel retailers navigating AI-driven personalization, CRM, and operations.<!-- /editable --></p>
       </div>
       <div class="industry-card">
-        <span class="industry-num">02</span>
+        <span class="industry-num">03</span>
         <span class="industry-icon" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
             <rect x="13" y="6" width="18" height="32" rx="3"/>
@@ -1418,62 +1430,22 @@
             <circle cx="22" cy="33" r="1.2" fill="currentColor" stroke="none"/>
           </svg>
         </span>
-        <div class="industry-name"><!-- editable:ind-2-name -->Consumer Tech<!-- /editable --></div>
-        <p class="industry-desc"><!-- editable:ind-2-desc -->Apps, platforms, and software companies integrating AI into product experience and the customer journey.<!-- /editable --></p>
-      </div>
-      <div class="industry-card">
-        <span class="industry-num">03</span>
-        <span class="industry-icon" aria-hidden="true">
-          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="6" y1="36" x2="38" y2="36"/>
-            <line x1="11" y1="29" x2="11" y2="36"/>
-            <line x1="19" y1="22" x2="19" y2="36"/>
-            <line x1="27" y1="16" x2="27" y2="36"/>
-            <line x1="35" y1="10" x2="35" y2="36"/>
-            <polyline points="11,26 19,19 27,13 35,7"/>
-            <polyline points="33,7 35,7 35,9" stroke-linejoin="miter"/>
-          </svg>
-        </span>
-        <div class="industry-name"><!-- editable:ind-3-name -->Financial Services<!-- /editable --></div>
-        <p class="industry-desc"><!-- editable:ind-3-desc -->Fintech, payments, and financial platforms implementing AI while navigating regulatory complexity and customer trust.<!-- /editable --></p>
+        <div class="industry-name"><!-- editable:ind-3-name -->Consumer Tech<!-- /editable --></div>
+        <p class="industry-desc"><!-- editable:ind-3-desc -->Apps, platforms, and software companies integrating AI into product experience and the customer journey.<!-- /editable --></p>
       </div>
       <div class="industry-card">
         <span class="industry-num">04</span>
         <span class="industry-icon" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="22" cy="22" r="15"/>
-            <polyline points="9,22 14,22 17,16 21,28 24,19 27,22 35,22"/>
+            <rect x="7" y="20" width="30" height="16" rx="1"/>
+            <path d="M7 20 L11 10 L33 10 L37 20 Z"/>
+            <rect x="18" y="26" width="8" height="10"/>
+            <line x1="7" y1="20" x2="37" y2="20"/>
+            <line x1="22" y1="10" x2="22" y2="20"/>
           </svg>
         </span>
-        <div class="industry-name"><!-- editable:ind-4-name -->Healthcare<!-- /editable --></div>
-        <p class="industry-desc"><!-- editable:ind-4-desc -->Health systems and digital health platforms applying AI to patient experience and clinical workflows.<!-- /editable --></p>
-      </div>
-      <div class="industry-card industry-card--has-case">
-        <span class="industry-num">05</span>
-        <span class="industry-icon" aria-hidden="true">
-          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- head: tall egg shape with defined jaw -->
-            <path d="M14 14 C14 8 17.5 5 22 5 C26.5 5 30 8 30 14 V18 C30 22 28 24.5 25.5 25.7 C24 26.4 23 27 22 27 C21 27 20 26.4 18.5 25.7 C16 24.5 14 22 14 18 Z"/>
-            <!-- single swept-bang: leaf-shaped curl across the forehead -->
-            <path d="M14.5 12.5 C17 8.5 21 7 25 8 C28 8.7 29.5 11 29.7 13 C26 11.5 22 12.5 19 14.5 C17 15.8 15.5 14.5 14.5 12.5 Z"/>
-            <!-- shoulders / body: smooth dome -->
-            <path d="M7 39 V33 C7 29 11 26.5 16 26.5 H28 C33 26.5 37 29 37 33 V39 Z"/>
-            <!-- stethoscope: both tubes emerge from neckline, drape onto chest -->
-            <!-- left tube: down chest, ends in small earpiece U-bend -->
-            <path d="M19 27 C18 30 16 33 15.5 36"/>
-            <path d="M15.5 36 a1.4 1.4 0 0 0 2.8 0 V35"/>
-            <!-- right tube: down chest, ends in chest piece circle -->
-            <path d="M25 27 C26 30 27.5 33 28 36"/>
-            <circle cx="28" cy="37.4" r="1.5"/>
-          </svg>
-        </span>
-        <div class="industry-name"><!-- editable:ind-5-name -->Concierge Medicine<!-- /editable --></div>
-        <p class="industry-desc"><!-- editable:ind-5-desc -->Independent and boutique practices using AI to elevate the patient relationship and reduce operational friction.<!-- /editable --></p>
-        <a class="industry-case" href="articles/04-one-solo-practice.html">
-          <span class="ic-eyebrow">Case study</span>
-          <span class="ic-title">44 handouts, four tools, <em>one solo practice.</em></span>
-          <span class="ic-cta">Read the build →</span>
-        </a>
+        <div class="industry-name"><!-- editable:ind-4-name -->Small Business Entrepreneurs<!-- /editable --></div>
+        <p class="industry-desc"><!-- editable:ind-4-desc -->Real estate operators, promotional products, CPAs, coaches, and service businesses using AI to compete and operate more efficiently.<!-- /editable --></p>
       </div>
     </div>
   </section>
@@ -1622,7 +1594,6 @@
       </div>
       <ul class="footer-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
         <li><a href="#industries">Industries</a></li>
         <li><a href="#services">Work</a></li>
         <li><a href="#notes">Notes</a></li>
