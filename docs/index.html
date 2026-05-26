@@ -771,16 +771,22 @@
       transform: translateY(-2px);
     }
     .service-link {
-      display: inline-block;
-      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 11px 20px;
       font-family: var(--font-display);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: var(--fw-medium);
       letter-spacing: var(--ls-label);
       text-transform: uppercase;
-      color: var(--cairn-amber);
+      color: var(--cairn-parchment);
+      background: var(--cairn-ironwood);
+      border-radius: var(--r-sm);
       text-decoration: none;
+      transition: background var(--dur-fast) var(--ease);
     }
+    .service-card-link:hover .service-link { background: var(--cairn-obsidian); }
 
     /* ══════════════════════════════════════════
        FIELD NOTES
@@ -1465,7 +1471,7 @@
         <div class="service-title">The AI Audit</div>
         <p class="service-text">A clear-eyed look at where your business actually stands — before a single tool gets purchased. We identify the highest-leverage opportunities and produce decisions, not a slide deck of possibilities.</p>
         <div class="service-rule"></div>
-        <span class="service-link">Read the overview →</span>
+        <span class="service-link">Learn More →</span>
       </a>
       <div class="service-card">
         <div class="service-num">02</div>
