@@ -488,6 +488,61 @@
       border-radius: 50%;
       background: var(--color-rule);
     }
+    .credentials-logo-block {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 0.5px solid var(--color-rule);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .cred-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .cred-group-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-slate-lt);
+    }
+    .cred-logo-row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 20px 32px;
+    }
+    .cred-edu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+    .cred-edu-label {
+      font-family: var(--font-display);
+      font-size: 8px;
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      color: var(--cairn-slate-lt);
+      white-space: nowrap;
+      text-align: center;
+      width: 100%;
+    }
+    .cred-logo {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      opacity: 0.85;
+    }
+    .cred-logo--cert {
+      height: 80px;
+    }
 
     /* ══════════════════════════════════════════
        EXPERIENCE
@@ -1348,16 +1403,31 @@
         </div>
         <div class="about-bio"><!-- editable:about-bio --><p>I bring 20+ years of experience leading marketing, customer experience, and product functions for global brands. I specialize in helping companies solve problems by building the systems and processes that increase loyalty, trust, and lifetime value. </p>
 <p>My leadership spans startup through global scale, from Amazon's early connected-device ecosystem to StockX's worldwide dual-sided platform.</p><!-- /editable --></div>
-        <div class="credentials" style="font-size:13px">
-          <span class="credential-item"><!-- editable:cred-1 -->Booth School of Business, University Chicago (MBA)<!-- /editable --></span>
-          <div class="credential-dot"></div>
-          <span class="credential-item"><!-- editable:cred-2 -->Ross School of Business, University of Michigan (BBA)<!-- /editable --></span>
-          <div class="credential-dot"></div>
-          <span class="credential-item"><!-- editable:cred-3 -->Stack Certified · AI Consulting<!-- /editable --></span>
-          <div class="credential-dot"></div>
-          <span class="credential-item"><!-- editable:cred-4 -->CCXP Certified<!-- /editable --></span>
-          <div class="credential-dot"></div>
-          <span class="credential-item"><!-- editable:cred-5 -->MIT Sloan · CX Strategy Certificate<!-- /editable --></span>
+        <div class="credentials-logo-block">
+          <div class="cred-group">
+            <div class="cred-group-label">Certifications</div>
+            <div class="cred-logo-row">
+              <img src="assets/Certs/stack certification.png" class="cred-logo cred-logo--cert" alt="Stack Certified AI Consulting">
+              <img src="assets/Certs/CCXP-cropped.png" class="cred-logo cred-logo--cert" alt="CCXP Certified">
+            </div>
+          </div>
+          <div class="cred-group">
+            <div class="cred-group-label">Education</div>
+            <div class="cred-logo-row">
+              <div class="cred-edu-item">
+                <img src="assets/Certs/boothsquare-final.png" class="cred-logo" alt="Chicago Booth MBA">
+                <span class="cred-edu-label">MBA</span>
+              </div>
+              <div class="cred-edu-item">
+                <img src="assets/Certs/Ross-Logo-300x300-cropped.png" class="cred-logo" alt="Michigan Ross BBA">
+                <span class="cred-edu-label">BBA</span>
+              </div>
+              <div class="cred-edu-item">
+                <img src="assets/Certs/mit" class="cred-logo" alt="MIT Sloan">
+                <span class="cred-edu-label">CX Certificate</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="about-exp-stack">
