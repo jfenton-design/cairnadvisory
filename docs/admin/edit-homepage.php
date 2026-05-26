@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'hero-eyebrow', 'hero-headline', 'hero-sub',
         'statement',
         'about-quote', 'about-bio',
-        'cred-1', 'cred-2', 'cred-3', 'cred-4',
+        'cred-1', 'cred-2', 'cred-3', 'cred-4', 'cred-5',
         'exp-1-name', 'exp-1-role', 'exp-1-desc', 'exp-1-meta-1', 'exp-1-meta-2',
         'exp-2-name', 'exp-2-role', 'exp-2-desc', 'exp-2-meta-1', 'exp-2-meta-2',
         'exp-3-name', 'exp-3-role', 'exp-3-desc', 'exp-3-meta-1', 'exp-3-meta-2',
@@ -195,6 +195,7 @@ $exp_meta_size = $esm[1] ?? 9;
             <input type="text" name="cred_2" class="field-input" value="<?= $e('cred-2') ?>" placeholder="Credential 2">
             <input type="text" name="cred_3" class="field-input" value="<?= $e('cred-3') ?>" placeholder="Credential 3">
             <input type="text" name="cred_4" class="field-input" value="<?= $e('cred-4') ?>" placeholder="Credential 4">
+            <input type="text" name="cred_5" class="field-input" value="<?= $e('cred-5') ?>" placeholder="Credential 5">
           </div>
         </div>
         <div class="form-field">
